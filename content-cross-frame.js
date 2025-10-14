@@ -1,17 +1,18 @@
 /**
  * TollBit 本番環境 日本語化拡張機能
- * バージョン: 1.0.3
+ * バージョン: 1.0.4
  *
  * 動的に生成されるiframeにも対応
  * topフレームから全てのiframeにアクセスして翻訳
  * 変数を含むテキスト（正規表現パターン）にも対応
  * 分割されたテキストにも対応（203エントリ）
+ * 末尾の句読点・スペースを除去して辞書検索
  */
 
 (function() {
   'use strict';
 
-  console.log('[TollBit日本語化] 本番環境版 v1.0.3 - 分割テキスト対応（203エントリ）');
+  console.log('[TollBit日本語化] 本番環境版 v1.0.4 - 末尾句読点対応（203エントリ）');
 
   // 通常の翻訳辞書（完全一致）
   const TRANSLATIONS = {
@@ -249,6 +250,13 @@
   let totalTranslations = 0;
 
   /**
+   * テキストを正規化（末尾の句読点とスペースを除去）
+   */
+  function normalizeText(text) {
+    return text.replace(/[.,!?;:\s]+$/, '');
+  }
+
+  /**
    * テキストノードを翻訳
    */
   function translateTextNode(node) {
@@ -271,7 +279,11 @@
       return false;
     }
 
+    // テキストを正規化（末尾の句読点・スペース除去）
+    const normalized = normalizeText(trimmed);
+
     // 1. 完全一致の辞書検索（優先）
+    // まず正規化せずに検索
     if (TRANSLATIONS[trimmed]) {
       const japanese = TRANSLATIONS[trimmed];
       node.nodeValue = node.nodeValue.replace(trimmed, japanese);
@@ -281,12 +293,22 @@
       return true;
     }
 
+    // 正規化版で検索
+    if (normalized !== trimmed && TRANSLATIONS[normalized]) {
+      const japanese = TRANSLATIONS[normalized];
+      node.nodeValue = node.nodeValue.replace(trimmed, japanese);
+      translatedNodes.add(node);
+      totalTranslations++;
+      console.log(`[翻訳(正規化)] "${trimmed}" → "${japanese}"`);
+      return true;
+    }
+
     // 2. パターンマッチング（正規表現）
     for (const patternObj of PATTERN_TRANSLATIONS) {
       try {
         const regex = new RegExp(patternObj.pattern, 'i');
-        if (regex.test(trimmed)) {
-          const japanese = trimmed.replace(regex, patternObj.replacement);
+        if (regex.test(normalized)) {
+          const japanese = normalized.replace(regex, patternObj.replacement);
           node.nodeValue = node.nodeValue.replace(trimmed, japanese);
           translatedNodes.add(node);
           totalTranslations++;
