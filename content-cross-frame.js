@@ -1,6 +1,6 @@
 /**
  * TollBit 本番環境 日本語化拡張機能
- * バージョン: 1.1.9
+ * バージョン: 1.2.0
  *
  * 動的に生成されるiframeにも対応
  * topフレームから全てのiframeにアクセスして翻訳
@@ -8,12 +8,13 @@
  * 分割されたテキストにも対応（388エントリ）
  * 末尾の句読点・スペースを除去して辞書検索
  * by以降削除対応
+ * パターンマッチングロジック修正（trimmed使用）
  */
 
 (function() {
   'use strict';
 
-  console.log('[TollBit日本語化] 本番環境版 v1.1.9 - 辞書更新 + Row 52修正（388エントリ）');
+  console.log('[TollBit日本語化] 本番環境版 v1.2.0 - パターンマッチング修正（388エントリ）');
 
   // 通常の翻訳辞書（完全一致）
   const TRANSLATIONS = {
@@ -34,7 +35,6 @@
   "3M": "3ヶ月",
   "6 Months": "6か月",
   "6M": "6ヶ月",
-  "99th": "$1%の",
   ": The values here are \"list\", \"summarize\", and \"generate\".": "：ここで使用できる値は「list」「summarize」「generate」です。",
   ": This is optional. NLWeb streams results back via SSE by default. If you want to disable streaming, set the “streaming” query param equal to “false”.": "：これは任意項目です。NLWebはデフォルトでSSEを介して結果をストリーム配信します。ストリーミングを無効にするには、“streaming”クエリパラメータを“false”に設定してください。",
   ": This is required, and is the natural language query that you want to ask the website to get content back and your query answered based on that content.": "：これは必須項目です。ウェブサイトに自然言語で質問し、コンテンツを取得してその内容に基づいて回答を得るためのクエリです。",
@@ -448,6 +448,10 @@
     "replacement": "あなたのサイトは、このボットから他のサイトの$1％よりも多くのボットトラフィックを受け取っています。"
   },
   {
+    "pattern": "(\d+)(st|nd|rd|th)",
+    "replacement": "$1%の"
+  },
+  {
     "pattern": "(\d+) days? ago",
     "replacement": "$1 日前"
   }
@@ -514,8 +518,9 @@
     for (const patternObj of PATTERN_TRANSLATIONS) {
       try {
         const regex = new RegExp(patternObj.pattern, 'i');
-        if (regex.test(normalized)) {
-          const japanese = normalized.replace(regex, patternObj.replacement);
+        if (regex.test(trimmed)) {
+          // trimmedに対してreplaceを実行（normalizedではない）
+          const japanese = trimmed.replace(regex, patternObj.replacement);
           node.nodeValue = node.nodeValue.replace(trimmed, japanese);
           translatedNodes.add(node);
           totalTranslations++;

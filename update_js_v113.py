@@ -37,7 +37,7 @@ def update_content_script(js_path, translations_data):
     entry_count = len(translations_data['normal']) + len(translations_data['patterns'])
     version_comment = f"""/**
  * TollBit 本番環境 日本語化拡張機能
- * バージョン: 1.1.9
+ * バージョン: 1.2.0
  *
  * 動的に生成されるiframeにも対応
  * topフレームから全てのiframeにアクセスして翻訳
@@ -45,6 +45,7 @@ def update_content_script(js_path, translations_data):
  * 分割されたテキストにも対応（{entry_count}エントリ）
  * 末尾の句読点・スペースを除去して辞書検索
  * by以降削除対応
+ * パターンマッチングロジック修正（trimmed使用）
  */"""
 
     # ファイル全体を置き換え
@@ -59,7 +60,7 @@ def update_content_script(js_path, translations_data):
     # console.logを更新
     content = re.sub(
         r"console\.log\('\[TollBit日本語化\].*?\);",
-        f"console.log('[TollBit日本語化] 本番環境版 v1.1.9 - 辞書更新 + Row 52修正（{entry_count}エントリ）');",
+        f"console.log('[TollBit日本語化] 本番環境版 v1.2.0 - パターンマッチング修正（{entry_count}エントリ）');",
         content
     )
 

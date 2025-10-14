@@ -268,7 +268,6 @@
     "Calculation: (This bot's hits ÷ Your total AI traffic) x 100 = Bot traffic %": "計算式：（このボットのトラフィック数 ÷ あなたのサイトでのAIトラフィックの総数） × 100 ＝ ボットトラフィックの割合（％）",
     "You have more AI traffic from this bot than": "あなたのサイトは、このボットからのAIトラフィックが多く、他の",
     "of other publishers": "サイトよりも多いです。",
-    "99th": "$1%の",
     "Add rates to your content based on the website structure.": "サイトの構造に基づいて、コンテンツに価格を設定してください。",
     "Define Global Rates for your content across all subdirectories and pages. These rates apply for each use and do not allow your content to be used for training or creating generative AI models.": "すべてのサブディレクトリやページに対して適用される「統一価格」を定義してください。 この価格はクローリングごとに適用され、あなたのコンテンツが生成AIモデルの学習や生成目的に使用されることは許可されません。",
     "The Summarization Content License means that purchasing Developers will be granted a non-exclusive, non-transferable, non-assignable, non-sublicensable, and revocable (pursuant to the Content Access Terms linked below) right and license for the Term to access, index, and process the Publisher Data solely to summarize, cite, and display ground inferences based upon Provider Data to end users, provided Developer is prohibited from displaying the full text of the Provider Data to end users.": "要約用ライセンスとは、購入したAI事業社に対し、非独占的・譲渡不可・再許諾不可・取消可能（下記リンク先の「コンテンツアクセス規約」に従う）な権利およびライセンスを、契約期間中に付与するものです。 AI事業社はこれにより、サイトのコンテンツにアクセス・インデックス化・処理して、要約・引用・根拠に基づく推論結果をエンドユーザーに表示することができます。 ただし、提供データの全文をエンドユーザーに表示することは禁止されています。",
@@ -465,6 +464,13 @@
       "replacement": "あなたのサイトは、このボットから他のサイトの$1％よりも多くのボットトラフィックを受け取っています。",
       "original_text": "You receive more traffic from this bot than 97% of other publishers.",
       "original_japanese": "あなたのサイトは、このボットから他のサイトの$1％よりも多くのボットトラフィックを受け取っています。",
+      "var_element": "数字"
+    },
+    {
+      "pattern": "(\\d+)(st|nd|rd|th)",
+      "replacement": "$1%の",
+      "original_text": "99th",
+      "original_japanese": "$1%の",
       "var_element": "数字"
     },
     {

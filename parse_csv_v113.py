@@ -61,6 +61,9 @@ def create_pattern(text, var_element):
     if var_element == '数字':
         pattern = text
 
+        # 序数（99th, 1st, 2nd, 3rd など）
+        pattern = re.sub(r'\b\d+(st|nd|rd|th)\b', r'(\\d+)(st|nd|rd|th)', pattern)
+
         # 数字+単位（K, M, B）のパターン
         pattern = re.sub(r'\d+\.?\d*[KMB]\b', r'([\\d.]+[KMB])', pattern)
 
