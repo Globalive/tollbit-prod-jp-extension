@@ -102,6 +102,17 @@ TollBit本番サイトを日本語化するChrome拡張機能です。
 
 ## バージョン履歴
 
+### v1.0.7 (2025-10-14) 🐛 パターン翻訳修正（273エントリ）
+- 🔧 増減率パターンの修正
+  - 「down 27.8%」→ `$1％減少` に修正（正しく変数置換されるように）
+  - 「up 27.8%」→ `$1％増加` に修正（正しく変数置換されるように）
+- 📝 新規追加エントリ（7個）
+  - 期間表示: 「times」「three months」「six months」「week」
+  - データ注意書き: 「Data includes only fully processed days...」
+  - 特別なケース: 「You receive more traffic from this bot than 100% of other publishers.」
+  - パターン: 「You receive more traffic from this bot than 97% of other publishers.」
+- 📊 翻訳辞書を273エントリに拡充（通常261個 + パターン12個）
+
 ### v1.0.6 (2025-10-14) 🚀 翻訳辞書大幅更新（266エントリ）
 - 📝 翻訳辞書を266エントリに大幅拡充（通常255個 + パターン11個）
 - 🆕 新規追加エントリ（51個）

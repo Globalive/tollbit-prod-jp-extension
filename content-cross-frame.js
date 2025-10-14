@@ -1,18 +1,18 @@
 /**
  * TollBit 本番環境 日本語化拡張機能
- * バージョン: 1.0.6
+ * バージョン: 1.0.7
  *
  * 動的に生成されるiframeにも対応
  * topフレームから全てのiframeにアクセスして翻訳
  * 変数を含むテキスト（正規表現パターン）にも対応
- * 分割されたテキストにも対応（266エントリ）
+ * 分割されたテキストにも対応（273エントリ）
  * 末尾の句読点・スペースを除去して辞書検索
  */
 
 (function() {
   'use strict';
 
-  console.log('[TollBit日本語化] 本番環境版 v1.0.6 - 辞書大幅更新（266エントリ）');
+  console.log('[TollBit日本語化] 本番環境版 v1.0.7 - パターン修正（273エントリ）');
 
   // 通常の翻訳辞書（完全一致）
   const TRANSLATIONS = {
@@ -271,6 +271,12 @@
   "scrapes you get 1 AI referral": "回のクローリングにつき、1回のリファラルを獲得",
   "Top referrers": "リファラルをもたらす上位AI事業社",
   "AI companies sending the most traffic to your site.": "あなたのサイトにリファラルをもたらす上位AI事業社",
+  "times": "回",
+  "three months": "過去3ヶ月で",
+  "six months": "過去6ヶ月で",
+  "week": "過去1週で",
+  "Data includes only fully processed days. Recent days or days before your property joined may not appear.": "データには、処理が完了した日だけが含まれています。最近の日付や、あなたのサイトが追加される参加する前の期間は表示されない場合があります。",
+  "You receive more traffic from this bot than 100% of other publishers.": "TollBit内の全サイトの中で、このボットに最もアクセス（クロール）されていることを意味します。",
 };
 
   // パターンベース翻訳（正規表現）
