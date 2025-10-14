@@ -1,0 +1,22 @@
+{
+  "manifest_version": 3,
+  "name": "TollBit 本番環境 日本語化拡張機能",
+  "version": "1.0.0",
+  "description": "TollBit本番環境を日本語化",
+
+  "content_scripts": [
+    {
+      "matches": [
+        "https://tollbit.com/*"
+      ],
+      "js": [
+        "content-cross-frame.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ],
+
+  "author": "Globalive",
+  "homepage_url": "https://github.com/Globalive/tollbit-prod-jp-extension"
+}
