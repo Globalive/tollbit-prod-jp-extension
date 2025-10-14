@@ -19,7 +19,8 @@ def parse_csv(csv_path):
 
         for row in reader:
             text = row['Text'].strip()
-            japanese = row['Japanese'].strip()
+            # 改行文字をスペースに置き換え（JavaScriptの文字列リテラル対策）
+            japanese = row['Japanese'].strip().replace('\n', ' ').replace('\r', '')
             var_flag = row['変数フラグ'].strip()
             var_element = row['変数となる要素'].strip()
 
