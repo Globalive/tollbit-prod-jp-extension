@@ -1,18 +1,19 @@
 /**
  * TollBit 本番環境 日本語化拡張機能
- * バージョン: 1.0.8
+ * バージョン: 1.0.9
  *
  * 動的に生成されるiframeにも対応
  * topフレームから全てのiframeにアクセスして翻訳
  * 変数を含むテキスト（正規表現パターン）にも対応
- * 分割されたテキストにも対応（273エントリ）
+ * 分割されたテキストにも対応（276エントリ）
  * 末尾の句読点・スペースを除去して辞書検索
+ * by以降削除対応
  */
 
 (function() {
   'use strict';
 
-  console.log('[TollBit日本語化] 本番環境版 v1.0.8 - パターン修正完了（273エントリ）');
+  console.log('[TollBit日本語化] 本番環境版 v1.0.9 - by以降削除対応（276エントリ）');
 
   // 通常の翻訳辞書（完全一致）
   const TRANSLATIONS = {
@@ -220,8 +221,8 @@
   "Bots that are not allowed to access or scrape your main site. They are forwarded to your Tollbit subdomain.": "メインサイトへのアクセスやクローリングが許可されていないボットです。これらはあなたのTollbitサブドメインへ転送されます。",
   "Bots that are allowed to access and scrape to your main site.": "メインサイトへのアクセスやスクレイピングが許可されているボットです。",
   "There may be an issue with your bot paywall setup. Some bots are making it through to your main site.": "ボットのペイウォール設定に問題がある可能性があります。いくつかのボットがメインサイトに到達してしまっています。",
-  "AI Bot scrapes ordered by total request count.": "AIボットの総リクエスト数（降順）",
-  "Total AI Bot scrapes": "AIボットの総リクエスト数",
+  "AI Bot scrapes ordered by total request count.": "AIボットの総クローリング数（降順）",
+  "Total AI Bot scrapes": "AIボットの総クローリング数",
   "scrapes": "クロール",
   "How many human visits your site received each day from AI referrals": "AIプラットフォーム上からのリファラル経由であなたのサイトに訪れたユーザー数",
   "Percentile Metrics": "パーセンタイル指標",
@@ -246,7 +247,6 @@
   "of other publishers.": "に位置しています。例えばこの数値が95%だった場合、あなたのサイトのAIボットのトラフィック量はTollBitで観測しているサイトの中の上位5位には入っている、という意味になります。",
   "of AI traffic": "を占める",
   "Shows how much of your AI traffic comes from this bot compared to other publishers.": "他のパブリッシャーと比較して、あなたのAIトラフィックのうちどれだけがこのボットから来ているかを示します。",
-  "You receive more traffic from this bot than 98% of other publishers.": "あなたはこのボットから他のパブリッシャーの98%より多くのトラフィックを受け取っています。",
   "initiated": "は",
   "and made up": "本サイト内に占めるAIボットのうち",
   "of your AI bot scrapes.": "を占めています。",
@@ -277,6 +277,9 @@
   "week": "過去1週で",
   "Data includes only fully processed days. Recent days or days before your property joined may not appear.": "データには、処理が完了した日だけが含まれています。最近の日付や、あなたのサイトが追加される参加する前の期間は表示されない場合があります。",
   "You receive more traffic from this bot than 100% of other publishers.": "TollBit内の全サイトの中で、このボットに最もアクセス（クロール）されていることを意味します。",
+  "per page": "ページごとの表示",
+  "decreased to": "は減少傾向に向かっていて、その数、",
+  "increased to": "は増加傾向に向かっていて、その数、"
 };
 
   // パターンベース翻訳（正規表現）
@@ -291,7 +294,7 @@
   },
   {
     "pattern": "AI bots made ([\\d.]+[KMB]) requests to your website, down ([\\d.]+)% from the previous week",
-    "replacement": "AIボットがあなたのウェブサイトに$1のリクエストを行いました。前週比で$2%減少しています。"
+    "replacement": "AIボットがあなたのウェブサイトに$1万件のリクエストを行いました。前週比で$1%減少しています。"
   },
   {
     "pattern": "You receive more traffic from AI bots than ([\\d.]+)% of other publishers",
@@ -318,11 +321,15 @@
     "replacement": "$1％増加"
   },
   {
-    "pattern": "only (\\d+)% of websites were scraped more by .*?",
+    "pattern": "You receive more traffic from this bot than ([\\d.]+)% of other publishers.",
+    "replacement": "あなたはこのボットから他のパブリッシャーの$1%より多くのトラフィックを受け取っています。"
+  },
+  {
+    "pattern": "only (\\d+)% of websites were scraped more",
     "replacement": "$1％に位置しています。"
   },
   {
-    "pattern": "no websites were scraped more by .*?",
+    "pattern": "no websites were scraped more",
     "replacement": "どのサイトよりも多く、このAIボットにクロールされています。"
   },
   {

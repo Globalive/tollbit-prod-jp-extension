@@ -102,6 +102,22 @@ TollBit本番サイトを日本語化するChrome拡張機能です。
 
 ## バージョン履歴
 
+### v1.0.9 (2025-10-14) 🔧 by以降削除対応（276エントリ）
+- 🔧 **by以降削除パターンの実装**
+  - 「only 2% of websites were scraped more by [bot-name]」→ ボット名削除、「$1％に位置しています。」に翻訳
+  - 「no websites were scraped more by [bot-name]」→ ボット名削除、「どのサイトよりも多く、このAIボットにクロールされています。」に翻訳
+  - パターンを `only (\d+)% of websites were scraped more` に変更（`by .*?` を削除）
+  - パターンを `no websites were scraped more` に変更（`by .*?` を削除）
+- 📝 新規追加エントリ（3個）
+  - 「per page」→「ページごとの表示」
+  - 「decreased to」→「は減少傾向に向かっていて、その数、」
+  - 「increased to」→「は増加傾向に向かっていて、その数、」
+- 📊 翻訳の改善
+  - 「AI Bot scrapes ordered by total request count.」→「AIボットの総クローリング数（降順）」に変更
+  - 「Total AI Bot scrapes」→「AIボットの総クローリング数」に変更
+- 📊 翻訳辞書を276エントリに拡充（通常263個 + パターン13個）
+- 🐛 重複パターン削除（「You receive more traffic from this bot than 98% of other publishers.」を削除）
+
 ### v1.0.8 (2025-10-14) ✅ パターン翻訳修正完了（273エントリ）
 - 🔧 **重要な修正：欠落していたパターンを追加**
   - 「down ([\\d.]+)%」→ $1％減少
