@@ -102,6 +102,16 @@ TollBit本番サイトを日本語化するChrome拡張機能です。
 
 ## バージョン履歴
 
+### v1.0.8 (2025-10-14) ✅ パターン翻訳修正完了（273エントリ）
+- 🔧 **重要な修正：欠落していたパターンを追加**
+  - 「down ([\\d.]+)%」→ $1％減少
+  - 「up ([\\d.]+)%」→ $1％増加
+  - 「only X% of websites were scraped more by [bot-name]」→ ボット名保持
+  - 「no websites were scraped more by [bot-name]」→ ボット名保持
+  - 「You receive more traffic from this bot than X% of other publishers.」→ 変数対応
+- 📝 v1.0.7で追加したつもりだったが、実際にはJavaScriptファイルに反映されていなかった
+- 🎯 これで`down 27.8%`が正しく「27.8％減少」と翻訳される
+
 ### v1.0.7 (2025-10-14) 🐛 パターン翻訳修正（273エントリ）
 - 🔧 増減率パターンの修正
   - 「down 27.8%」→ `$1％減少` に修正（正しく変数置換されるように）

@@ -1,6 +1,6 @@
 /**
  * TollBit 本番環境 日本語化拡張機能
- * バージョン: 1.0.7
+ * バージョン: 1.0.8
  *
  * 動的に生成されるiframeにも対応
  * topフレームから全てのiframeにアクセスして翻訳
@@ -12,7 +12,7 @@
 (function() {
   'use strict';
 
-  console.log('[TollBit日本語化] 本番環境版 v1.0.7 - パターン修正（273エントリ）');
+  console.log('[TollBit日本語化] 本番環境版 v1.0.8 - パターン修正完了（273エントリ）');
 
   // 通常の翻訳辞書（完全一致）
   const TRANSLATIONS = {
@@ -308,6 +308,26 @@
   {
     "pattern": "\\$([\\d.]+)",
     "replacement": "$$1"
+  },
+  {
+    "pattern": "down ([\\d.]+)%",
+    "replacement": "$1％減少"
+  },
+  {
+    "pattern": "up ([\\d.]+)%",
+    "replacement": "$1％増加"
+  },
+  {
+    "pattern": "only (\\d+)% of websites were scraped more by .*?",
+    "replacement": "$1％に位置しています。"
+  },
+  {
+    "pattern": "no websites were scraped more by .*?",
+    "replacement": "どのサイトよりも多く、このAIボットにクロールされています。"
+  },
+  {
+    "pattern": "You receive more traffic from this bot than ([\\d.]+)% of other publishers.",
+    "replacement": "あなたのサイトは、このボットから他のサイトの$1％よりも多くのボットトラフィックを受け取っています。"
   }
 ];
   // 翻訳済みノードを追跡（全フレーム共通）
