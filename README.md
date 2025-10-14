@@ -102,6 +102,16 @@ TollBit本番サイトを日本語化するChrome拡張機能です。
 
 ## バージョン履歴
 
+### v1.0.5 (2025-10-14) 📚 翻訳辞書更新（215エントリ）
+- 📝 翻訳辞書を215エントリに拡充（通常208個 + パターン7個）
+- 🆕 新規追加エントリ（11個）
+  - Bot Paywall関連: 「Blocked」「Allowed」「Partially Forwarded」
+  - 説明文: 「Bots that are not allowed...」「Bots that are allowed...」「There may be an issue...」
+  - Analytics: 「AI Bot scrapes ordered by total request count.」「Total AI Bot scrapes」「scrapes」
+  - Metrics: 「How many human visits...」「Percentile Metrics」
+- 📊 翻訳の詳細化
+  - 「of other publishers on TollBit」の説明をより詳しく更新
+
 ### v1.0.4 (2025-10-14) 📝 末尾句読点対応
 - 🔤 末尾の句読点・スペースを除去して辞書検索
   - 「How many human visitors AI platforms are sending you.」→「How many human visitors AI platforms are sending you」として検索

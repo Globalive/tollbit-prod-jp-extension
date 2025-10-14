@@ -1,18 +1,18 @@
 /**
  * TollBit 本番環境 日本語化拡張機能
- * バージョン: 1.0.4
+ * バージョン: 1.0.5
  *
  * 動的に生成されるiframeにも対応
  * topフレームから全てのiframeにアクセスして翻訳
  * 変数を含むテキスト（正規表現パターン）にも対応
- * 分割されたテキストにも対応（203エントリ）
+ * 分割されたテキストにも対応（215エントリ）
  * 末尾の句読点・スペースを除去して辞書検索
  */
 
 (function() {
   'use strict';
 
-  console.log('[TollBit日本語化] 本番環境版 v1.0.4 - 末尾句読点対応（203エントリ）');
+  console.log('[TollBit日本語化] 本番環境版 v1.0.5 - 辞書更新（215エントリ）');
 
   // 通常の翻訳辞書（完全一致）
   const TRANSLATIONS = {
@@ -64,7 +64,7 @@
   "Top AI bots scraping your website": "あなたのウェブサイトをクロールしているAIボットの上位",
   "Referral Metrics": "リファラル指標",
   "Clickthrough Rates": "クリック率",
-  "How many human visitors AI platforms are sending you": "AIプラットフォームがあなたにどれだけの人間の訪問者を送っているか（リファラルリンク経由のユーザー数）",
+  "How many human visitors AI platforms are sending you.": "AIプラットフォームがあなたにどれだけの人間の訪問者を送っているか（リファラルリンク経由のユーザー数）",
   "AI Platform": "AIプラットフォーム",
   "Referers": "リファラルの数",
   "Scrapes": "クローリング数",
@@ -201,7 +201,7 @@
   "referrals": "リファラル",
   "How your AI traffic compares to others on TollBit": "TollBit内で、あなたのサイトのAIトラフィックが他と比較してどの位置にあるか",
   "You have more AI traffic than": "あなたは全TollBit内の全サイトを100としたうち、上位",
-  "of other publishers on TollBit": "に位置しています。例えばこの数値が95%だった場合、AIボットのトラフィック量は上位5位には入っている、となります。",
+  "of other publishers on TollBit": "に位置しています。例えばこの数値が95%だった場合、あなたのサイトのAIボットのトラフィック量はTollBitで観測しているサイトの中の上位5位には入っている、という意味になります。",
   "Previous": "前へ",
   "Next": "次へ",
   "1000?per page": "1000件ごとの表示",
@@ -211,7 +211,19 @@
   "6M": "6ヶ月",
   "Main site": "メインサイト",
   "subdomain": "サブドメイン",
-  "All": "全て"
+  "All": "全て",
+  "TollBit subdomain": "TollBit サブドメイン",
+  "Blocked": "ブロック済み",
+  "Allowed": "許可済み",
+  "Partially Forwarded": "一部転送済み",
+  "Bots that are not allowed to access or scrape your main site. They are forwarded to your Tollbit subdomain.": "メインサイトへのアクセスやクローリングが許可されていないボットです。これらはあなたのTollbitサブドメインへ転送されます。",
+  "Bots that are allowed to access and scrape to your main site.": "メインサイトへのアクセスやスクレイピングが許可されているボットです。",
+  "There may be an issue with your bot paywall setup. Some bots are making it through to your main site.": "ボットのペイウォール設定に問題がある可能性があります。いくつかのボットがメインサイトに到達してしまっています。",
+  "AI Bot scrapes ordered by total request count.": "AIボットの総リクエスト数（降順）",
+  "Total AI Bot scrapes": "AIボットの総リクエスト数",
+  "scrapes": "クロール",
+  "How many human visits your site received each day from AI referrals": "AIプラットフォーム上からのリファラル経由であなたのサイトに訪れたユーザー数",
+  "Percentile Metrics": "パーセンタイル指標",
 };
 
   // パターンベース翻訳（正規表現）
