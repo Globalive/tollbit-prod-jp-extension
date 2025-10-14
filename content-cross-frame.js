@@ -13,7 +13,7 @@
 (function() {
   'use strict';
 
-  console.log('[TollBit日本語化] 本番環境版 v1.1.1 - 追加更新（322エントリ）);
+  console.log('[TollBit日本語化] 本番環境版 v1.1.1 - 追加更新（322エントリ）');
 
   // 通常の翻訳辞書（完全一致）
   const TRANSLATIONS = {
