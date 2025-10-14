@@ -1,21 +1,22 @@
 /**
  * TollBit 本番環境 日本語化拡張機能
- * バージョン: 1.0.5
+ * バージョン: 1.0.6
  *
  * 動的に生成されるiframeにも対応
  * topフレームから全てのiframeにアクセスして翻訳
  * 変数を含むテキスト（正規表現パターン）にも対応
- * 分割されたテキストにも対応（215エントリ）
+ * 分割されたテキストにも対応（266エントリ）
  * 末尾の句読点・スペースを除去して辞書検索
  */
 
 (function() {
   'use strict';
 
-  console.log('[TollBit日本語化] 本番環境版 v1.0.5 - 辞書更新（215エントリ）');
+  console.log('[TollBit日本語化] 本番環境版 v1.0.6 - 辞書大幅更新（266エントリ）');
 
   // 通常の翻訳辞書（完全一致）
   const TRANSLATIONS = {
+  "Home": "ホーム",
   "Add and select a property to get started monetizing your content.": "コンテンツの収益化を始めるには、サイトを追加して選択してください。",
   "Users in this organization": "この組織のユーザー",
   "Invite Users": "ユーザーを招待",
@@ -200,7 +201,7 @@
   "Total referrals": "リファラル獲得数の合計",
   "referrals": "リファラル",
   "How your AI traffic compares to others on TollBit": "TollBit内で、あなたのサイトのAIトラフィックが他と比較してどの位置にあるか",
-  "You have more AI traffic than": "あなたは全TollBit内の全サイトを100としたうち、上位",
+  "You have more AI traffic than": "あなたのサイトはTollBit内の全サイトを100としたうち、上位",
   "of other publishers on TollBit": "に位置しています。例えばこの数値が95%だった場合、あなたのサイトのAIボットのトラフィック量はTollBitで観測しているサイトの中の上位5位には入っている、という意味になります。",
   "Previous": "前へ",
   "Next": "次へ",
@@ -224,6 +225,52 @@
   "scrapes": "クロール",
   "How many human visits your site received each day from AI referrals": "AIプラットフォーム上からのリファラル経由であなたのサイトに訪れたユーザー数",
   "Percentile Metrics": "パーセンタイル指標",
+  "2D": "2日",
+  "All AI User Agents": "全てのAIユーザーエージェント",
+  "Organization Home": "組織のホームへ戻る",
+  "Property:": "サイト：",
+  "Logout": "ログアウト",
+  "AI bot scrapes": "AIボットのクロール数",
+  "percentile": "パーセンタイル",
+  "from previous": "前期間との比較",
+  "AI bots made": "AIボットのクロールは",
+  "to your website,": "あなたのサイトに訪問してきており、前期間と比較して、",
+  "from the previous week.": "しています。",
+  "from the last month.": "しています。",
+  "from the last three months.": "しています。",
+  "from the last six months.": "しています。",
+  "Last month": "先月",
+  "Last three months": "過去3ヶ月",
+  "Last six months": "過去6ヶ月",
+  "You receive more traffic from AI bots than": "あなたのサイトはTollBit内の全サイトを100としたうち、上位",
+  "of other publishers.": "に位置しています。例えばこの数値が95%だった場合、あなたのサイトのAIボットのトラフィック量はTollBitで観測しているサイトの中の上位5位には入っている、という意味になります。",
+  "of AI traffic": "を占める",
+  "Shows how much of your AI traffic comes from this bot compared to other publishers.": "他のパブリッシャーと比較して、あなたのAIトラフィックのうちどれだけがこのボットから来ているかを示します。",
+  "You receive more traffic from this bot than 98% of other publishers.": "あなたはこのボットから他のパブリッシャーの98%より多くのトラフィックを受け取っています。",
+  "initiated": "は",
+  "and made up": "本サイト内に占めるAIボットのうち",
+  "of your AI bot scrapes.": "を占めています。",
+  "Your site ranks in the": "あなたのサイトはTollBit内の全サイトを100としたうち、上位",
+  "Most-scraped pages": "最もクローリングされているページ",
+  "Your website's pages AI bots visited the most.": "あなたのサイトで、AIボットが最も多く訪れたページ",
+  "Top 5 Pages": "上位5ページ",
+  "Your most frequently scraped content.": "あなたのコンテンツの中で最も頻繁にクロールされたもの",
+  "Your homepage": "あなたのサイトを",
+  "was scraped the most.": "最もクローリングしているAIボット",
+  "Breakdown by AI platform:": "AIプラットフォーム別の内訳",
+  "Referral traffic": "リファラルトラフィック合計",
+  "AI companies brought": "AI事業社は前期間とくらべて、",
+  "over the last": "をもたらし、",
+  "from the previous period": "（前期間比）",
+  "was the top referrer with": "が最も多くのリファラル数をもたらし、その回数は",
+  "Scrape-to-referral ratio": "クローリング数とリファラ数の比較",
+  "How often AI bot scrapes result in a human visit.": "1回のリファラルは何回のAIボットによるクローリングによってもたらされるか",
+  "Total AI referrals": "総リファラル数",
+  "Total scrapes": "総クロール数",
+  "For every": "合計、",
+  "scrapes you get 1 AI referral": "回のクローリングにつき、1回のリファラルを獲得",
+  "Top referrers": "リファラルをもたらす上位AI事業社",
+  "AI companies sending the most traffic to your site.": "あなたのサイトにリファラルをもたらす上位AI事業社",
 };
 
   // パターンベース翻訳（正規表現）

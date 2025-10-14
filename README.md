@@ -102,6 +102,27 @@ TollBit本番サイトを日本語化するChrome拡張機能です。
 
 ## バージョン履歴
 
+### v1.0.6 (2025-10-14) 🚀 翻訳辞書大幅更新（266エントリ）
+- 📝 翻訳辞書を266エントリに大幅拡充（通常255個 + パターン11個）
+- 🆕 新規追加エントリ（51個）
+  - ナビゲーション: 「Home」「Organization Home」「Property:」「Logout」
+  - 期間指定: 「2D」「Last month」「Last three months」「Last six months」
+  - 分割テキスト: 「AI bots made」「to your website,」「from previous」など
+  - 詳細メトリクス: 「percentile」「of AI traffic」「initiated」「and made up」
+  - ページ分析: 「Most-scraped pages」「Top 5 Pages」「Your homepage」「was scraped the most.」
+  - リファラル: 「Referral traffic」「AI companies brought」「over the last」「from the previous period」
+  - スクレイプ比率: 「Scrape-to-referral ratio」「For every」「scrapes you get 1 AI referral」
+  - 上位事業者: 「Top referrers」「was the top referrer with」
+- 🔄 新規パターン翻訳（4個）
+  - 「down 27.8%」→ 変数対応の減少率パターン
+  - 「up 27.8%」→ 変数対応の増加率パターン
+  - 「only 2% of websites were scraped more by [bot-name]」→ ボット名を保持したまま翻訳
+  - 「no websites were scraped more by [bot-name]」→ ボット名を保持したまま翻訳
+- 📊 翻訳の改善
+  - 「You have more AI traffic than」「You receive more traffic from AI bots than」を明確に区別
+  - 「of other publishers on TollBit」と「of other publishers.」を分離
+  - より自然な日本語表現に改善
+
 ### v1.0.5 (2025-10-14) 📚 翻訳辞書更新（215エントリ）
 - 📝 翻訳辞書を215エントリに拡充（通常208個 + パターン7個）
 - 🆕 新規追加エントリ（11個）
