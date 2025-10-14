@@ -1,11 +1,11 @@
 /**
  * TollBit 本番環境 日本語化拡張機能
- * バージョン: 1.1.0
+ * バージョン: 1.1.1
  *
  * 動的に生成されるiframeにも対応
  * topフレームから全てのiframeにアクセスして翻訳
  * 変数を含むテキスト（正規表現パターン）にも対応
- * 分割されたテキストにも対応（302エントリ）
+ * 分割されたテキストにも対応（322エントリ）
  * 末尾の句読点・スペースを除去して辞書検索
  * by以降削除対応
  */
@@ -13,7 +13,7 @@
 (function() {
   'use strict';
 
-  console.log('[TollBit日本語化] 本番環境版 v1.1.0 - 大幅更新（302エントリ）');
+  console.log('[TollBit日本語化] 本番環境版 v1.1.1 - 追加更新（322エントリ）);
 
   // 通常の翻訳辞書（完全一致）
   const TRANSLATIONS = {
@@ -305,49 +305,69 @@
   "Current Directory": "現在のディレクトリ",
   "This rate will be used for all sub directories and pages.": "この価格は、すべてのサブディレクトリおよびページに適用されます。",
   "Subdirectories": "ディレクトリ",
-  "Prevent all access to URLs begining with a custom Prefix.": "特定のプレフィックス（接頭辞）で始まるURLへのすべてのアクセスを禁止します。"
+  "Prevent all access to URLs begining with a custom Prefix.": "特定のプレフィックス（接頭辞）で始まるURLへのすべてのアクセスを禁止します。",
+  "Price per User Agent": "ユーザーエージェントごとの価格",
+  "Independently manage the access rates for specific AI bots and User Agents.": "特定のAIボットやユーザーエージェントごとに価格を個別に管理します。",
+  "Add a Bot Rate": "ボットごとの価格を追加",
+  "Add Rate": "価格を追加",
+  "Manage Bot Blocking": "ボットブロックの管理",
+  "Block specific bots from accessing your property.": "特定のボットがあなたのサイトにアクセスするのをブロックします。",
+  "Add user agents to block or allow.": "ブロックまたは許可するユーザーエージェントを追加します。",
+  "Block User Agents": "ユーザーエージェントをブロック",
+  "No user agents selected": "ユーザーエージェントが選択されていません",
+  "Block List": "ブロックリスト",
+  "Specific Page Access": "特定ページへのアクセス設定",
+  "Fine grain control over access rates for specific pages.": "特定のページに対する価格を細かく制御します。",
+  "No Page Rates": "ページ単位の価格設定はありません",
+  "Add Page Rate": "ページ単位の価格を追加",
+  "Page Path": "ページパス",
+  "Determine how the price of content changes after it is uploaded": "コンテンツがアップロードされた後の経過時間に応じて価格がどのように変化するかを設定します。",
+  "No Time Rates": "時間変動価格は設定されていません",
+  "Add Time Rate": "時間ごとの価格を追加",
+  "Starting Price per 1,000 pages": "開始価格",
+  "Create Time Pricing": "時間変動型の価格設定を作成"
 };
 
   // パターンベース翻訳（正規表現）
   const PATTERN_TRANSLATIONS = [
   {
-    "pattern": "Updated 55 days? ago",
+    "pattern": "Updated (\\d+) days? ago",
     "replacement": "$1日前に更新"
   },
   {
-    "pattern": "Members (12)",
+    "pattern": "Members \\((\\d+)\\)",
     "replacement": "メンバー ($1)"
   },
   {
-    "pattern": "AI bots made 1.1M requests to your website, down 27.8% from the previous week",
+    "pattern": "AI bots made ([\\d.]+[KMB]) requests to your website, down ([\\d.]+)% from the previous week",
     "replacement": "AIボットがあなたのウェブサイトに$1万件のリクエストを行いました。前週比で$1%減少しています。"
   },
   {
-    "pattern": "You receive more traffic from AI bots than 92% of other publishers",
+    "pattern": "You receive more traffic from AI bots than ([\\d.]+)% of other publishers",
     "replacement": "あなたは他のサイトの$1%より多く、AIボットからのトラフィックがあります。"
   },
   {
-    "pattern": "Top 5 Bots?",
+    "pattern": "Top (\\d+) Bots?",
     "replacement": "上位$1ボット"
   },
   {
-    "pattern": "Breakdown the top 5 most active bot agents accessing your content",
+    "pattern": "Breakdown the top (\\d+) most active bot agents accessing your content",
     "replacement": "あなたのコンテンツにアクセスしている最も活発なボットエージェント上位$1の内訳"
   },
   {
-    "pattern": "$0.00",
+    "pattern": "\\$([\\d.]+)",
     "replacement": "$$$1"
   },
   {
-    "pattern": "down 27.8%",
+    "pattern": "down ([\\d.]+)%",
     "replacement": "$1％減少"
   },
   {
-    "pattern": "up 27.8%",
+    "pattern": "up ([\\d.]+)%",
     "replacement": "$1％増加"
   },
   {
-    "pattern": "You receive more traffic from this bot than 98% of other publishers.",
+    "pattern": "You receive more traffic from this bot than ([\\d.]+)% of other publishers.",
     "replacement": "あなたはこのボットから他の$1%のサイトより多くのトラフィックを受け取っています。"
   },
   {
@@ -359,7 +379,7 @@
     "replacement": "どのサイトよりも多く、このAIボットにクロールされています。"
   },
   {
-    "pattern": "You receive more traffic from this bot than 97% of other publishers.",
+    "pattern": "You receive more traffic from this bot than ([\\d.]+)% of other publishers.",
     "replacement": "あなたのサイトは、このボットから他のサイトの$1％よりも多くのボットトラフィックを受け取っています。"
   }
 ];

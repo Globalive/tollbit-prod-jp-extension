@@ -102,6 +102,34 @@ TollBit本番サイトを日本語化するChrome拡張機能です。
 
 ## バージョン履歴
 
+### v1.1.1 (2025-10-14) ➕ 追加更新（322エントリ）
+- 📝 **新規追加エントリ（20個）**
+  - 価格設定関連：
+    * "Price per User Agent" → "ユーザーエージェントごとの価格"
+    * "Independently manage the access rates for specific AI bots and User Agents." → "特定のAIボットやユーザーエージェントごとに価格を個別に管理します。"
+    * "Add a Bot Rate" → "ボットごとの価格を追加"
+    * "Add Rate" → "価格を追加"
+  - ボットブロック管理：
+    * "Manage Bot Blocking" → "ボットブロックの管理"
+    * "Block specific bots from accessing your property." → "特定のボットがあなたのサイトにアクセスするのをブロックします。"
+    * "Add user agents to block or allow." → "ブロックまたは許可するユーザーエージェントを追加します。"
+    * "Block User Agents" → "ユーザーエージェントをブロック"
+    * "No user agents selected" → "ユーザーエージェントが選択されていません"
+    * "Block List" → "ブロックリスト"
+  - ページ単位の価格設定：
+    * "Specific Page Access" → "特定ページへのアクセス設定"
+    * "Fine grain control over access rates for specific pages." → "特定のページに対する価格を細かく制御します。"
+    * "No Page Rates" → "ページ単位の価格設定はありません"
+    * "Add Page Rate" → "ページ単位の価格を追加"
+    * "Page Path" → "ページパス"
+  - 時間変動価格：
+    * "Determine how the price of content changes after it is uploaded" → "コンテンツがアップロードされた後の経過時間に応じて価格がどのように変化するかを設定します。"
+    * "No Time Rates" → "時間変動価格は設定されていません"
+    * "Add Time Rate" → "時間ごとの価格を追加"
+    * "Starting Price per 1,000 pages" → "開始価格"
+    * "Create Time Pricing" → "時間変動型の価格設定を作成"
+- 📊 翻訳辞書を322エントリに拡充（通常309個 + パターン13個）
+
 ### v1.1.0 (2025-10-14) 🚀 大幅更新（302エントリ）
 - 📝 **新規追加エントリ（26個）**
   - 「Activate」→「有効化」、「Deactivate」→「無効化」
