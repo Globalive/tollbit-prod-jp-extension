@@ -1,16 +1,17 @@
 /**
  * TollBit 本番環境 日本語化拡張機能
- * バージョン: 1.0.2
+ * バージョン: 1.0.3
  *
  * 動的に生成されるiframeにも対応
  * topフレームから全てのiframeにアクセスして翻訳
  * 変数を含むテキスト（正規表現パターン）にも対応
+ * 分割されたテキストにも対応（203エントリ）
  */
 
 (function() {
   'use strict';
 
-  console.log('[TollBit日本語化] 本番環境版 v1.0.2 - 変数対応パターンマッチング追加');
+  console.log('[TollBit日本語化] 本番環境版 v1.0.3 - 分割テキスト対応（203エントリ）');
 
   // 通常の翻訳辞書（完全一致）
   const TRANSLATIONS = {
@@ -64,7 +65,7 @@
   "Clickthrough Rates": "クリック率",
   "How many human visitors AI platforms are sending you": "AIプラットフォームがあなたにどれだけの人間の訪問者を送っているか（リファラルリンク経由のユーザー数）",
   "AI Platform": "AIプラットフォーム",
-  "Referers": "参照元",
+  "Referers": "リファラルの数",
   "Scrapes": "クローリング数",
   "Clickthrough Rate": "クリック率",
   "OpenAI (ChatGPT)": "OpenAI (ChatGPT)",
@@ -79,24 +80,26 @@
   "Different http response status codes over time. Quickly monitor the health of your site.": "HTTPレスポンスステータスコード別の時系列推移。サイトの健康状態を簡単にモニターできます。",
   "Bot Activity": "ボットアクティビティ",
   "Bot Status": "ボットステータス",
-  "Which bots are being forwarded or not. See the docs for your CDN provider to change if a bot is forwarded or not.": "どのボットが転送されているか。ボットが転送されるかどうかを変更するには、CDNプロバイダーのドキュメントを（https://docs.tollbit.com/publisher-bot-deterrence/）参照してください。",
+  "Which bots are being forwarded or not.": "どのボットが転送されているか。ボットが転送されるかどうかを変更するには、",
+  "See the docs": "詳細はこちらのドキュメントを参照し、",
+  "for your CDN provider to change if a bot is forwarded or not.": "適宜設定してください。",
   "Total AI Bot Scrapes": "AIボットのクローリング総数",
-  "AI Bot scrapes ordered by total request count": "AIボットクローリング数（降順）",
+  "AI Bot scrapes ordered by total request.": "AIボットクローリング数（降順）",
   "All Bots": "すべてのボット",
   "AI Agents": "AIエージェント",
   "SEO Agents": "SEOエージェント",
   "Recent AI Bot Activity": "最近のAIボットアクティビティ",
-  "How the traffic looks over time for all AI user agents": "すべてのAIユーザーエージェントにおけるトラフィックの時系列推移",
+  "How the traffic looks over time for all AI user agents.": "すべてのAIユーザーエージェントにおけるトラフィックの時系列推移",
   "AI Bot Traffic": "AIボットトラフィック",
   "Top Pages": "人気ページ",
-  "How the most accessed pages break down by user agent category": "最もアクセスされたページがユーザーエージェントカテゴリー別にどのように分布しているか",
+  "How the most accessed pages break down by user agent category.": "最もアクセスされたページがユーザーエージェントカテゴリー別にどのように分布しているか",
   "Page": "ページ",
   "Human": "人間",
   "AI Bots": "AIボット",
   "Other Bots": "その他のボット",
   "Search for a page...": "ページを検索...",
   "Logs": "ログ",
-  "View a sample of logs for the graph above": "上記グラフのログサンプルを表示",
+  "View a sample of logs for the graph above.": "上記グラフのログサンプルを表示",
   "Day": "日",
   "Hour": "時間",
   "Host": "ホスト",
@@ -187,7 +190,27 @@
   "Crawler": "クローラー",
   "Operator": "運営者",
   "Robots.txt violations": "robots.txtの違反",
-  "Action": "アクション"
+  "Action": "アクション",
+  "Invite your team to join your organization": "チーム（メンバー）をあなたの組織に追加しましょう。",
+  "Enter or paste one or more email addressess, separated by spaces or commas.": "メールアドレスを入力ください。コンマもしくはスペース区切りで複数の入力・登録も可能です。",
+  "Send invitations": "招待を送信",
+  "Invite Team": "メンバーを招待する",
+  "Total number of referrals by bot type": "ボットタイプ別のリファラル獲得数",
+  "Total referrals": "リファラル獲得数の合計",
+  "referrals": "リファラル",
+  "How your AI traffic compares to others on TollBit": "TollBit内で、あなたのサイトのAIトラフィックが他と比較してどの位置にあるか",
+  "You have more AI traffic than": "あなたは全TollBit内の全サイトを100としたうち、上位",
+  "of other publishers on TollBit": "に位置しています。例えばこの数値が95%だった場合、AIボットのトラフィック量は上位5位には入っている、となります。",
+  "Previous": "前へ",
+  "Next": "次へ",
+  "1000?per page": "1000件ごとの表示",
+  "1W": "1週間",
+  "1M": "1ヶ月",
+  "3M": "3ヶ月",
+  "6M": "6ヶ月",
+  "Main site": "メインサイト",
+  "subdomain": "サブドメイン",
+  "All": "全て"
 };
 
   // パターンベース翻訳（正規表現）
@@ -221,7 +244,6 @@
     "replacement": "$$1"
   }
 ];
-
   // 翻訳済みノードを追跡（全フレーム共通）
   const translatedNodes = new WeakSet();
   let totalTranslations = 0;

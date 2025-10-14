@@ -102,12 +102,20 @@ TollBit本番サイトを日本語化するChrome拡張機能です。
 
 ## バージョン履歴
 
+### v1.0.3 (2025-10-14) 🔄 分割テキスト対応
+- 📝 翻訳辞書を203エントリに拡充（通常196個 + パターン7個）
+- 🧩 複数のテキストノードに分割された文章にも対応
+  - 「You have more AI traffic than」「98%」「of other publishers on TollBit」が分割されていても翻訳可能
+  - 「Which bots are being forwarded or not.」「See the docs」「for your CDN provider...」など
+- 📊 新規追加エントリ（22個）
+  - リファラル関連: 「Referers」「Total referrals」「referrals」
+  - ベンチマーク: 「You have more AI traffic than」「of other publishers on TollBit」
+  - メンバー招待: 「Invite your team」「Send invitations」
+  - その他: 「1W」「1M」「3M」「6M」「Main site」「subdomain」など
+
 ### v1.0.2 (2025-10-14) 🎨 翻訳辞書大幅更新
 - 📝 管理画面UI向けの翻訳辞書を181エントリに拡充（通常174個 + パターン7個）
 - 🔢 変数を含むテキストの翻訳に対応（正規表現パターンマッチング実装）
-  - 「Updated 55 days ago」→「55日前に更新」など、数字が変動するテキストに対応
-  - 「Members (12)」→「メンバー (12)」など、括弧内の数字に対応
-  - 「$0.00」などの金額表示に対応
 - 🎯 本番環境の管理画面（Settings, Analytics, Rates等）を完全日本語化
 
 ### v1.0.1 (2025-10-14) 🔧 URL修正
