@@ -5,7 +5,7 @@ TollBit本番サイトを日本語化するChrome拡張機能です。
 ## 概要
 
 この拡張機能は以下のTollBit本番サイトを日本語化します：
-- https://tollbit.com/* （本番環境専用）
+- https://app.tollbit.com/* （本番環境専用）
 
 ## 特徴
 
@@ -30,7 +30,7 @@ TollBit本番サイトを日本語化するChrome拡張機能です。
 ### 基本的な使い方
 
 1. 拡張機能をインストール
-2. TollBit本番サイト（https://tollbit.com）にアクセス
+2. TollBit本番サイト（https://app.tollbit.com）にアクセス
 3. 自動的に日本語化されます
 
 ## 注意事項
@@ -56,7 +56,7 @@ TollBit本番サイトを日本語化するChrome拡張機能です。
   - 完全にローカルで動作します
 
 - **動作範囲の制限**
-  - TollBit本番サイト（`https://tollbit.com/*`）でのみ動作
+  - TollBit本番サイト（`https://app.tollbit.com/*`）でのみ動作
   - 他のウェブサイト（デモページを含む）には影響を与えません
   - DOM操作のみで、ネットワーク通信は行いません
 
@@ -102,14 +102,17 @@ TollBit本番サイトを日本語化するChrome拡張機能です。
 
 ## バージョン履歴
 
+### v1.0.1 (2025-10-14) 🔧 URL修正
+- 🎯 動作対象をhttps://app.tollbit.com/* に変更（サブドメイン対応）
+
 ### v1.0.0 (2025-10-14) 🎉 初回リリース
 - 🚀 TollBit本番環境用の日本語化拡張機能を作成
 - 📝 デモ版（v3.6.9）の翻訳辞書（221エントリ）を使用
-- 🎯 https://tollbit.com/* でのみ動作
+- 🎯 https://app.tollbit.com/* でのみ動作
 - 📦 プライベートリポジトリとして管理
 
 ## 関連リンク
 
 - **GitHubリポジトリ**: https://github.com/Globalive/tollbit-prod-jp-extension
-- **TollBit本番サイト**: https://tollbit.com
+- **TollBit本番サイト**: https://app.tollbit.com
 - **デモ版拡張機能**: https://github.com/Globalive/tollbit-jp-extension
