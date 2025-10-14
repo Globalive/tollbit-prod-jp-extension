@@ -102,6 +102,35 @@ TollBit本番サイトを日本語化するChrome拡張機能です。
 
 ## バージョン履歴
 
+### v1.1.2 (2025-10-14) 🚀 大幅更新（378エントリ）
+- 📝 **新規追加エントリ（56個）**
+  - トランザクション関連：
+    * "Transactions" → "トランザクション"
+    * "Total Transactions" → "合計トランザクション数"
+    * "Cumulative Growth" → "累積成長"
+    * "Monthly Spend" → "月間支出"
+    * "1 Day", "1 Week", "1 Month" → 期間選択オプション
+  - コンテンツフィルタ作成：
+    * "create an element filter" → "要素フィルタを作成"
+    * "create an article filter" → "記事フィルタを作成"
+    * "Tag", "Attribute", "Value" → タグ、属性、値
+  - サブドメイン管理：
+    * "Your subdomain is not active." → "あなたのサブドメインは有効化されていません。"
+    * "Reach out to team@tollbit.com to activate your subdomain." → "サブドメインを有効化するには、team@tollbit.com にお問い合わせください。"
+  - パス設定関連：
+    * "Path Prefix" → "パスプレフィックス"
+    * "Rate Limit" → "レート制限"
+    * "Add Bot Rate" → "ボットの価格を追加"
+  - テスト機能：
+    * "Test your property's bot forwarding functionality based on popular bot user agents." → "人気のあるボットのユーザーエージェントに基づいて、あなたのサイトのボット転送機能をテストできます。"
+  - NLWeb詳細設定：
+    * "NLWeb is a protocol that aims to simplify..." → 詳細な説明文
+    * エンドポイントとクエリパラメータの説明文
+  - A2Aプロトコル説明：
+    * "Agent2Agent (A2A) protocol is an open standard..." → 詳細な説明文
+    * インスペクターの使い方に関する説明文
+- 📊 翻訳辞書を378エントリに拡充（通常365個 + パターン13個）
+
 ### v1.1.1 (2025-10-14) ➕ 追加更新（322エントリ）
 - 📝 **新規追加エントリ（20個）**
   - 価格設定関連：
