@@ -102,6 +102,23 @@ TollBit本番サイトを日本語化するChrome拡張機能です。
 
 ## バージョン履歴
 
+### v1.1.4 (2025-10-14) 📝 辞書更新（382エントリ）
+- 📝 **新規追加エントリ（4個）**
+  - "Properties" → "サイト一覧"
+  - "API Access" → "APIアクセス"
+  - "Updated" → "更新："
+  - "55 days ago" → "$1日前"（パターン翻訳）
+- 📊 翻訳辞書を382エントリに拡充（通常368個 + パターン14個）
+
+### v1.1.3 (2025-10-14) 🐛 SyntaxError修正
+- 🐛 **SyntaxError修正**: JavaScriptオブジェクトリテラル内の改行文字をエスケープ
+  - 4箇所で実際の改行が含まれていた問題を `\n` に修正
+  - "Customize rates further..." の翻訳（行122-123）
+  - "Define Global Rates for..." の翻訳（行127-128）
+  - "The Full Display Content License..." の翻訳（行293）
+  - "The Summarization Content License..." の翻訳（行294）
+- 🔧 manifest.json: 1.1.2 → 1.1.3（キャッシュクリア用）
+
 ### v1.1.2 (2025-10-14) 🚀 大幅更新（378エントリ）
 - 📝 **新規追加エントリ（56個）**
   - トランザクション関連：

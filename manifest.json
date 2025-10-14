@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "TollBit 本番環境 日本語化拡張機能",
-  "version": "1.1.3",
+  "version": "1.1.4",
   "description": "TollBit本番環境を日本語化",
 
   "content_scripts": [

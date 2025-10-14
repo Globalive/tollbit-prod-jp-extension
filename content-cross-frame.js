@@ -1,11 +1,11 @@
 /**
  * TollBit 本番環境 日本語化拡張機能
- * バージョン: 1.1.3
+ * バージョン: 1.1.4
  *
  * 動的に生成されるiframeにも対応
  * topフレームから全てのiframeにアクセスして翻訳
  * 変数を含むテキスト（正規表現パターン）にも対応
- * 分割されたテキストにも対応（378エントリ）
+ * 分割されたテキストにも対応（382エントリ）
  * 末尾の句読点・スペースを除去して辞書検索
  * by以降削除対応
  */
@@ -13,11 +13,11 @@
 (function() {
   'use strict';
 
-  console.log('[TollBit日本語化] 本番環境版 v1.1.3 - SyntaxError修正（378エントリ）');
+  console.log('[TollBit日本語化] 本番環境版 v1.1.4 - 辞書更新（382エントリ）');
 
   // 通常の翻訳辞書（完全一致）
   const TRANSLATIONS = {
-  "+ Add Attribute Pair": "Attribute（属性）のペアを追加する",
+  "#NAME?": "Attribute（属性）のペアを追加する",
   ". Follow the instructions for starting the inspector, and for the Agent Card URL use": "インスペクターの起動手順に従い、Agent Card URLには次を使用してください：",
   "1 Day": "1日",
   "1 Month": "1か月",
@@ -51,6 +51,7 @@
   "AI bots made": "AIボットのクロールは",
   "AI companies brought": "AI事業社は前期間とくらべて、",
   "AI companies sending the most traffic to your site.": "あなたのサイトにリファラルをもたらす上位AI事業社",
+  "API Access": "APIアクセス",
   "Access": "アクセス",
   "Account": "アカウント",
   "Action": "アクション",
@@ -119,12 +120,13 @@
   "Cumulative Growth": "累積の実績",
   "Current Directory": "現在のディレクトリ",
   "Custom Rate": "カスタム価格",
-  "Customize rates further for specific subdirectories, pages, or bots in the Advanced Settings. Global Rates are the default unless more customized rates are defined.": "「高度な設定」で、特定のサブディレクトリ、ページ、またはボットごとに価格をさらにカスタマイズできます。\n統一価格がデフォルト（初期設定）として適用されますが、より細かく設定された価格があればそちらが優先されます。",
+  "Customize rates further for specific subdirectories, pages, or bots in the Advanced Settings. Global Rates are the default unless more customized rates are defined.": "「高度な設定」で、特定のサブディレクトリ、ページ、またはボットごとに価格をさらにカスタマイズできます。統一価格がデフォルト（初期設定）として適用されますが、より細かく設定された価格があればそちらが優先されます。",
   "Data includes only fully processed days. Recent days or days before your property joined may not appear.": "データには、処理が完了した日だけが含まれています。最近の日付や、あなたのサイトが追加される参加する前の期間は表示されない場合があります。",
   "Day": "日",
   "Deactivate": "無効化",
   "Define Global Rates across your subdirectories and pages at the property level. If a custom rate conflicts with a global rate, the custom rate will be used.": "サブディレクトリやページ全体に統一価格を設定します。カスタム価格が統一価格と矛盾する場合はカスタム価格が使用されます。",
-  "Define Global Rates for your content across all subdirectories and pages. These rates apply for each use and do not allow your content to be used for training or creating generative AI models.": "すべてのサブディレクトリやページに対して適用される「統一価格」を定義してください。\nこの価格はクローリングごとに適用され、あなたのコンテンツが生成AIモデルの学習や生成目的に使用されることは許可されません。",
+  "Define Global Rates for your content across all subdirectories and pages. These rates apply for each use and do not allow your content to be used for training or creating generative AI models.": "すべてのサブディレクトリやページに対して適用される「統一価格」を定義してください。
+この価格はクローリングごとに適用され、あなたのコンテンツが生成AIモデルの学習や生成目的に使用されることは許可されません。",
   "Define how the rate of a page should change over time.": "最終更新から特定の時間が経過した場合の、特別な価格設定を行う",
   "Define how the rate should change over time": "時間とともに価格がどのように変化するかを定義",
   "Delete account": "アカウントを削除",
@@ -226,6 +228,7 @@
   "Price per User Agent": "ユーザーエージェントごとの価格",
   "Profile": "プロフィール",
   "Profile details": "プロフィール詳細",
+  "Properties": "サイト一覧",
   "Property:": "サイト：",
   "Rate Limit": "レート制限",
   "Rates": "価格設定を追加",
@@ -290,8 +293,11 @@
   "Test your property against sample requests to check forwarding and content filters.": "サンプルリクエストに対してサイトをテストし、転送とコンテンツフィルターを確認します。",
   "Test your property's bot forwarding functionality based on popular bot user agents.": "一般的なボットユーザーエージェントに基づいて、あなたのサイトのボット転送機能をテストします。",
   "The Agent2Agent (A2A) protocol is an open standard designed to let AI agents collaborate securely without sharing their internal logic or data. It enables agents to discover each other's capabilities, negotiate how to interact, and work together on tasks over http(s). For more A2A details, please review the": "Agent2Agent（A2A）プロトコルは、AIエージェント同士が内部ロジックやデータを共有せずに安全に協調できるよう設計されたオープンスタンダードです。エージェントは互いの機能を発見し、通信方法を交渉し、HTTP(S)上でタスクを協力して実行できます。詳細は以下をご覧ください。",
-  "The Full Display Content License means that purchasing Developers will be granted a non-exclusive, non-transferable, non-assignable, non-sublicensable, and revocable (pursuant to the Content Access Terms linked below) right and license for the Term to access, index, and process the Publisher Data to summarize, cite, and display ground inferences based upon Provider Data to end users, including displaying the full text of Provider Data to end users.": "全文表示コンテンツライセンスとは、購入したAI事業社に対し、非独占的・譲渡不可・再許諾不可・取消可能（下記リンク先の「コンテンツアクセス規約」に従う）な権利およびライセンスを、契約期間中に付与するものです。\nこれにより、AI事業社はサイトのコンテンツデータを要約・引用・処理し、提供データの全文をエンドユーザーに表示することも可能です。",
-  "The Summarization Content License means that purchasing Developers will be granted a non-exclusive, non-transferable, non-assignable, non-sublicensable, and revocable (pursuant to the Content Access Terms linked below) right and license for the Term to access, index, and process the Publisher Data solely to summarize, cite, and display ground inferences based upon Provider Data to end users, provided Developer is prohibited from displaying the full text of the Provider Data to end users.": "要約用ライセンスとは、購入したAI事業社に対し、非独占的・譲渡不可・再許諾不可・取消可能（下記リンク先の「コンテンツアクセス規約」に従う）な権利およびライセンスを、契約期間中に付与するものです。\nAI事業社はこれにより、サイトのコンテンツにアクセス・インデックス化・処理して、要約・引用・根拠に基づく推論結果をエンドユーザーに表示することができます。\nただし、提供データの全文をエンドユーザーに表示することは禁止されています。",
+  "The Full Display Content License means that purchasing Developers will be granted a non-exclusive, non-transferable, non-assignable, non-sublicensable, and revocable (pursuant to the Content Access Terms linked below) right and license for the Term to access, index, and process the Publisher Data to summarize, cite, and display ground inferences based upon Provider Data to end users, including displaying the full text of Provider Data to end users.": "全文表示コンテンツライセンスとは、購入したAI事業社に対し、非独占的・譲渡不可・再許諾不可・取消可能（下記リンク先の「コンテンツアクセス規約」に従う）な権利およびライセンスを、契約期間中に付与するものです。
+これにより、AI事業社はサイトのコンテンツデータを要約・引用・処理し、提供データの全文をエンドユーザーに表示することも可能です。",
+  "The Summarization Content License means that purchasing Developers will be granted a non-exclusive, non-transferable, non-assignable, non-sublicensable, and revocable (pursuant to the Content Access Terms linked below) right and license for the Term to access, index, and process the Publisher Data solely to summarize, cite, and display ground inferences based upon Provider Data to end users, provided Developer is prohibited from displaying the full text of the Provider Data to end users.": "要約用ライセンスとは、購入したAI事業社に対し、非独占的・譲渡不可・再許諾不可・取消可能（下記リンク先の「コンテンツアクセス規約」に従う）な権利およびライセンスを、契約期間中に付与するものです。
+AI事業社はこれにより、サイトのコンテンツにアクセス・インデックス化・処理して、要約・引用・根拠に基づく推論結果をエンドユーザーに表示することができます。
+ただし、提供データの全文をエンドユーザーに表示することは禁止されています。",
   "The requests is recieved at TollBit.": "転送されたリクエストはTollBitで正しく受信されました。",
   "There may be an issue with your bot paywall setup. Some bots are making it through to your main site.": "ボットのペイウォール設定に問題がある可能性があります。いくつかのボットがメインサイトに到達してしまっています。",
   "These are the secret keys to be used from your backend code. They are sensitive and should be deleted if leaked.": "これはAPIを利用する際に使用する秘密鍵です。機密情報のため、流出した場合は削除してください。",
@@ -316,6 +322,7 @@
   "Total scrapes": "総クロール数",
   "Transactions": "トランザクション",
   "Update profile": "プロフィールを更新",
+  "Updated": "更新：",
   "User": "ユーザー",
   "User Agent": "ユーザーエージェント",
   "Users in this organization": "この組織のユーザー",
@@ -437,6 +444,10 @@
   {
     "pattern": "You receive more traffic from this bot than ([\d.]+)% of other publishers.",
     "replacement": "あなたのサイトは、このボットから他のサイトの$1％よりも多くのボットトラフィックを受け取っています。"
+  },
+  {
+    "pattern": "(\d+) days? ago",
+    "replacement": "$1日前"
   }
 ];
   // 翻訳済みノードを追跡（全フレーム共通）
