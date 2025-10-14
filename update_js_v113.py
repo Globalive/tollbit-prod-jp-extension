@@ -37,7 +37,7 @@ def update_content_script(js_path, translations_data):
     entry_count = len(translations_data['normal']) + len(translations_data['patterns'])
     version_comment = f"""/**
  * TollBit 本番環境 日本語化拡張機能
- * バージョン: 1.1.8
+ * バージョン: 1.1.9
  *
  * 動的に生成されるiframeにも対応
  * topフレームから全てのiframeにアクセスして翻訳
@@ -59,7 +59,7 @@ def update_content_script(js_path, translations_data):
     # console.logを更新
     content = re.sub(
         r"console\.log\('\[TollBit日本語化\].*?\);",
-        f"console.log('[TollBit日本語化] 本番環境版 v1.1.8 - 改行文字エスケープ修正（{entry_count}エントリ）');",
+        f"console.log('[TollBit日本語化] 本番環境版 v1.1.9 - 辞書更新 + Row 52修正（{entry_count}エントリ）');",
         content
     )
 

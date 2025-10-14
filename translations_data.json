@@ -368,7 +368,12 @@
     "Updated": "更新：",
     "Properties": "サイト一覧",
     "API Access": "APIアクセス",
-    "Delete": "削除"
+    "Delete": "削除",
+    "\"list\" will simply return a list of documents that match the query.": "\"list\"：クエリに一致するドキュメントのリストのみを返します。",
+    "\"summarize\" will return a list plus a summary of the contents of the docs.": "\"summarize\"：リストに加えて各ドキュメントの内容の要約を返します。",
+    "\"generate\" will return the list plus an answer to the query based on the documents.": "\"generate\"：リストに加えて、ドキュメントに基づくクエリへの回答を返します。",
+    "endpoint. This allows developers and agents to seamlessly interact with your content via natural language.": "エンドポイント。これにより、開発者やエージェントが自然言語を通じてあなたのコンテンツとシームレスにやり取りできるようになります。",
+    "endpoint and an MCP compatible": "エンドポイントおよびMCP互換の"
   },
   "patterns": [
     {

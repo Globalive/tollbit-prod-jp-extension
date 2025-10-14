@@ -1,11 +1,11 @@
 /**
  * TollBit 本番環境 日本語化拡張機能
- * バージョン: 1.1.8
+ * バージョン: 1.1.9
  *
  * 動的に生成されるiframeにも対応
  * topフレームから全てのiframeにアクセスして翻訳
  * 変数を含むテキスト（正規表現パターン）にも対応
- * 分割されたテキストにも対応（383エントリ）
+ * 分割されたテキストにも対応（388エントリ）
  * 末尾の句読点・スペースを除去して辞書検索
  * by以降削除対応
  */
@@ -13,10 +13,13 @@
 (function() {
   'use strict';
 
-  console.log('[TollBit日本語化] 本番環境版 v1.1.8 - 改行文字エスケープ修正（383エントリ）');
+  console.log('[TollBit日本語化] 本番環境版 v1.1.9 - 辞書更新 + Row 52修正（388エントリ）');
 
   // 通常の翻訳辞書（完全一致）
   const TRANSLATIONS = {
+  "\"generate\" will return the list plus an answer to the query based on the documents.": "\"generate\"：リストに加えて、ドキュメントに基づくクエリへの回答を返します。",
+  "\"list\" will simply return a list of documents that match the query.": "\"list\"：クエリに一致するドキュメントのリストのみを返します。",
+  "\"summarize\" will return a list plus a summary of the contents of the docs.": "\"summarize\"：リストに加えて各ドキュメントの内容の要約を返します。",
   "#NAME?": "Attribute（属性）のペアを追加する",
   ". Follow the instructions for starting the inspector, and for the Agent Card URL use": "インスペクターの起動手順に従い、Agent Card URLには次を使用してください：",
   "1 Day": "1日",
@@ -347,6 +350,8 @@
   "create an article filter": "記事フィルターを作成",
   "create an element filter": "要素フィルターを作成",
   "decreased to": "は減少傾向に向かっていて、その数、",
+  "endpoint and an MCP compatible": "エンドポイントおよびMCP互換の",
+  "endpoint. This allows developers and agents to seamlessly interact with your content via natural language.": "エンドポイント。これにより、開発者やエージェントが自然言語を通じてあなたのコンテンツとシームレスにやり取りできるようになります。",
   "for your CDN provider to change if a bot is forwarded or not.": "適宜設定してください。",
   "from Anthropic and follow along with our demo": "ダウンロードし、デモに従ってください。",
   "from previous": "前期間との比較",
