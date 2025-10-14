@@ -1,290 +1,226 @@
 /**
- * TollBit デモ 日本語化 - クロスフレーム対応版
+ * TollBit 本番環境 日本語化拡張機能
+ * バージョン: 1.0.2
  *
  * 動的に生成されるiframeにも対応
  * topフレームから全てのiframeにアクセスして翻訳
+ * 変数を含むテキスト（正規表現パターン）にも対応
  */
 
 (function() {
   'use strict';
 
-  console.log('[TollBit日本語化] クロスフレーム対応版開始 v3.6.9 - Rates詳細設定画面の追加');
+  console.log('[TollBit日本語化] 本番環境版 v1.0.2 - 変数対応パターンマッチング追加');
 
-  // 翻訳辞書
+  // 通常の翻訳辞書（完全一致）
   const TRANSLATIONS = {
-    "Properties Home": "プロパティホーム",
-    "API Access": "APIアクセス",
-    "Payouts": "支払い",
-    "Settings": "設定",
-    "Next": "次へ",
-    "Previous": "前へ",
-    "Back": "戻る",
-    "Skip": "スキップ",
-    "Close": "閉じる",
-    "Done": "完了",
-    "Home": "ホーム",
-    "Dashboard": "ダッシュボード",
-    "Analytics": "分析",
-    "Rates": "料金",
-    "Define Rates": "料金を定義",
-    "Users in this organization": "この組織のユーザー",
-    "Invite Users": "ユーザーを招待",
-    "Add Property": "プロパティを追加",
-    "Logout": "ログアウト",
-    "Users": "ユーザー",
-    "Add a property": "プロパティを追加",
-    "TollBit helps websites monitor, manage, and monetize bot scraping on their website - for free.": "TollBitはWebサイトのボットスクレイピングを無料で監視、管理、収益化することを支援します。",
-    "The internet is changing - as more people adopt AI, website visits and ad revenue will continue to decline.": "インターネットは変化しています - より多くの人がAIを採用するにつれて、Webサイトの訪問数と広告収入は減少し続けます。",
-    "Over 1,000 websites recognize this problem and have partnered with TollBit to protect their content.": "1,000以上のWebサイトがこの問題を認識し、TollBitと提携してコンテンツを保護しています。",
-    "TollBit is free for websites and it will take your tech team less than 30 minutes to get started!": "TollBitはWebサイトに無料で提供され、技術チームは30分以内に開始できます！",
-    "Summarization License": "要約ライセンス",
-    "Full Display License": "全文表示ライセンス",
-    "Price per 1,000 pages": "1000ページあたりの価格",
-    "Set Global Rates For Your Content": "コンテンツのグローバル料金を設定する",
-    "Powered by Navattic": "Powered by Navattic",
-    "Book a Demo": "デモを予約",
-    "Book A Demo": "デモを予約",
-    "Get Started": "始める",
+  "Add and select a property to get started monetizing your content.": "コンテンツの収益化を始めるには、サイトを追加して選択してください。",
+  "Users in this organization": "この組織のユーザー",
+  "Invite Users": "ユーザーを招待",
+  "Add rates": "価格設定を追加",
+  "Add Property": "サイトを追加",
+  "Access": "アクセス",
+  "Manage your secret keys.": "秘密鍵を管理します。",
+  "Secret Keys": "秘密鍵",
+  "These are the secret keys to be used from your backend code. They are sensitive and should be deleted if leaked.": "これはAPIを利用する際に使用する秘密鍵です。機密情報のため、流出した場合は削除してください。",
+  "Secret Key": "秘密鍵",
+  "Regenerate Key": "鍵を再生成",
+  "Manage your TollBit Account.": "アカウントを管理",
+  "Settings": "設定",
+  "User": "ユーザー",
+  "Manage your profile": "プロフィールを管理",
+  "Org": "組織",
+  "Manage your organization": "組織を管理",
+  "Analytics": "アナリティクス",
+  "Manage your analytics settings": "アナリティクス設定を管理",
+  "Account": "アカウント",
+  "Manage your account info.": "アカウント情報を管理",
+  "Profile": "プロフィール",
+  "Security": "セキュリティ",
+  "Profile details": "プロフィール詳細",
+  "Email addresses": "メールアドレス",
+  "Add email address": "メールアドレスを追加",
+  "Connected accounts": "接続済みアカウント",
+  "Update profile": "プロフィールを更新",
+  "Password": "パスワード",
+  "Set password": "パスワードを設定",
+  "Active devices": "アクティブなデバイス",
+  "This device": "このデバイス",
+  "Delete account": "アカウントを削除",
+  "Organization": "組織",
+  "General": "一般",
+  "Organization Profile": "組織プロフィール",
+  "Leave organization": "組織を離れる",
+  "Members": "メンバー",
+  "Search": "検索",
+  "Joined": "参加日",
+  "Role": "役割",
+  "Actions": "操作",
+  "Overview": "概要",
+  "Last week": "先週",
+  "A snapshot of your website's AI bot traffic, excluding robots.txt visits and traffic forwarded to your TollBit subdomain.": "robots.txt訪問とTollBitサブドメインへ転送されたトラフィックを除いた、あなたのウェブサイトへのAIボットトラフィックのスナップショットです。",
+  "Top AI bots scraping your website": "あなたのウェブサイトをクロールしているAIボットの上位",
+  "Referral Metrics": "リファラル指標",
+  "Clickthrough Rates": "クリック率",
+  "How many human visitors AI platforms are sending you": "AIプラットフォームがあなたにどれだけの人間の訪問者を送っているか（リファラルリンク経由のユーザー数）",
+  "AI Platform": "AIプラットフォーム",
+  "Referers": "参照元",
+  "Scrapes": "クローリング数",
+  "Clickthrough Rate": "クリック率",
+  "OpenAI (ChatGPT)": "OpenAI (ChatGPT)",
+  "Perplexity": "Perplexity",
+  "Referral traffic by day": "日別のリファラルトラフィック",
+  "Total referral traffic": "リファラルトラフィック合計",
+  "Benchmarking": "ベンチマーク",
+  "Percentile Metrics: How your AI traffic compares to others on TollBit": "パーセンタイル指標: TollBit内で、あなたのサイトのAIトラフィックが他と比較してどの位置にあるか",
+  "Breakdown by bot": "ボット別内訳",
+  "Status Traffic": "ステータストラフィック",
+  "Status Codes": "ステータスコード",
+  "Different http response status codes over time. Quickly monitor the health of your site.": "HTTPレスポンスステータスコード別の時系列推移。サイトの健康状態を簡単にモニターできます。",
+  "Bot Activity": "ボットアクティビティ",
+  "Bot Status": "ボットステータス",
+  "Which bots are being forwarded or not. See the docs for your CDN provider to change if a bot is forwarded or not.": "どのボットが転送されているか。ボットが転送されるかどうかを変更するには、CDNプロバイダーのドキュメントを（https://docs.tollbit.com/publisher-bot-deterrence/）参照してください。",
+  "Total AI Bot Scrapes": "AIボットのクローリング総数",
+  "AI Bot scrapes ordered by total request count": "AIボットクローリング数（降順）",
+  "All Bots": "すべてのボット",
+  "AI Agents": "AIエージェント",
+  "SEO Agents": "SEOエージェント",
+  "Recent AI Bot Activity": "最近のAIボットアクティビティ",
+  "How the traffic looks over time for all AI user agents": "すべてのAIユーザーエージェントにおけるトラフィックの時系列推移",
+  "AI Bot Traffic": "AIボットトラフィック",
+  "Top Pages": "人気ページ",
+  "How the most accessed pages break down by user agent category": "最もアクセスされたページがユーザーエージェントカテゴリー別にどのように分布しているか",
+  "Page": "ページ",
+  "Human": "人間",
+  "AI Bots": "AIボット",
+  "Other Bots": "その他のボット",
+  "Search for a page...": "ページを検索...",
+  "Logs": "ログ",
+  "View a sample of logs for the graph above": "上記グラフのログサンプルを表示",
+  "Day": "日",
+  "Hour": "時間",
+  "Host": "ホスト",
+  "User Agent": "ユーザーエージェント",
+  "Download as CSV": "CSVとしてダウンロード",
+  "Rates": "価格設定を追加",
+  "Set Global Rates For Your Content": "コンテンツの統一価格を設定",
+  "Define Global Rates across your subdirectories and pages at the property level. If a custom rate conflicts with a global rate, the custom rate will be used.": "サブディレクトリやページ全体に統一価格を設定します。カスタム価格が統一価格と矛盾する場合はカスタム価格が使用されます。",
+  "Summarization License": "要約用ライセンス",
+  "Not Activated": "無効",
+  "A Summarization License allows AI to access your content for the purpose of summarization. They can extract a few relevant sentences to compile a new text piece on a website, in an app, or on other digital platforms.": "要約ライセンスは、要約目的でAI事業社があなたのコンテンツにアクセスすることを許可します。ウェブサイトやアプリなどで新しいテキストを作成するために関連する文を抽出することができます。",
+  "Price per 1,000 pages": "1,000ページあたりの価格",
+  "Activate": "有効",
+  "Full Display License": "完全表示ライセンス",
+  "A Full Display License allows AI to access your content for the purpose of display. This includes generating text for a website, voice assistant, or other digital platform.": "完全表示ライセンスは表示目的でAI事業社があなたのコンテンツにアクセスすることを許可します。ウェブサイトや音声アシスタントなどでテキストを生成することが含まれます。",
+  "Consider your current RPM as a benchmark when setting this rate": "この価格を設定する際は、現在のRPM（1000PVあたりの売上）をベンチマークとして検討してください。",
+  "Show Custom License Rates": "カスタムライセンス価格を表示",
+  "Show Advanced Settings": "高度な設定を表示",
+  "Summarization License Options": "要約ライセンスオプション",
+  "Activate the Rates You Need / Set Up Each Type Below": "必要な価格を有効化 / 各タイプを以下で設定",
+  "Bot": "ボット",
+  "Time": "時間",
+  "Directory": "ディレクトリ",
+  "Set special rates for specific bots": "特定のボット用に特別な価格を設定",
+  "Set a rate for a specific page": "特定のページの価格を設定",
+  "Define how the rate should change over time": "時間とともに価格がどのように変化するかを定義",
+  "Set a flat rate for all content within a directory": "ディレクトリ内のすべてのコンテンツに対して一定価格を設定",
+  "Custom Rate": "カスタム価格",
+  "Add": "追加",
+  "No Subdirectory information found": "サブディレクトリ情報が見つかりません",
+  "Manage URL Path Blocking": "URLパスブロックを管理",
+  "Prevent all access to URLs beginning with a custom Prefix": "指定したプレフィックスで始まるURLへのすべてのアクセスを禁止する",
+  "Enable": "有効にする",
+  "Recent Transactions": "最近のトランザクション",
+  "A detailed ledger of recent transactions for your property.": "サイトに関する最近のトランザクションの詳細です。",
+  "No data": "データなし",
+  "Content Controls": "コンテンツコントロール",
+  "Set include/exclude filters for articles, sections, tags, images, links, and embeds to control what AI bots and agentic apps can access.": "AIボットやエージェンティックアプリがアクセスできる内容を制御するため、記事、セクション、タグ、画像、リンク、埋め込みのインクルード/エクスクルードフィルターを設定します。",
+  "Element Filter": "要素フィルター",
+  "Exclude specific HTML elements from AI access": "特定のHTML要素へのAIアクセスを除外",
+  "Article Filters": "記事フィルター",
+  "Exclude entire articles from AI access if the page contains matching HTML patterns": "ページに一致するHTMLパターンが含まれている場合、AIアクセスから記事全体を除外",
+  "Add filter": "フィルターを追加",
+  "Test Bot Requests": "ボットリクエストをテスト",
+  "Test your property against sample requests to check forwarding and content filters.": "サンプルリクエストに対してサイトをテストし、転送とコンテンツフィルターを確認します。",
+  "Bot Forwarding": "ボットの転送",
+  "Content Retrieval": "コンテンツの取得",
+  "Simulate a Bot Request": "ボットリクエストをシミュレーション",
+  "Choose a page and a bot user agent to simulate what a bot sees": "ページとボットのユーザーエージェントを選択して、ボットが実際に見る内容をシミュレーションする。",
+  "Content to request": "要求するコンテンツ",
+  "Select User Agent": "ユーザーエージェントを選択",
+  "Test": "テスト",
+  "Bot View": "ボットビュー",
+  "Analyze the response of your content sites from the perspective of a bot": "ボットの視点からあなたのコンテンツサイトのレスポンスを分析",
+  "Request Activity": "リクエストアクティビティ",
+  "Request Received - Base URL received the request.": "リクエスト受信 - ベースURLがリクエストを受信しました。",
+  "Forwarded to TollBit - CDN services routed the request to TollBit.": "TollBitへ転送 - CDNがリクエストをTollBitに転送しました。",
+  "Destination Success - The request is received at TollBit": "転送成功 - リクエストがTollBitで受信されました",
+  "NLWeb": "NLWeb",
+  "One-Click Activation for NLWeb at your TollBit Subdomain": "TollBitサブドメインでNLWebをワンクリックで有効化",
+  "NLWeb is a protocol that aims to simplify the creation of natural language interfaces for websites": "NLWebは、ウェブサイト向けの自然言語インターフェース作成を簡素化することを目的としたプロトコルです。",
+  "Important query parameters:": "重要なクエリパラメーター:",
+  "query ? the question or query being asked to your site": "クエリとは、あなたのサイトに投げられる質問やクエリを指します。",
+  "streaming ? boolean for if the query is a streaming query": "ストリーミングとは、クエリがストリーミングクエリかどうかを示すTRUE or NOTの値です。",
+  "mode ? one of the supported modes. Use mode \"list\" for classification or to retrieve a list of objects, mode \"summarize\" to condense or compress content, or mode \"generate\" to generate new content": "モードとは、 サポートされているモードの1つ。分類またはオブジェクトのリストを取得するには「リスト」モード、コンテンツを要約または圧縮するには「要約」モード、新しいコンテンツを生成するには「生成」モードを使用します。",
+  "Get Started with NLWeb": "NLWebを始める",
+  "Enable NLWeb": "NLWebを有効化",
+  "Save": "保存",
+  "A2A": "A2A (Agent2Agent)",
+  "Agent2Agent (A2A) protocol": "Agent2Agent (A2A)プロトコル",
+  "Agent2Agent is an open standard for AI agents to collaborate securely without sharing internal logic. It allows AI agents to discover capabilities, negotiate interactions, and work together seamlessly over HTTP.": "Agent2Agentは、AIエージェント同士が内部ロジックを共有せずに安全にコラボレーションするためのオープンスタンダードです。AIエージェントが機能を発見し、相互作用を交渉し、HTTP上でシームレスに動作することを可能にします。",
+  "Your agent card is always available at": "あなたのエージェントカードは常に以下で利用可能です",
+  "Visit this URL below to see how other agents can discover your schema.": "他のエージェントがあなたのスキーマをどのように発見できるかを見るには、以下のURLを確認してください。",
+  "You can use the a2a-inspector to validate and test your Agent2Agent implementation.": "a2a-inspectorを使用してあなたのAgent2Agent実装を検証およびテストできます。",
+  "Sample Agent Card": "サンプルエージェントカード",
+  "Get Started with A2A": "A2Aを始める",
+  "Enable A2A": "A2Aを有効化",
+  "Integrations": "インテグレーション",
+  "TollBit's bot blocking is easily compatible with Fastly customers. By adding your API key and Service ID, the Bot Blocking controls are a simple toggle function.": "TollBitのボットブロックはFastlyのお客様と簡単に互換性があります。APIキーとサービスIDを追加することで、ボットブロックコントロールを簡単に切り替えられます。",
+  "Get Started with Fastly Integration": "Fastlyとのインテグレーションを始める",
+  "Fastly API Key": "Fastly APIキー",
+  "Service ID": "サービスID",
+  "Allow for your logs to be streamed.": "ログのストリーミングを許可します。",
+  "Bot Paywall": "ボットペイウォール",
+  "Choose which bots are hitting your subdomain or have permission to crawl": "どのボットがあなたのサブドメインにアクセスしているか、またはクロール許可があるかを選択",
+  "Block All Bots": "すべてのボットをブロック",
+  "Save Changes": "変更を保存",
+  "Crawler": "クローラー",
+  "Operator": "運営者",
+  "Robots.txt violations": "robots.txtの違反",
+  "Action": "アクション"
+};
 
-    // v3.2.0追加分 - UI要素
-    "Admin": "管理者",
-    "Member": "メンバー",
-    "Open sidebar": "サイドバーを開く",
-    "Your profile": "あなたのプロフィール",
-    "Toggle theme": "テーマを切り替え",
-    "Skip to capture": "キャプチャへスキップ",
-    "Skip to content": "コンテンツへスキップ",
-    "Updated": "更新日",
-    "of": "/",
-    "Home - Demo Media, Inc.": "ホーム - Demo Media, Inc.",
-    "TollBit is free for websites": "TollBitは完全無料でご利用頂けます",
-    "Add and select a property to get started monetizing your content.": "サイトを追加してコンテンツのマネタイズを始めましょう",
-
-    // v3.3.0追加分 - デモツアー全16ページ対応
-    // ボタン・ナビゲーション
-    "Continue Tour": "ツアーを続ける",
-    "See TollBit in Action": "TollBitの実際の動作を見る",
-    "Sign Up Free": "無料でサインアップ",
-
-    // ツアーセクション名
-    "Introduction": "イントロダクション",
-    "High level overview": "概要",
-    "Organization Page": "組織ページ",
-    "Click-Through Data": "クリックスルーデータ",
-    "Robots.txt Report": "Robots.txtレポート",
-    "AI Bot Reporting": "AIボットレポート",
-    "Top Page Report": "トップページレポート",
-    "Filtering Analytics": "フィルタリング分析",
-    "Bot Paywall Transition": "ボットペイウォール設定",
-    "Set Rates": "料金設定",
-    "Sign Up/Book Demo": "サインアップ/デモ予約",
-
-    // 機能説明（重要）
-    "TollBit Analytics - reveals which AI bots are scraping your content, how often, and which pages they target": "TollBit アナリティクスは、どのAIボットがコンテンツをスクレイピングしているか、その頻度、対象ページを明らかにします",
-    "Bot Paywall - blocks unauthorized AI bots from accessing your content": "ボットペイウォールは、未承認のAIボットによるコンテンツアクセスをブロックします",
-    "Monetization - let you set custom pricing for AI companies": "マネタイズ機能により、AI企業向けのカスタム価格を設定できます",
-    "AI chat bots on average drive click-throughs at a rate that is 96% lower than traditional Google search.": "AIチャットボットは、従来のGoogle検索と比較してクリックスルー率が平均96%低下します",
-    "Across our users AI bot scrapes that bypassed robots.txt grew by over 40% in Q4.": "ユーザー全体で、robots.txtを回避したAIボットのスクレイピングがQ4に40%以上増加しました",
-
-    // 詳細説明
-    "Let's talk about the tools of TollBit at a high-level, then we will walk you through each of them on this tour:": "まず、TollBitのツールを概要レベルでご説明し、その後ツアーで各機能を詳しくご案内します",
-    "Protect content across all of your websites with TollBit.": "TollBitで、すべてのWebサイトのコンテンツを保護しましょう",
-    "With TollBit Analytics, websites can see which bots access their site, track popular pages, and make data-driven decisions to maximize their content's value in the AI era.": "TollBit アナリティクスにより、Webサイトはどのボットがアクセスしているか確認し、人気ページを追跡し、AI時代にコンテンツ価値を最大化するためのデータドリブンな意思決定ができます",
-    "By implementing a bot paywall - websites can control which bots can access their content.": "ボットペイウォールを実装することで、Webサイトはどのボットがコンテンツにアクセスできるかを制御できます",
-    "Start monitoring, managing, and monetizing AI bot scraping on your website today by signing up for TollBit.": "今すぐTollBitにサインアップして、WebサイトのAIボットスクレイピングの監視、管理、収益化を始めましょう",
-    "TollBit's filters let you track scraping by bot and time period for clear insights.": "TollBitのフィルタ機能により、ボットや期間別のスクレイピングを追跡し、明確なインサイトが得られます",
-    "Use TollBit Analytics to get a better understanding of how many bots are bypassing your robots.txt": "TollBit アナリティクスを使用して、robots.txtを回避しているボットの数をより深く理解しましょう",
-    "Websites can set custom prices for their content": "Webサイトはコンテンツに対してカスタム価格を設定できます",
-    "TollBit Analytics provides you with a comprehensive picture of click-throughs you receive from AI chat bots.": "TollBit アナリティクスは、AIチャットボットから受け取るクリックスルーの包括的な全体像を提供します",
-
-    // v3.4.0追加分 - Analytics画面の詳細要素
-    // 見出し（最優先）
-    "All Bot Traffic": "全ボットトラフィック",
-    "Clickthrough Rates from AI Bots": "AIが行う引用元表示からのクリック遷移獲得率",
-
-    // 左サイドバー
-    "Property List": "プロパティリスト",
-    "Recent Transactions": "最近の取引",
-
-    // Analytics画面要素
-    "Dive into your data.": "データを深く分析しましょう",
-    "Read the docs →": "ドキュメントを読む →",
-    "Analytics for your main site.": "メインサイトの分析",
-    "Analytics for forwarded traffic to your TollBit subdomain.": "TollBitサブドメインに転送されたトラフィックの分析",
-    "All AI User Agents": "すべてのAIユーザーエージェント",
-    "How many human visitors are AI bots sending you?": "AIが行う引用元表示からの実際の訪問者数を確認する",
-
-    // 期間フィルター
-    "2D": "2日",
-    "1W": "1週間",
-    "1M": "1ヶ月",
-    "3M": "3ヶ月",
-
-    // カテゴリフィルター
-    "All": "すべて",
-    "AI": "AI",
-    "Search": "検索",
-
-    // 統計表示
-    "visits": "訪問数",
-    "scrapes": "スクレイピング回数",
-    "Referrals": "リファラル",
-    "Your referral traffic by day": "日別のリファラルトラフィック",
-    "Total referrals": "リファラル合計",
-
-    // 説明文
-    "Do you know how often AI is scraping your site?": "AIがどのくらいの頻度でサイトをスクレイピングしているかご存知ですか？",
-    "AI Bot User Agents bypassing your robots.txt. Set up Bot Deterrence now.": "AI Botはrobots.txtをすり抜けてきます。今すぐ対策をしましょう。",
-
-    // v3.5.0追加分 - HTML解析による包括的翻訳（30個）
-    // ステップ名
-    "Monetization Transition": "マネタイズ設定",
-    "High level overview ": "概要",
-    "Bot Paywall Transistion": "ボットペイウォール設定",
-    "Bot Paywall Subdomain": "ボットペイウォールサブドメイン",
-
-    // 分割されたテキスト（Introduction）
-    "TollBit helps websites monitor, manage, and": "TollBitはWebサイトの監視、管理、",
-    "monetize bot scraping on their website - for free.": "ボットスクレイピングの収益化を無料で支援します。",
-
-    // 完全版の機能説明（High level overview）
-    "TollBit Analytics - reveals which AI bots are scraping your content, how often, and which pages they target - giving you full visibility into bot activity.": "TollBit アナリティクス - どのAIボットがコンテンツをスクレイピングしているか、その頻度、対象ページを明らかにし、ボットアクティビティの完全な可視性を提供します。",
-    " - reveals which AI bots are scraping your content, how often, and which pages they target - giving you full visibility into bot activity.": " - どのAIボットがコンテンツをスクレイピングしているか、その頻度、対象ページを明らかにし、ボットアクティビティの完全な可視性を提供します。",
-    "Bot Paywall - blocks unauthorized AI bots from accessing your content and directs them to a controlled access point, ensuring only approved bots get through.": "ボットペイウォール - 未承認のAIボットによるコンテンツアクセスをブロックし、制御されたアクセスポイントに誘導することで、承認されたボットのみがアクセスできるようにします。",
-    " - blocks unauthorized AI bots from accessing your content and directs them to a controlled access point, ensuring only approved bots get through.": " - 未承認のAIボットによるコンテンツアクセスをブロックし、制御されたアクセスポイントに誘導することで、承認されたボットのみがアクセスできるようにします。",
-    "Monetization -  let you set custom pricing for AI companies, turning bot traffic into a monetization opportunity.": "マネタイズ - AI企業向けのカスタム価格を設定し、ボットトラフィックを収益化の機会に変えることができます。",
-    " -  let you set custom pricing for AI companies, turning bot traffic into a monetization opportunity.": " - AI企業向けのカスタム価格を設定し、ボットトラフィックを収益化の機会に変えることができます。",
-
-    // v3.5.5追加分 - Draft.js分割テキスト対応
-    // モーダル内でタイトルと説明が別々のテキストノードになっている
-    "TollBit Analytics -": "TollBit アナリティクス -",
-    "reveals which AI bots are scraping your content, how often, and which pages they target - giving you full visibility into bot activity.": "どのAIボットがコンテンツをスクレイピングしているか、その頻度、対象ページを明らかにし、ボットアクティビティの完全な可視性を提供します。",
-    "Bot Paywall -": "ボットペイウォール -",
-    "blocks unauthorized AI bots from accessing your content and directs them to a controlled access point, ensuring only approved bots get through.": "未承認のAIボットによるコンテンツアクセスをブロックし、制御されたアクセスポイントに誘導することで、承認されたボットのみがアクセスできるようにします。",
-    "Monetization -": "マネタイズ -",
-    "let you set custom pricing for AI companies, turning bot traffic into a monetization opportunity.": "AI企業向けのカスタム価格を設定し、ボットトラフィックを収益化の機会に変えることができます。",
-
-    // Organization Page
-    "Whether your organization has one website or 50, you can implement TollBit on all of your websites. Invite as many team members as needed.": "組織が1つのWebサイトを持っていても50のWebサイトを持っていても、すべてのWebサイトにTollBitを実装できます。必要なだけチームメンバーを招待できます。",
-    "Now let's take a closer look at TollBit Analytics.": "それでは、TollBit アナリティクスを詳しく見ていきましょう。",
-
-    // Robots.txt Report
-    "Use TollBit Analytics to get a better understanding of how many bots are bypassing your robots.txt.": "TollBit アナリティクスを使用して、robots.txtを回避しているボットの数をより深く理解しましょう。",
-    "Across our users Al bot scrapes that bypassed robots.txt grew by over 40% in Q4.": "ユーザー全体で、robots.txtを回避したAIボットのスクレイピングがQ4に40%以上増加しました。",
-
-    // AI Bot Reporting
-    "The Total AI Bot User Agent Visits report will help you visualize and understand which bots are accessing your sites most often.": "AIボットユーザーエージェント訪問総数レポートは、どのボットが最も頻繁にサイトにアクセスしているかを視覚化し理解するのに役立ちます。",
-    "The Top Bot agents report provides you with an additional breakdown of the most active bot agents on your site. You can filter these by all bots, ai agents, and seo agents.": "トップボットエージェントレポートは、サイト上で最もアクティブなボットエージェントの追加の内訳を提供します。すべてのボット、AIエージェント、SEOエージェントでフィルタリングできます。",
-    "The Recent AI Bot Activity report which is where you can see the total bot traffic to your site over time, helping you identify unauthorized usage and trends.": "最近のAIボットアクティビティレポートでは、時間の経過とともにサイトへの総ボットトラフィックを確認でき、不正な使用とトレンドを特定するのに役立ちます。",
-
-    // Top Page Report
-    "In the Top Pages report TollBit Analytics provides a breakdown of how often each page on your site is being visited by ai bots, humans, and other bots which may include scrapers, seo bots, and other types of custom agents.": "トップページレポートでは、TollBit アナリティクスがサイトの各ページがAIボット、人間、スクレイパー、SEOボット、その他のカスタムエージェントを含む可能性のある他のボットによってどのくらいの頻度で訪問されているかの内訳を提供します。",
-
-    // Filtering Analytics
-    "TollBit's filters let you track scraping by bot and time period for clear insights.": "TollBitのフィルターを使うと、ボットごと・期間ごとにスクレイピングの状況を追跡でき、明確なインサイトを得ることができます。",
-
-    // Bot Paywall Transition
-    "Not only can TollBit help websites monitor bot scraping - we can manage it through our Bot Paywall.": "TollBit はボットのスクレイピングを監視するだけでなく、ボットペイウォール機能でそれを管理することもできます。",
-    "Continue the tour to see our Bot Paywall and Rates features or book a demo to learn more.": "ツアーを続けて、ボットペイウォールと料金機能をご覧いただくか、デモを予約して詳細をご確認ください。",
-
-    // Bot Paywall Subdomain
-    "Unauthorized bots will be taken to a subdomain (tollbit.publisher.com) and told they can only access content with a valid TollBit Token.": "未承認のボットはサブドメイン（tollbit.publisher.com）に誘導され、有効なTollBitトークンでのみコンテンツにアクセスできることが通知されます。",
-    "Once your Bot Paywall is set up - you can start letting bots access your content, if they are willing to pay.": "ボットペイウォールの設定が完了したら、支払いを希望するボットにコンテンツへのアクセスを許可できます。",
-
-    // Monetization Transition
-    "When AI tools scrape and repurpose your content, their users get answers without ever visiting your site - reducing traffic to your site and potentially revenue.": "AIツールがコンテンツをスクレイピングして再利用すると、ユーザーはサイトを訪問することなく回答を得られるため、サイトへのトラフィックと潜在的な収益が減少します。",
-    "We can provide an alternative revenue source to offset this. TollBit provides a scalable, usage based model to monetize your content.": "これを相殺する代替収益源を提供できます。TollBitは、コンテンツを収益化するためのスケーラブルな使用量ベースのモデルを提供します。",
-    "Lets check out Rates.": "料金設定を確認しましょう。",
-    "We have two licenses in the platform today, one for summarization and one for full display. Each has their own set of rates associated with it.": "現在、プラットフォームには2つのライセンスがあります。1つは要約用、もう1つは全文表示用です。それぞれに独自の料金設定があります。",
-    "A summarization license allows AI customers to use your content once to create a summary, grounding or citation.": "要約ライセンスは、AI顧客がコンテンツを1回使用して、要約、根拠、または引用を作成できるようにします。",
-    "A full display license allows AI customers to show the full text of an article once.": "全文表示ライセンスは、AI顧客が記事の全文を1回表示できるようにします。",
-
-    // Set Rates
-    "Websites can set custom prices for their content.": "Webサイトはコンテンツに対してカスタム価格を設定できます。",
-    "Set global summarization and full display license rates or create unique pricing per bot, page, directory, or based upon the newness of your content.": "グローバルな要約ライセンスと全文表示ライセンスの料金を設定するか、ボット、ページ、ディレクトリごと、またはコンテンツの新しさに基づいて独自の価格を作成できます。",
-
-    // v3.5.9追加分 - CSVから追加
-    "You are not authorized to access this content without a valid TollBit Token. Please follow this URL to find out more.": "有効なTollBitトークンがないため、このコンテンツにアクセスする権限がありません。詳細についてはこのURLをご確認ください。",
-    "Asset Management": "アセットマネジメント",
-    "Tiles": "タイル",
-    "Legal": "法務",
-    "API Auth Settings": "API認証設定",
-    "Test Bot Forwarding": "ボットの転送を試す",
-
-    // v3.6.0追加分 - CSV完全マージ（27エントリ）
-    "Total AI Bot User Agents bypassing your robots.txt": "robots.txtをバイパスしているAIボットユーザーエージェントの総数",
-    "AI bot user agents are blocked in your robots.txt but are still accessing your content. Set up Bot Deterrence now.": "AIボットユーザーエージェントは基本的にはrobots.txtでブロックされていますが、一部はすり抜けてきています。今すぐボット抑止機能を設定してください。",
-    "View docs": "ドキュメントを表示",
-    "Download as CSV": "CSVでダウンロード",
-    "All Bots": "すべてのボット",
-    "Bot Breakdown": "ボット内訳",
-    "Bot Traffic": "ボットトラフィック",
-    "Breakdown the top 5 most active bot agents accessing your content.": "あなたのコンテンツにアクセスしている最もアクティブなボットエージェント上位5つの内訳。",
-    "Day": "日",
-    "Host": "ホスト",
-    "Hour": "時間",
-    "How the most accessed pages break down by user agent category.": "最もアクセスされたページがユーザーエージェントカテゴリ別にどのように分布しているか。",
-    "How the traffic looks over time for all AI user agents.": "全AIユーザーエージェントのトラフィックの時系列推移",
-    "Human": "人間",
-    "More pages": "その他のページ",
-    "N/A": "該当なし",
-    "OAI-SearchBot": "OAIサーチボット",
-    "Other Bots": "その他のボット",
-    "Page": "ページ",
-    "Top Bot Agents": "トップボットエージェント",
-    "Recent AI Bot Activity": "最近のAIボットアクティビティ",
-    "Total AI Bot User Agent Visits": "AIボットユーザーエージェント訪問総数",
-    "AI Bot user agent visits ordered by total request count.": "AIボットユーザーエージェント訪問数（総リクエスト数順）。",
-    "Logs": "ログ",
-    "View a sample of logs for the graph above.": "上記グラフのログサンプルを表示。",
-    "Status Traffic": "ステータストラフィック",
-    "Different http response status codes over time. Quickly monitor the health of your site.": "HTTPレスポンスステータスコードの時系列変化。サイトの健全性を素早く監視できます。",
-
-    // v3.6.5追加分 - Rates設定画面の詳細（29エントリ）
-    "Not only can TollBit help websites monitor bot scraping - we can": "TollBit はボットのスクレイピングを監視するだけでなく、",
-    "manage it through our Bot Paywall": "ボットペイウォールで管理する",
-    "AI Bot Clickthrough Rates - now available dating back to January 15th, 2025.": "AIボットのクリックスルー率 - 2025年1月15日まで遡って利用可能になりました。",
-    "We can provide an alternative revenue source to offset this.": "TollBitはその機会損失を収益化に変えることが可能です。",
-    "TollBit provides a scalable, usage based model to monetize your content.": "TollBit は、コンテンツを収益化するためのスケーラブルな従量課金モデルをAI事業社側に提示可能です。",
-    "Add rates to your content based on the website structure.": "ウェブサイトの構造に基づいて、コンテンツに価格を設定します。",
-    "Define Global Rates for your content across all subdirectories and pages. These rates apply for each use and do not allow your content to be used for training or creating generative AI models.": "すべてのサブディレクトリとページで一律の価格を定義します。これらのレートはスクレイピングされるごとに適用され、コンテンツを生成AIモデルの、トレーニングや作成に使用することはできません。",
-    "This license allows AI customers to use your content once to create a summary, grounding or citation.": "このライセンスは、AIの利用者があなたのコンテンツを 1回だけ使用して、要約・グラウンディング（根拠付け）・引用を作成することを許可します。",
-    "Tip:": "ヒント:",
-    "Tip: Consider your current RPM as a benchmark when setting this rate": "ヒント: この価格を設定する際は、現在のRPM（1000PVあたりの売上）をベンチマークとして検討してください。",
-    "Consider your current RPM as a benchmark when setting this rate": "この価格を設定する際は、現在のRPM（1000PVあたりの売上）をベンチマークとして検討してください。",
-    "This license allows AI customers to show the full text of an article once.": "このライセンスは、AIの利用者が 記事の全文を一度だけ表示することを許可します。",
-    "Tip: Consider your syndication rates as a benchmark when setting this rate": "ヒント：この料金を設定する際は、あなたのシンジケーション料金（記事配信の単価）をベンチマークとして考慮してください。",
-    "Consider your syndication rates as a benchmark when setting this rate": "この料金を設定する際は、あなたのシンジケーション料金（記事配信の単価）をベンチマークとして考慮してください。",
-    "ACTIVATED": "有効化",
-    "Customize rates further for specific subdirectories, pages, or bots in the Advanced Settings. Global Rates are the default unless more customized rates are defined.": "詳細設定で、特定のサブディレクトリ、ページ、またはボットごとに料金をさらにカスタマイズできます。カスタマイズされた料金が定義されていない場合、あらかじめ設定してある一律の価格がデフォルトとして適用されます。",
-    "Show Advanced Settings": "より詳細の機能を表示する。",
-    "Options": "オプション",
-    "Set special rates for any specific bots that accesses your platform.": "特定のボットに特別な料金を設定する。",
-    "Set a rate for a specific page on your website.": "ウェブサイト上の特定のページに価格を設定します。",
-    "Time": "時間",
-    "Define how the rate of a page should change over time.": "ページの価格を時間の経過に応じてどのように変化させるかを定義します。",
-    "Directory": "ディレクトリ",
-    "Set a flat rate for all the content within a page directory of your site.": "サイトのページディレクトリ内のすべてのコンテンツに一律の価格を設定します。",
-    "Page Path": "ページディレクトリ",
-    "Fine grain control over access rates for specific pages.": "特定のページに対するアクセス料金を、細かい粒度で詳細に制御できます。",
-    "Specific Page Access": "特定のページへのアクセスに対する個別設定",
-    "Edit": "編集",
-    "Delete": "削除",
-    "Current Rate": "現在の価格",
-    "Add Rate": "価格設定を追加する",
-
-    // v3.6.9追加分 - Rates詳細設定画面（10エントリ）
-    "This rate will be used for all sub directories and pages.": "この価格は、全てのサブディレクトリとページで使用されます。",
-    "Current Directory": "現在のディレクトリ",
-    "Custom Rate": "カスタム価格",
-    "Price per 1,000 requests": "1,000リクエストごとの価格",
-    "Subdirectories": "サブディレクトリ",
-    "No Subdirectory information found.": "サブディレクトリの情報が存在しません。",
-    "Manage URL Path Blocking": "URLパスでのブロック管理",
-    "Prevent all access to URLs begining with a custom Prefix.": "カスタムのプレフィックス（接頭辞）で始まるURLへのすべてのアクセスを禁止します。",
-    "1 Prefixes currently configured.": "現在1つのプレフィックスが設定されています。",
-    "Updae": "更新"
-  };
+  // パターンベース翻訳（正規表現）
+  const PATTERN_TRANSLATIONS = [
+  {
+    "pattern": "Updated (\\d+) days? ago",
+    "replacement": "$1日前に更新"
+  },
+  {
+    "pattern": "Members \\((\\d+)\\)",
+    "replacement": "メンバー ($1)"
+  },
+  {
+    "pattern": "AI bots made ([\\d.]+[KMB]) requests to your website, down ([\\d.]+)% from the previous week",
+    "replacement": "AIボットがあなたのウェブサイトに$1のリクエストを行いました。前週比で$2%減少しています。"
+  },
+  {
+    "pattern": "You receive more traffic from AI bots than ([\\d.]+)% of other publishers",
+    "replacement": "あなたは他のパブリッシャーの$1%より多く、AIボットからのトラフィックがあります。"
+  },
+  {
+    "pattern": "Top (\\d+) Bots?",
+    "replacement": "上位$1ボット"
+  },
+  {
+    "pattern": "Breakdown the top (\\d+) most active bot agents accessing your content",
+    "replacement": "あなたのコンテンツにアクセスしている最も活発なボットエージェント上位$1の内訳"
+  },
+  {
+    "pattern": "\\$([\\d.]+)",
+    "replacement": "$$1"
+  }
+];
 
   // 翻訳済みノードを追跡（全フレーム共通）
   const translatedNodes = new WeakSet();
@@ -302,50 +238,42 @@
     const trimmed = text.trim();
     if (!trimmed || trimmed.length === 0) return false;
 
-    // Draft.js要素の詳細デバッグ
-    const parentElement = node.parentElement;
-    let isDraftJs = false;
-    if (parentElement) {
-      const classStr = parentElement.className || '';
-      const classString = typeof classStr === 'string' ? classStr : classStr.toString();
-
-      isDraftJs = classString.includes('DraftStyleDefault') ||
-        (parentElement.closest && parentElement.closest('.public-DraftStyleDefault-unorderedListItem') !== null);
-
-      // デバッグ用（通常は無効化）
-      const DEBUG_DRAFT_JS = false;
-      if (isDraftJs && DEBUG_DRAFT_JS) {
-        const matched = !!TRANSLATIONS[trimmed];
-        if (!matched) {
-          console.log(`[Draft.js未翻訳] "${trimmed.substring(0, 80)}..."`);
-        }
-      }
-    }
-
     // 既に日本語に翻訳済みならスキップ（無限ループ防止）
     const hasJapanese = /[\u3040-\u309F\u30A0-\u30FF\u4E00-\u9FAF]/.test(trimmed);
     if (hasJapanese) {
       return false; // 日本語が含まれていれば翻訳済みとみなす
     }
 
-    // 辞書検索
-    if (TRANSLATIONS[trimmed]) {
-      // 通常要素は既翻訳ならスキップ
-      if (translatedNodes.has(node)) {
-        return false;
-      }
+    // 既翻訳ノードチェック
+    if (translatedNodes.has(node)) {
+      return false;
+    }
 
+    // 1. 完全一致の辞書検索（優先）
+    if (TRANSLATIONS[trimmed]) {
       const japanese = TRANSLATIONS[trimmed];
       node.nodeValue = node.nodeValue.replace(trimmed, japanese);
       translatedNodes.add(node);
       totalTranslations++;
-
-      if (isDraftJs) {
-        console.log(`[Draft.js翻訳] "${trimmed.substring(0, 30)}..." → "${japanese.substring(0, 30)}..."`);
-      } else {
-        console.log(`[翻訳] "${trimmed}" → "${japanese}"`);
-      }
+      console.log(`[翻訳] "${trimmed.substring(0, 30)}..." → "${japanese.substring(0, 30)}..."`);
       return true;
+    }
+
+    // 2. パターンマッチング（正規表現）
+    for (const patternObj of PATTERN_TRANSLATIONS) {
+      try {
+        const regex = new RegExp(patternObj.pattern, 'i');
+        if (regex.test(trimmed)) {
+          const japanese = trimmed.replace(regex, patternObj.replacement);
+          node.nodeValue = node.nodeValue.replace(trimmed, japanese);
+          translatedNodes.add(node);
+          totalTranslations++;
+          console.log(`[パターン翻訳] "${trimmed}" → "${japanese}"`);
+          return true;
+        }
+      } catch (e) {
+        console.error(`[パターンエラー] ${patternObj.pattern}:`, e);
+      }
     }
 
     return false;
@@ -467,75 +395,6 @@
     const observer = new MutationObserver((mutations) => {
       // 通常の翻訳
       translateDocument(doc, 'on-mutation');
-
-      // Draft.js要素の変更を検出（ログ削減）
-      let hasDraftJsChange = false;
-      mutations.forEach((mutation) => {
-        // characterDataの変更をチェック
-        if (mutation.type === 'characterData') {
-          const parent = mutation.target.parentElement;
-          if (parent && parent.className) {
-            const classStr = typeof parent.className === 'string' ? parent.className : parent.className.toString();
-            if (classStr.includes('DraftStyleDefault')) {
-              hasDraftJsChange = true;
-            }
-          }
-        }
-
-        mutation.addedNodes.forEach((node) => {
-          if (node.nodeType === 1) { // Element
-            // Draft.js要素を検出
-            if (node.className) {
-              const classStr = typeof node.className === 'string' ? node.className : node.className.toString();
-              if (classStr.includes('DraftStyleDefault')) {
-                hasDraftJsChange = true;
-              }
-            }
-
-            // Navatticモーダルを検出
-            if (node.classList && (
-              node.classList.contains('nv-scale-dialog-center') ||
-              node.classList.contains('py-ct-dialog-py') ||
-              node.querySelector('.nv-scale-dialog-center') ||
-              node.querySelector('.py-ct-dialog-py')
-            )) {
-              console.log('[モーダル検出] 全iframe含めて即座に翻訳実行');
-
-              // topフレームから全iframeを再翻訳（モーダルがどのiframeにあっても対応）
-              if (window === window.top) {
-                setTimeout(() => {
-                  console.log('[モーダル翻訳] 全フレーム再翻訳開始');
-                  translateAllFrames(document, 0, 'modal-all-frames-1');
-                }, 100);
-                setTimeout(() => {
-                  translateAllFrames(document, 0, 'modal-all-frames-2');
-                }, 500);
-                setTimeout(() => {
-                  translateAllFrames(document, 0, 'modal-all-frames-3');
-                }, 1000);
-                setTimeout(() => {
-                  translateAllFrames(document, 0, 'modal-all-frames-4');
-                }, 2000);
-              } else {
-                // iframe内で検出された場合は、そのiframe自身を翻訳
-                setTimeout(() => {
-                  translateDocument(doc, 'modal-in-iframe-1');
-                }, 100);
-                setTimeout(() => {
-                  translateDocument(doc, 'modal-in-iframe-2');
-                }, 500);
-              }
-            }
-          }
-        });
-      });
-
-      // Draft.js変更があった場合、追加で再翻訳（ログなし）
-      if (hasDraftJsChange) {
-        setTimeout(() => {
-          translateDocument(doc, 'draftjs-retranslate');
-        }, 100);
-      }
     });
 
     observer.observe(doc.body || doc.documentElement, {
@@ -555,7 +414,7 @@
     // 段階的に再実行（iframeの遅延読み込みに対応）
     const timings = [
       200, 500, 1000, 1500, 2000, 3000,
-      5000, 8000, 10000, 15000
+      5000, 8000, 10000
     ];
 
     timings.forEach((ms, i) => {
@@ -571,7 +430,7 @@
       setupTextObserver(document);
     }, 1000);
 
-    // 永続的な定期監視（5秒間隔に短縮）
+    // 永続的な定期監視（5秒間隔）
     setInterval(() => {
       console.log('[定期監視] 全フレーム再翻訳');
       translateAllFrames(document, 0, 'top-periodic');
@@ -597,7 +456,7 @@
         // iframe内でも定期監視
         setInterval(() => {
           translateDocument(document, 'iframe-periodic');
-        }, 2000); // より頻繁に（2秒間隔）
+        }, 2000);
       }
     });
   } else {
