@@ -1,11 +1,11 @@
 /**
  * TollBit 本番環境 日本語化拡張機能
- * バージョン: 1.0.9
+ * バージョン: 1.1.0
  *
  * 動的に生成されるiframeにも対応
  * topフレームから全てのiframeにアクセスして翻訳
  * 変数を含むテキスト（正規表現パターン）にも対応
- * 分割されたテキストにも対応（276エントリ）
+ * 分割されたテキストにも対応（302エントリ）
  * 末尾の句読点・スペースを除去して辞書検索
  * by以降削除対応
  */
@@ -13,7 +13,7 @@
 (function() {
   'use strict';
 
-  console.log('[TollBit日本語化] 本番環境版 v1.0.9 - by以降削除対応（276エントリ）');
+  console.log('[TollBit日本語化] 本番環境版 v1.1.0 - 大幅更新（302エントリ）');
 
   // 通常の翻訳辞書（完全一致）
   const TRANSLATIONS = {
@@ -115,8 +115,9 @@
   "Not Activated": "無効",
   "A Summarization License allows AI to access your content for the purpose of summarization. They can extract a few relevant sentences to compile a new text piece on a website, in an app, or on other digital platforms.": "要約ライセンスは、要約目的でAI事業社があなたのコンテンツにアクセスすることを許可します。ウェブサイトやアプリなどで新しいテキストを作成するために関連する文を抽出することができます。",
   "Price per 1,000 pages": "1,000ページあたりの価格",
-  "Activate": "有効",
-  "Full Display License": "完全表示ライセンス",
+  "Activate": "有効化",
+  "Deactivate": "無効化",
+  "Full Display License": "全文表示ライセンス",
   "A Full Display License allows AI to access your content for the purpose of display. This includes generating text for a website, voice assistant, or other digital platform.": "完全表示ライセンスは表示目的でAI事業社があなたのコンテンツにアクセスすることを許可します。ウェブサイトや音声アシスタントなどでテキストを生成することが含まれます。",
   "Consider your current RPM as a benchmark when setting this rate": "この価格を設定する際は、現在のRPM（1000PVあたりの売上）をベンチマークとして検討してください。",
   "Show Custom License Rates": "カスタムライセンス価格を表示",
@@ -279,50 +280,75 @@
   "You receive more traffic from this bot than 100% of other publishers.": "TollBit内の全サイトの中で、このボットに最もアクセス（クロール）されていることを意味します。",
   "per page": "ページごとの表示",
   "decreased to": "は減少傾向に向かっていて、その数、",
-  "increased to": "は増加傾向に向かっていて、その数、"
+  "increased to": "は増加傾向に向かっていて、その数、",
+  "Shows what percentage of your AI traffic comes from this specific bot compared to other publishers.": "他のサイトと比較して、あなたのサイトでは、AIトラフィックのうちどのくらいの割合がこの特定のボットから来ているかを示しています。",
+  "Calculation: (This bot's hits ÷ Your total AI traffic) x 100 = Bot traffic %": "計算式：（このボットのトラフィック数 ÷ あなたのサイトでのAIトラフィックの総数） × 100 ＝ ボットトラフィックの割合（％）",
+  "You have more AI traffic from this bot than": "あなたのサイトは、このボットからのAIトラフィックが多く、他の",
+  "of other publishers": "サイトよりも多いです。",
+  "99th": "$1%の",
+  "Add rates to your content based on the website structure.": "サイトの構造に基づいて、コンテンツに価格を設定してください。",
+  "Define Global Rates for your content across all subdirectories and pages. These rates apply for each use and do not allow your content to be used for training or creating generative AI models.": "すべてのサブディレクトリやページに対して適用される「統一価格」を定義してください。\nこの価格はクローリングごとに適用され、あなたのコンテンツが生成AIモデルの学習や生成目的に使用されることは許可されません。",
+  "The Summarization Content License means that purchasing Developers will be granted a non-exclusive, non-transferable, non-assignable, non-sublicensable, and revocable (pursuant to the Content Access Terms linked below) right and license for the Term to access, index, and process the Publisher Data solely to summarize, cite, and display ground inferences based upon Provider Data to end users, provided Developer is prohibited from displaying the full text of the Provider Data to end users.": "要約用ライセンスとは、購入したAI事業社に対し、非独占的・譲渡不可・再許諾不可・取消可能（下記リンク先の「コンテンツアクセス規約」に従う）な権利およびライセンスを、契約期間中に付与するものです。\nAI事業社はこれにより、サイトのコンテンツにアクセス・インデックス化・処理して、要約・引用・根拠に基づく推論結果をエンドユーザーに表示することができます。\nただし、提供データの全文をエンドユーザーに表示することは禁止されています。",
+  "The Full Display Content License means that purchasing Developers will be granted a non-exclusive, non-transferable, non-assignable, non-sublicensable, and revocable (pursuant to the Content Access Terms linked below) right and license for the Term to access, index, and process the Publisher Data to summarize, cite, and display ground inferences based upon Provider Data to end users, including displaying the full text of Provider Data to end users.": "全文表示コンテンツライセンスとは、購入したAI事業社に対し、非独占的・譲渡不可・再許諾不可・取消可能（下記リンク先の「コンテンツアクセス規約」に従う）な権利およびライセンスを、契約期間中に付与するものです。\nこれにより、AI事業社はサイトのコンテンツデータを要約・引用・処理し、提供データの全文をエンドユーザーに表示することも可能です。",
+  "By clicking Activate, you agree to the": "「有効化」をクリックすることで、",
+  "license terms": "コンテンツアクセス規約",
+  "shown above.": "に同意したものとみなされます。",
+  "Consider your syndication rates as a benchmark when setting this rate": "この料金を設定する際は、既存のコンテンツ配信（シンジケーション）価格を基準として検討してください。",
+  "Customize rates further for specific subdirectories, pages, or bots in the Advanced Settings. Global Rates are the default unless more customized rates are defined.": "「高度な設定」で、特定のサブディレクトリ、ページ、またはボットごとに価格をさらにカスタマイズできます。\n統一価格がデフォルト（初期設定）として適用されますが、より細かく設定された価格があればそちらが優先されます。",
+  "Activate the Rates You Need": "必要な価格設定を有効化しましょう",
+  "Set Up Each Type Below": "以下の4タイプの設定が可能",
+  "Read the docs →": "ドキュメントを確認する",
+  "Set special rates for any specific bots that accesses your platform.": "特定のボットに対して、特別な価格設定を行う",
+  "Set a rate for a specific page on your website.": "特定のページに対して、特別な価格設定を行う",
+  "Define how the rate of a page should change over time.": "最終更新から特定の時間が経過した場合の、特別な価格設定を行う",
+  "Set a flat rate for all the content within a page directory of your site.": "サイト内の特定ディレクトリ配下のすべてのコンテンツに対して、特別な価格設定を行う",
+  "Current Directory": "現在のディレクトリ",
+  "This rate will be used for all sub directories and pages.": "この価格は、すべてのサブディレクトリおよびページに適用されます。",
+  "Subdirectories": "ディレクトリ",
+  "Prevent all access to URLs begining with a custom Prefix.": "特定のプレフィックス（接頭辞）で始まるURLへのすべてのアクセスを禁止します。"
 };
 
   // パターンベース翻訳（正規表現）
   const PATTERN_TRANSLATIONS = [
   {
-    "pattern": "Updated (\\d+) days? ago",
+    "pattern": "Updated 55 days? ago",
     "replacement": "$1日前に更新"
   },
   {
-    "pattern": "Members \\((\\d+)\\)",
+    "pattern": "Members (12)",
     "replacement": "メンバー ($1)"
   },
   {
-    "pattern": "AI bots made ([\\d.]+[KMB]) requests to your website, down ([\\d.]+)% from the previous week",
+    "pattern": "AI bots made 1.1M requests to your website, down 27.8% from the previous week",
     "replacement": "AIボットがあなたのウェブサイトに$1万件のリクエストを行いました。前週比で$1%減少しています。"
   },
   {
-    "pattern": "You receive more traffic from AI bots than ([\\d.]+)% of other publishers",
-    "replacement": "あなたは他のパブリッシャーの$1%より多く、AIボットからのトラフィックがあります。"
+    "pattern": "You receive more traffic from AI bots than 92% of other publishers",
+    "replacement": "あなたは他のサイトの$1%より多く、AIボットからのトラフィックがあります。"
   },
   {
-    "pattern": "Top (\\d+) Bots?",
+    "pattern": "Top 5 Bots?",
     "replacement": "上位$1ボット"
   },
   {
-    "pattern": "Breakdown the top (\\d+) most active bot agents accessing your content",
+    "pattern": "Breakdown the top 5 most active bot agents accessing your content",
     "replacement": "あなたのコンテンツにアクセスしている最も活発なボットエージェント上位$1の内訳"
   },
   {
-    "pattern": "\\$([\\d.]+)",
-    "replacement": "$$1"
+    "pattern": "$0.00",
+    "replacement": "$$$1"
   },
   {
-    "pattern": "down ([\\d.]+)%",
+    "pattern": "down 27.8%",
     "replacement": "$1％減少"
   },
   {
-    "pattern": "up ([\\d.]+)%",
+    "pattern": "up 27.8%",
     "replacement": "$1％増加"
   },
   {
-    "pattern": "You receive more traffic from this bot than ([\\d.]+)% of other publishers.",
-    "replacement": "あなたはこのボットから他のパブリッシャーの$1%より多くのトラフィックを受け取っています。"
+    "pattern": "You receive more traffic from this bot than 98% of other publishers.",
+    "replacement": "あなたはこのボットから他の$1%のサイトより多くのトラフィックを受け取っています。"
   },
   {
     "pattern": "only (\\d+)% of websites were scraped more",
@@ -333,7 +359,7 @@
     "replacement": "どのサイトよりも多く、このAIボットにクロールされています。"
   },
   {
-    "pattern": "You receive more traffic from this bot than ([\\d.]+)% of other publishers.",
+    "pattern": "You receive more traffic from this bot than 97% of other publishers.",
     "replacement": "あなたのサイトは、このボットから他のサイトの$1％よりも多くのボットトラフィックを受け取っています。"
   }
 ];

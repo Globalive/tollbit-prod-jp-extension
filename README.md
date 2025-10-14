@@ -102,6 +102,25 @@ TollBit本番サイトを日本語化するChrome拡張機能です。
 
 ## バージョン履歴
 
+### v1.1.0 (2025-10-14) 🚀 大幅更新（302エントリ）
+- 📝 **新規追加エントリ（26個）**
+  - 「Activate」→「有効化」、「Deactivate」→「無効化」
+  - 「Shows what percentage of your AI traffic comes from this specific bot compared to other publishers.」→「他のサイトと比較して、あなたのサイトでは、AIトラフィックのうちどのくらいの割合がこの特定のボットから来ているかを示しています。」
+  - 「Calculation: (This bot's hits ÷ Your total AI traffic) x 100 = Bot traffic %」→「計算式：（このボットのトラフィック数 ÷ あなたのサイトでのAIトラフィックの総数） × 100 ＝ ボットトラフィックの割合（％）」
+  - 「You have more AI traffic from this bot than」→「あなたのサイトは、このボットからのAIトラフィックが多く、他の」
+  - 「of other publishers」→「サイトよりも多いです。」
+  - 「99th」→「$1%の」（パーセンタイル表示）
+  - 「Add rates to your content based on the website structure.」→「サイトの構造に基づいて、コンテンツに価格を設定してください。」
+  - ライセンス関連の詳細説明文（要約用ライセンス、全文表示ライセンス）
+  - 価格設定関連の詳細説明文（統一価格、カスタム価格、高度な設定）
+  - 「Read the docs →」→「ドキュメントを確認する」
+  - 「Current Directory」→「現在のディレクトリ」
+  - 「Subdirectories」→「ディレクトリ」
+  - その他、設定画面の詳細テキスト
+- 📊 翻訳辞書を302エントリに拡充（通常289個 + パターン13個）
+- 🐛 小さな翻訳修正
+  - 「Full Display License」→「全文表示ライセンス」（「完全表示ライセンス」から変更）
+
 ### v1.0.9 (2025-10-14) 🔧 by以降削除対応（276エントリ）
 - 🔧 **by以降削除パターンの実装**
   - 「only 2% of websites were scraped more by [bot-name]」→ ボット名削除、「$1％に位置しています。」に翻訳
