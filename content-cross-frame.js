@@ -1,6 +1,6 @@
 /**
  * TollBit 本番環境 日本語化拡張機能
- * バージョン: 1.1.5
+ * バージョン: 1.1.6
  *
  * 動的に生成されるiframeにも対応
  * topフレームから全てのiframeにアクセスして翻訳
@@ -13,7 +13,7 @@
 (function() {
   'use strict';
 
-  console.log('[TollBit日本語化] 本番環境版 v1.1.5 - SyntaxError修正（改行エスケープ）');
+  console.log('[TollBit日本語化] 本番環境版 v1.1.6 - パターン翻訳バグ修正（$2使用）');
 
   // 通常の翻訳辞書（完全一致）
   const TRANSLATIONS = {
@@ -399,7 +399,7 @@
   },
   {
     "pattern": "AI bots made ([\d.]+[KMB]) requests to your website, down ([\d.]+)% from the previous week",
-    "replacement": "AIボットがあなたのウェブサイトに$1万件のリクエストを行いました。前週比で$1%減少しています。"
+    "replacement": "AIボットがあなたのウェブサイトに$1万件のリクエストを行いました。前週比で$2%減少しています。"
   },
   {
     "pattern": "You receive more traffic from AI bots than ([\d.]+)% of other publishers",
