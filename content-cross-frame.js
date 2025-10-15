@@ -5,7 +5,7 @@
  * 動的に生成されるiframeにも対応
  * topフレームから全てのiframeにアクセスして翻訳
  * 変数を含むテキスト（正規表現パターン）にも対応
- * 分割されたテキストにも対応（599エントリ: 通常581 + Placeholder3 + パターン15）
+ * 分割されたテキストにも対応（604エントリ: 通常586 + Placeholder3 + パターン15）
  * 末尾の句読点・スペースを除去して辞書検索
  * by以降削除対応
  * パターンマッチングロジック修正（trimmed使用）
@@ -18,7 +18,7 @@
 (function() {
   'use strict';
 
-  console.log('[TollBit日本語化] 本番環境版 v1.2.10 - 辞書更新完了（599エントリ: 通常581 + Placeholder3 + パターン15）');
+  console.log('[TollBit日本語化] 本番環境版 v1.2.10 - 辞書更新完了（604エントリ: 通常586 + Placeholder3 + パターン15）');
 
   // 通常の翻訳辞書（完全一致）
   const TRANSLATIONS = {
@@ -29,6 +29,7 @@
   "), you will need to set your worker route to just": "）、ワーカーのルートを次のように設定する必要があります。",
   "*.<your_site.com>/*": "*. <your_site.com> /*",
   "+ Add Attribute Pair": "ペアを追加する",
+  ", and": "、そして",
   ", or a custom path if you only want to forward logs for certain URL patterns. Under workers, choose the worker that you just created.": "特定URLのみ転送する場合はカスタムパスを指定します。作成したワーカーを選択する。",
   ". Add a new header value with the key": "新しいヘッダー値を追加し、キー：",
   ". Clicking": "。",
@@ -127,6 +128,7 @@
   "Allowed": "許可済み",
   "Analytics": "アナリティクス",
   "Analytics Integration": "アナリティクスのインテグレーション",
+  "Analytics Setup in Progress": "アナリティクスのセットアップを進行中・・・",
   "Analytics for bots that are": "あなたのサイトに来ているボットの分析情報です。これらのボットは次の対象ドメインに対してアクセスが",
   "Analytics for bots that are being forwarded to your Tollbit subdomain. These bots are": "あなたのTollbit サブドメインに転送されているボットの分析情報です。これらのボットは次の対象ドメインに対してアクセスが",
   "Analytics setup verification pending": "アナリティクス設定の確認を保留中",
@@ -191,6 +193,7 @@
   "Current Directory": "現在のディレクトリ",
   "Custom Rate": "カスタム価格",
   "Customize rates further for specific subdirectories, pages, or bots in the Advanced Settings. Global Rates are the default unless more customized rates are defined.": "「高度な設定」で、特定のサブディレクトリ、ページ、またはボットごとに価格をさらにカスタマイズできます。統一価格がデフォルト（初期設定）として適用されますが、より細かく設定された価格があればそちらが優先されます。",
+  "DNS changes can take a little time to propagate = usually a few minutes, but it may take up to 24 hours. We'll update the status automatically once your domain is verified.": "DNSの変更が反映されるまで少し時間がかかる場合があります（通常は数分ですが、最大で24時間かかることもあります）。ドメインが認証され次第、ステータスは自動的に更新されます。",
   "Data includes only fully processed days. Recent days or days before your property joined may not appear.": "データには、処理が完了した日だけが含まれています。最近の日付や、あなたのサイトが追加される参加する前の期間は表示されない場合があります。",
   "Day": "日",
   "Deactivate": "無効化",
@@ -207,6 +210,7 @@
   "Directory": "ディレクトリ",
   "Domain": "ドメイン",
   "Domain Verification": "ドメイン認証",
+  "Domain Verification In Progress": "ドメインの認証を進行中・・・",
   "Download as CSV": "CSVとしてダウンロード",
   "Edit worker code": "ワーカーコードを編集",
   "Element Filter": "要素フィルター",
@@ -479,6 +483,7 @@
   "We are currently able to support log ingestion from S3, R2 and GCS. Please ensure that your log files are prefixed by date and time, and that the logs within the files are in JSON format (ideally as similar to the above as possible), and each log is a single line and all logs are newline separated. Please contact us at": "現在、S3、R2、GCSからのログ取り込みに対応しています。ログファイルは日付と時刻のプレフィックスを付け、内容はJSON形式（可能な限り上記と同様）で、各ログが1行で他のログとは改行で区切られていることを確認してください。準備ができ次第、",
   "We provide a way for you to forward logs to our platform so that we can provide analytics on bot traffic and more.": "ボットトラフィックなどのアナリティクスを提供できるよう、ログを当社プラットフォームに転送する方法を提供します。",
   "We see firsthand the surge in AI-driven traffic. TollBit": "私たちは、AIによって急増するトラフィックを直接目の当たりにしています。TollBitは、",
+  "We're ingesting your logs and configuring your dashboard - this can take up to 24-48 hours. We'll email you as soon as everything's ready. Have questions? Just let us know and we'll be happy to help.": "ログを取り込み、ダッシュボードを構成しています。この処理には最大で24~48時間かかる場合があります。準備が整い次第、メールでお知らせします。ご不明点がありましたら、お気軽にお問い合わせください。",
   "When choosing data parameters, make sure to parameters that cover at least everything in following sample log JSON. Also, please ensure that your log format is JSON.": "データパラメータを選択する際は、次のサンプルログJSONに含まれるすべての項目をカバーするようにしてください。また、ログ形式はJSONであることを確認してください。",
   "When streaming the logs to the endpoint, please ensure that you are batching logs as much as possible. Each log be a single line, and should be newline separated from the other logs.": "エンドポイントにログをストリーミングする際は、できるだけログをバッチ処理してください。各ログは1行で、他のログとは改行で区切ってください。",
   "Which bots are being forwarded or not.": "どのボットが転送されているか。ボットが転送されるかどうかを変更するには、",
@@ -613,11 +618,14 @@
   // Placeholder翻訳（入力フィールド用）
   // Placeholder翻訳（入力フィールド用）
   // Placeholder翻訳（入力フィールド用）
+  // Placeholder翻訳（入力フィールド用）
   const PLACEHOLDER_TRANSLATIONS = {
   "Enter URL prefixes, starting with /. E.g. '/articles/hidden/": "URL のプレフィックスを「/」から始めて入力してください。例：/articles/hidden/",
   "Run a test to see data...": "データを見るためにはテストを実施してみましょう。",
   "Search for a page...": "ページを検索..."
 };
+
+  
 
   
 
