@@ -5,7 +5,7 @@
  * 動的に生成されるiframeにも対応
  * topフレームから全てのiframeにアクセスして翻訳
  * 変数を含むテキスト（正規表現パターン）にも対応
- * 分割されたテキストにも対応（588エントリ: 通常570 + Placeholder3 + パターン15）
+ * 分割されたテキストにも対応（599エントリ: 通常581 + Placeholder3 + パターン15）
  * 末尾の句読点・スペースを除去して辞書検索
  * by以降削除対応
  * パターンマッチングロジック修正（trimmed使用）
@@ -18,7 +18,7 @@
 (function() {
   'use strict';
 
-  console.log('[TollBit日本語化] 本番環境版 v1.2.10 - 辞書更新完了（588エントリ: 通常570 + Placeholder3 + パターン15）');
+  console.log('[TollBit日本語化] 本番環境版 v1.2.10 - 辞書更新完了（599エントリ: 通常581 + Placeholder3 + パターン15）');
 
   // 通常の翻訳辞書（完全一致）
   const TRANSLATIONS = {
@@ -221,6 +221,7 @@
   "Exclude entire articles from AI access if the page contains matching HTML patterns": "ページに一致するHTMLパターンが含まれている場合、AIアクセスから記事全体を除外",
   "Exclude specific HTML elements from AI access": "特定のHTML要素へのAIアクセスを除外",
   "Fastly API Key": "Fastly APIキー",
+  "File storage": "ファイルストレージの設定",
   "Finalize Setup": "セットアップの仕上げ",
   "Finally, set the URL to": "最後に、URLを次のように設定します。",
   "Finally, you can": "最後に、",
@@ -263,6 +264,7 @@
   "If your main site does not use the": "メインサイトが",
   "Important query parameters:": "重要なクエリパラメーター:",
   "In Progress": "進行中",
+  "In addition to our more prescriptive setup guides, we also support direct log forwarding and file storage access solutions.": "より詳細なセットアップガイドに加え、直接ログ転送やファイルストレージアクセスのソリューションもサポートしています。",
   "In order for Vercel to send logs to our platform, you need to show Vercel that our endpoint is expecting the logs. Vercel will provide you with the value of an": "Vercelがログを当社プラットフォームに送信できるようにするには、Vercelに当社のエンドポイントがログを受信することを示す必要があります。Vercelは、エンドポイントからの返り値として期待する：",
   "In the": "次に、",
   "Independently manage the access rates for specific AI bots and User Agents.": "特定のAIボットやユーザーエージェントごとに価格を個別に管理します。",
@@ -278,6 +280,7 @@
   "Last week": "先週",
   "Leave organization": "組織を離れる",
   "Link worker": "ワーカーをリンク",
+  "Log forwarding": "ログ転送の設定",
   "Log into your": "まず、",
   "Logout": "ログアウト",
   "Logs": "ログ",
@@ -327,6 +330,7 @@
   "Organization Home": "組織のホームへ戻る",
   "Organization Profile": "組織プロフィール",
   "Other Bots": "その他のボット",
+  "Other methods of TollBit Analytics integration": "TollBitアナリティクスのインテグレーションにおけるその他の方法",
   "Our logging endpoint": "当社のログエンドポイント",
   "Overview": "概要",
   "Page": "ページ",
@@ -429,6 +433,7 @@
   "The Agent2Agent (A2A) protocol is an open standard designed to let AI agents collaborate securely without sharing their internal logic or data. It enables agents to discover each other's capabilities, negotiate how to interact, and work together on tasks over http(s). For more A2A details, please review the": "Agent2Agent（A2A）プロトコルは、AIエージェント同士が内部ロジックやデータを共有せずに安全に協調できるよう設計されたオープンスタンダードです。エージェントは互いの機能を発見し、通信方法を交渉し、HTTP(S)上でタスクを協力して実行できます。詳細は以下をご覧ください。",
   "The Full Display Content License means that purchasing Developers will be granted a non-exclusive, non-transferable, non-assignable, non-sublicensable, and revocable (pursuant to the Content Access Terms linked below) right and license for the Term to access, index, and process the Publisher Data to summarize, cite, and display ground inferences based upon Provider Data to end users, including displaying the full text of Provider Data to end users.": "全文表示コンテンツライセンスとは、購入したAI事業社に対し、非独占的・譲渡不可・再許諾不可・取消可能（下記リンク先の「コンテンツアクセス規約」に従う）な権利およびライセンスを、契約期間中に付与するものです。\nこれにより、AI事業社はサイトのコンテンツデータを要約・引用・処理し、提供データの全文をエンドユーザーに表示することも可能です。",
   "The Summarization Content License means that purchasing Developers will be granted a non-exclusive, non-transferable, non-assignable, non-sublicensable, and revocable (pursuant to the Content Access Terms linked below) right and license for the Term to access, index, and process the Publisher Data solely to summarize, cite, and display ground inferences based upon Provider Data to end users, provided Developer is prohibited from displaying the full text of the Provider Data to end users.": "要約用ライセンスとは、購入したAI事業社に対し、非独占的・譲渡不可・再許諾不可・取消可能（下記リンク先の「コンテンツアクセス規約」に従う）な権利およびライセンスを、契約期間中に付与するものです。\nAI事業社はこれにより、サイトのコンテンツにアクセス・インデックス化・処理して、要約・引用・根拠に基づく推論結果をエンドユーザーに表示することができます。\nただし、提供データの全文をエンドユーザーに表示することは禁止されています。",
+  "The logs must conform to the following JSON format. Not all fields are required, but we need at least the": "ログは以下のJSON形式に準拠している必要があります。すべての項目が必須ではありませんが、少なくとも次のフィールドが必要です。",
   "The requests is recieved at TollBit.": "転送されたリクエストはTollBitで正しく受信されました。",
   "There may be an issue with your bot paywall setup. Some bots are making it through to your main site.": "ボットのペイウォール設定に問題がある可能性があります。いくつかのボットがメインサイトに到達してしまっています。",
   "These are the secret keys to be used from your backend code. They are sensitive and should be deleted if leaked.": "これはAPIを利用する際に使用する秘密鍵です。機密情報のため、流出した場合は削除してください。",
@@ -471,10 +476,13 @@
   "View a sample of logs for the graph above.": "上記グラフのログサンプルを表示",
   "View the docs": "ドキュメントを確認し、",
   "Visit this URL below to see how other agents can discover your schema.": "他のエージェントがあなたのスキーマをどのように発見できるかを見るには、以下のURLを確認してください。",
+  "We are currently able to support log ingestion from S3, R2 and GCS. Please ensure that your log files are prefixed by date and time, and that the logs within the files are in JSON format (ideally as similar to the above as possible), and each log is a single line and all logs are newline separated. Please contact us at": "現在、S3、R2、GCSからのログ取り込みに対応しています。ログファイルは日付と時刻のプレフィックスを付け、内容はJSON形式（可能な限り上記と同様）で、各ログが1行で他のログとは改行で区切られていることを確認してください。準備ができ次第、",
   "We provide a way for you to forward logs to our platform so that we can provide analytics on bot traffic and more.": "ボットトラフィックなどのアナリティクスを提供できるよう、ログを当社プラットフォームに転送する方法を提供します。",
   "We see firsthand the surge in AI-driven traffic. TollBit": "私たちは、AIによって急増するトラフィックを直接目の当たりにしています。TollBitは、",
   "When choosing data parameters, make sure to parameters that cover at least everything in following sample log JSON. Also, please ensure that your log format is JSON.": "データパラメータを選択する際は、次のサンプルログJSONに含まれるすべての項目をカバーするようにしてください。また、ログ形式はJSONであることを確認してください。",
+  "When streaming the logs to the endpoint, please ensure that you are batching logs as much as possible. Each log be a single line, and should be newline separated from the other logs.": "エンドポイントにログをストリーミングする際は、できるだけログをバッチ処理してください。各ログは1行で、他のログとは改行で区切ってください。",
   "Which bots are being forwarded or not.": "どのボットが転送されているか。ボットが転送されるかどうかを変更するには、",
+  "You can forward your logs to our log sink endpoint at": "ログを当社のログシンクエンドポイントに転送できます。送信先：",
   "You can use the a2a-inspector to validate and test your Agent2Agent implementation.": "a2a-inspectorを使用してあなたのAgent2Agent実装を検証およびテストできます。",
   "You have more AI traffic from this bot than": "あなたのサイトは、このボットからのAIトラフィックが多く、他の",
   "You have more AI traffic than": "あなたのサイトはTollBit内の全サイトを100としたうち、上位",
@@ -499,9 +507,11 @@
   "and go to the \"Workers & Pages\" section on the left bar.": "にログインし、左のバーの「Workers & Pages」セクションに進みます。",
   "and made up": "本サイト内に占めるAIボットのうち",
   "and pick the correct domain. Click \"Edit Configuration\", and clone your current configuration. This saves a new configuration version as a draft, and allows you to rollback if necessary. This should bring you to a new screen. On the sidebar, scroll down until you see Logging and click on that. Then, click \"Create Endpoint\"": "これにより新しい設定バージョンが下書きとして保存され、必要に応じてロールバックが可能になります。新しい画面が表示されます。サイドバーで「Logging」が見えるまでスクロールし、それをクリックします。次に「Create Endpoint」をクリックします。",
+  "and set the value to your secret key. Your secret key can be accessed below.": "と、秘密鍵を値として設定してください。あなたの秘密鍵はは以下で確認できます。",
   "and the value as your secret key. Your secret key can be accessed below": "を設定します。値にはあなたの秘密鍵を設定します。秘密鍵は以下で確認できます。",
   "and we can get that set up for you.": "その後に、当社側でその設定を行います。",
   "and your mcp endpoint will be hosted at": "そしてあなたのMCPエンドポイントは次の場所にホストされます。",
+  "as long as you include the header": "ただそ。ヘッダーに、",
   "button. Select the": "ボタンをクリックします。次に、",
   "by presenting AI bots with a paywall where publishers can monetize the data that is being scraped.": "を実現しています。",
   "content licensing deals with AI companies": "AI企業とのコンテンツライセンス契約",
@@ -552,7 +562,7 @@
   "over the last": "をもたらし、",
   "per page": "ページごとの表示",
   "percentile": "パーセンタイル",
-  "permissions. For an example:": "の権限でし。例：",
+  "permissions. For an example:": "の権限です。例：",
   "query ? the question or query being asked to your site": "クエリとは、あなたのサイトに投げられる質問やクエリを指します。",
   "referrals": "リファラル",
   "requests": "回",
@@ -579,6 +589,7 @@
   "to enable ingestion this way.": "までご連絡ください。",
   "to mirror your traffic to the TollBit subdomain.": "トラフィックをTollBitサブドメインにミラーリングしましょう。",
   "to our leading online business publications, we turned to TollBit.": "主要なオンラインビジネスのコンテンツにおいてTollBitを導入しました。",
+  "to set up this pipeline for you.": "までご連絡ください。セットアップの仕上げを行います。",
   "to your website,": "あなたのサイトに訪問してきており、前期間と比較して、",
   "to your website.": "あなたのサイトに訪れてきています。",
   "unlock new revenue from AI traffic": "AIトラフィックから新たな収益を生み出すために、",
@@ -601,11 +612,14 @@
   // Placeholder翻訳（入力フィールド用）
   // Placeholder翻訳（入力フィールド用）
   // Placeholder翻訳（入力フィールド用）
+  // Placeholder翻訳（入力フィールド用）
   const PLACEHOLDER_TRANSLATIONS = {
   "Enter URL prefixes, starting with /. E.g. '/articles/hidden/": "URL のプレフィックスを「/」から始めて入力してください。例：/articles/hidden/",
   "Run a test to see data...": "データを見るためにはテストを実施してみましょう。",
   "Search for a page...": "ページを検索..."
 };
+
+  
 
   
 
