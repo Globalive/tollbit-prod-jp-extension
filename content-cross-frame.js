@@ -1,11 +1,11 @@
 /**
  * TollBit 本番環境 日本語化拡張機能
- * バージョン: 1.2.9
+ * バージョン: 1.2.10
  *
  * 動的に生成されるiframeにも対応
  * topフレームから全てのiframeにアクセスして翻訳
  * 変数を含むテキスト（正規表現パターン）にも対応
- * 分割されたテキストにも対応（429エントリ: 通常411 + Placeholder3 + パターン15）
+ * 分割されたテキストにも対応（482エントリ: 通常464 + Placeholder3 + パターン15）
  * 末尾の句読点・スペースを除去して辞書検索
  * by以降削除対応
  * パターンマッチングロジック修正（trimmed使用）
@@ -18,7 +18,7 @@
 (function() {
   'use strict';
 
-  console.log('[TollBit日本語化] 本番環境版 v1.2.9 - 辞書更新完了（429エントリ）');
+  console.log('[TollBit日本語化] 本番環境版 v1.2.10 - 辞書更新完了（482エントリ）');
 
   // 通常の翻訳辞書（完全一致）
   const TRANSLATIONS = {
@@ -30,16 +30,23 @@
   ". Clicking": "。",
   ". Follow the instructions for starting the inspector, and for the Agent Card URL use": "インスペクターの起動手順に従い、Agent Card URLには次を使用してください：",
   ". These bots are not being forwarded to your Tollbit subdomain. To change a bots status": "これらのボットはTollbit サブドメインに転送されていません。設定を変更するには",
-  ". To change a bots status": "設定を変更するには、",
+  ". To change a bots status": "。設定を変更するには、",
   "1 Day": "1日",
   "1 Month": "1か月",
   "1 Week": "1週間",
   "1 Year": "1年",
+  "1. Create a new Logging Configuration": "1. 新しいログ設定を作成する",
+  "1. Put this text string into a TXT DNS record for your top level domain.": "1. このテキスト文字列をトップレベルドメインのTXT DNSレコードに追加してください。",
+  "1. Verify Domain Ownership": "1. ドメイン所有権を確認する",
   "1000?per page": "1000件ごとの表示",
   "1M": "1ヶ月",
   "1W": "1週間",
+  "2. Configure Analytics Integration": "2. アナリティクス統合を設定する",
+  "2. Configure your logs to be sent to our logging endpoint": "2. ログを当社のログエンドポイントに送信するよう設定します。",
+  "2. Create your": "2. 次のサブドメインを作成し、",
   "2D": "2日",
   "3 Months": "3か月",
+  "3. Ensure that your Requests are Authenticated": "3. リクエストが認証されていることを確認する",
   "3M": "3ヶ月",
   "6 Months": "6か月",
   "6M": "6ヶ月",
@@ -73,9 +80,11 @@
   "Active devices": "アクティブなデバイス",
   "Add": "追加",
   "Add Bot Rate": "ボット価格を追加",
+  "Add Directory Rate": "ディレクトリごとの価格を追加",
   "Add Page Rate": "ページ単位の価格を追加",
   "Add Property": "サイトを追加",
   "Add Rate": "価格を追加",
+  "Add TXT records to your DNS settings": "DNS設定にTXTレコードを追加してください",
   "Add Time Rate": "時間ごとの価格を追加",
   "Add URL Paths and Prefixes as individual lines. Any URL requested that contains these lines as prefixes will be blocked.": "URLパスやプレフィックスを 1 行ずつ追加してください。これらの行をプレフィックスとして含む URLへのリクエストはすべてブロックされます。",
   "Add a Bot Rate": "ボットごとの価格を追加",
@@ -93,12 +102,18 @@
   "Allow for your logs to be streamed.": "ログのストリーミングを許可します。",
   "Allowed": "許可済み",
   "Analytics": "アナリティクス",
+  "Analytics Integration": "アナリティクスのインテグレーション",
   "Analytics for bots that are": "あなたのサイトに来ているボットの分析情報です。これらのボットは次の対象ドメインに対してアクセスが",
   "Analytics for bots that are being forwarded to your Tollbit subdomain. These bots are": "あなたのTollbit サブドメインに転送されているボットの分析情報です。これらのボットは次の対象ドメインに対してアクセスが",
+  "Analytics setup verification pending": "アナリティクス設定の確認を保留中",
   "Analyze the response of your content sites from the perspective of a bot": "ボットの視点からあなたのコンテンツサイトのレスポンスを分析",
   "Article Filters": "記事フィルター",
   "Attribute": "Attribute（属性）",
+  "Authentication your requests": "リクエストの認証設定",
   "Base URL recieved the request.": "ベースURLがリクエストを受信しました。",
+  "Before continuing...": "続行する前に...",
+  "Before you can access analytics we need to properly integrate TollBit with your website": "アナリティクスにアクセスする前に、TollBitをあなたのウェブサイトに正しくインテグレーションする必要があります",
+  "Before you can publish your rates, receive transactions, or get analytics, we need to verify that you own": "価格設定を行ったり、トランザクションを受け取ったり、アナリティクス機能を利用したりする前に、あなたがこのドメインを所有していることを確認する必要があります。",
   "Benchmarking": "ベンチマーク",
   "Block All Bots": "すべてのボットをブロック",
   "Block List": "ブロックリスト",
@@ -119,17 +134,22 @@
   "By working with TollBit, we're creating": "TollBitと協力することで、我々は",
   "CDN services routed the request to TollBit.": "CDNがその受信したリクエストをTollBitに転送しました。",
   "Calculation: (This bot's hits ÷ Your total AI traffic) x 100 = Bot traffic %": "計算式：（このボットのトラフィック数 ÷ あなたのサイトでのAIトラフィックの総数） × 100 ＝ ボットトラフィックの割合（％）",
+  "Check to make sure your logs are streaming to": "ログが正しく送信されていることを確認してください。",
   "Choose a page and a bot user agent to simulate what a bot sees": "ページとボットのユーザーエージェントを選択して、ボットが実際に見る内容をシミュレーションする。",
   "Choose which bots are hitting your subdomain or have permission to crawl": "どのボットがあなたのサブドメインにアクセスしているか、またはクロール許可があるかを選択",
+  "Choose your CDN Provider:": "CDNプロバイダーを選択してください：",
   "Clickthrough Rate": "クリック率",
   "Clickthrough Rates": "クリック率",
+  "Connect your CDN platform": "CDNプラットフォームを接続してください",
   "Connected accounts": "接続済みアカウント",
   "Consider your current RPM as a benchmark when setting this rate": "この価格を設定する際は、現在のRPM（1000PVあたりの売上）をベンチマークとして検討してください。",
   "Consider your syndication rates as a benchmark when setting this rate": "この料金を設定する際は、既存のコンテンツ配信（シンジケーション）価格を基準として検討してください。",
   "Content Controls": "コンテンツコントロール",
   "Content Retrieval": "コンテンツの取得",
   "Content to request": "要求するコンテンツ",
+  "Continue": "続行",
   "Crawler": "クローラー",
+  "Create Property": "サイトを追加",
   "Create Time Pricing": "時間変動型の価格設定を作成",
   "Create an Article Filter": "記事フィルターを作成",
   "Cumulative Growth": "累積の実績",
@@ -150,6 +170,8 @@
   "Determine how the price of content changes after it is uploaded": "コンテンツがアップロードされた後の経過時間に応じて価格がどのように変化するかを設定します。",
   "Different http response status codes over time. Quickly monitor the health of your site.": "HTTPレスポンスステータスコード別の時系列推移。サイトの健康状態を簡単にモニターできます。",
   "Directory": "ディレクトリ",
+  "Domain": "ドメイン",
+  "Domain Verification": "ドメイン認証",
   "Download as CSV": "CSVとしてダウンロード",
   "Element Filter": "要素フィルター",
   "Email addresses": "メールアドレス",
@@ -160,7 +182,10 @@
   "Exclude entire articles from AI access if the page contains matching HTML patterns": "ページに一致するHTMLパターンが含まれている場合、AIアクセスから記事全体を除外",
   "Exclude specific HTML elements from AI access": "特定のHTML要素へのAIアクセスを除外",
   "Fastly API Key": "Fastly APIキー",
+  "Finally, set the URL to": "最後に、URLを次のように設定します。",
+  "Find the HTTP logging endpoint and click \"Create endpoint\". You can set the name to anything descriptive (e.g. tollbit-prod). Keep the placement option as the default selection. Make sure your log placement option as the default selection. Make sure your log format is exactly as follows, without extra trailing spaces or newlines:": "HTTPロギングエンドポイントを見つけ、「Create endpoint」をクリックします。名前は任意のわかりやすいものに設定できます（例：tollbit-prod）。配置オプションはデフォルトのままにしてください。余分な空白や改行のない、以下のフォーマットに正確に合わせてください。",
   "Fine grain control over access rates for specific pages.": "特定のページに対する価格を細かく制御します。",
+  "Follow these steps to set up an integration into our platform if you use Fastly.": "Fastlyを使用している場合、次の手順で当社プラットフォームへの統合を設定します。",
   "For every": "合計、",
   "Forwarded to TollBit": "TollBitへ転送されました",
   "Forwarded to TollBit - CDN services routed the request to TollBit.": "TollBitへ転送 - CDNがリクエストをTollBitに転送しました。",
@@ -169,6 +194,8 @@
   "Get Started with A2A": "A2Aを始める",
   "Get Started with Fastly Integration": "Fastlyとのインテグレーションを始める",
   "Get Started with NLWeb": "NLWebを始める",
+  "Go into Advanced Options and set the \"Custom header name\" field to \"TollbitKey\". You must set the customer header value to your secret key. Your secret key can be accessed below": "「Advanced Options」を開き、「Custom header name」を「TollbitKey」に設定します。カスタムヘッダーの値をあなたのシークレットキーに設定する必要があります。あなたの秘密鍵は以下で確認できます。",
+  "Go to your": "正しいドメインを選択し、「Edit Configuration」をクリックして現在の設定をクローンしてください。",
   "Here's an example query for your HTTP ask endpoint:": "実際にエンドポイントに送信するクエリの例は以下のとおりです。",
   "Home": "ホーム",
   "Host": "ホスト",
@@ -181,6 +208,7 @@
   "How your AI traffic compares to others on TollBit": "TollBit内で、あなたのサイトのAIトラフィックが他と比較してどの位置にあるか",
   "Human": "人間",
   "Important query parameters:": "重要なクエリパラメーター:",
+  "In Progress": "進行中",
   "Independently manage the access rates for specific AI bots and User Agents.": "特定のAIボットやユーザーエージェントごとに価格を個別に管理します。",
   "Integrations": "インテグレーション",
   "Invite Team": "メンバーを招待する",
@@ -212,6 +240,10 @@
   "NLWeb": "NLWeb",
   "NLWeb is a protocol that aims to simplify the creation of natural language interfaces for websites": "NLWebは、ウェブサイト向けの自然言語インターフェース作成を簡素化することを目的としたプロトコルです。",
   "NLWeb is a protocol that aims to simplify the creation of natural language interfaces for websites. There are two main endpoints in the NLWeb protocol, an HTTP": "NLWebはウェブサイト向けの自然言語インターフェース構築を簡素化することを目的としたプロトコルです。NLWebプロトコルには2つの主要なエンドポイント（HTTPなど）があります。",
+  "Name:": "名前：",
+  "Navigate to your DNS provider and create a new NS record for the subdomain. If your main website were www.example.com or example.com, the subdomain must be tollbit.example.com. Point the NS records at the following domains:": "メインサイトが www.example.com または example.com の場合、サブドメインは tollbit.example.com である必要があります。NSレコードを以下のドメインに向けてください：",
+  "Need help?": "お困りの場合以下までご連絡ください。",
+  "New logging configuration": "新しいログ設定",
   "Next": "次へ",
   "No Page Rates": "ページ単位の価格設定はありません",
   "No Subdirectory information found": "サブディレクトリ情報が見つかりません",
@@ -219,6 +251,7 @@
   "No data": "データなし",
   "No user agents selected": "ユーザーエージェントが選択されていません",
   "Not Activated": "無効",
+  "Once this set up is complete, it may take 24-48 hours for your analytics to populate": "設定が完了すると、データの反映が開始されます。アナリティクスデータが反映されるまでに24?48時間かかる場合があります。",
   "One-Click Activation for A2A at your TollBit Subdomain": "TollBitサブドメインでA2Aをワンクリックで有効化",
   "One-Click Activation for NLWeb at your TollBit Subdomain": "TollBitサブドメインでNLWebをワンクリックで有効化",
   "OpenAI (ChatGPT)": "OpenAI (ChatGPT)",
@@ -228,12 +261,15 @@
   "Organization Home": "組織のホームへ戻る",
   "Organization Profile": "組織プロフィール",
   "Other Bots": "その他のボット",
+  "Our logging endpoint": "当社のログエンドポイント",
   "Overview": "概要",
   "Page": "ページ",
   "Page Path": "ページパス",
   "Partially Forwarded": "一部転送済み",
   "Password": "パスワード",
+  "Paste it into the \"Custom header value\" field with no trailing spaces. Keep all the other settings as default, scroll to the bottom, and save.": "末尾に空白を入れずに、「Custom header value」フィールドに貼り付けてください。その他の設定はすべてデフォルトのままにし、下までスクロールして保存します。",
   "Path Prefix": "パスのプレフィックス（接頭語）",
+  "Pending": "保留中",
   "Percentile": "パーセンタイル",
   "Percentile Metrics": "パーセンタイル指標",
   "Percentile Metrics: How your AI traffic compares to others on TollBit": "パーセンタイル指標: TollBit内で、あなたのサイトのAIトラフィックが他と比較してどの位置にあるか",
@@ -247,6 +283,8 @@
   "Profile": "プロフィール",
   "Profile details": "プロフィール詳細",
   "Properties": "サイト一覧",
+  "Property Name": "サイト名",
+  "Property setup": "プロパティ設定",
   "Property:": "サイト：",
   "Rate Limit": "レート制限",
   "Rates": "価格設定を追加",
@@ -261,6 +299,7 @@
   "Request Activity": "リクエストアクティビティ",
   "Request Received": "リクエストの受信",
   "Request Received - Base URL received the request.": "リクエスト受信 - ベースURLがリクエストを受信しました。",
+  "Retry domain verification": "ドメイン認証を再実行する",
   "Robots.txt violations": "robots.txtの違反",
   "Role": "役割",
   "Run a test to see data...": "データを確認するためにテストを実行...",
@@ -282,6 +321,7 @@
   "Send invitations": "招待を送信",
   "Service ID": "サービスID",
   "Set Global Rates For Your Content": "コンテンツの統一価格を設定",
+  "Set Up Analytics": "アナリティクスをセットアップする",
   "Set Up Each Type Below": "以下の4タイプの設定が可能",
   "Set a flat rate for all content within a directory": "ディレクトリ内のすべてのコンテンツに対して一定価格を設定",
   "Set a flat rate for all the content within a page directory of your site.": "サイト内の特定ディレクトリ配下のすべてのコンテンツに対して、特別な価格設定を行う",
@@ -291,6 +331,8 @@
   "Set password": "パスワードを設定",
   "Set special rates for any specific bots that accesses your platform.": "特定のボットに対して、特別な価格設定を行う",
   "Set special rates for specific bots": "特定のボット用に特別な価格を設定",
+  "Set up TollBit subdomain ? create NS records for content delivery": "TollBitサブドメインを設定し、コンテンツ配信用のNSレコードを作成してください",
+  "Set up property to access analytics": "アナリティクスにアクセスするためのサイトの設定を行う",
   "Settings": "設定",
   "Show Advanced Settings": "高度な設定を表示",
   "Show Custom License Rates": "カスタムライセンス価格を表示",
@@ -301,10 +343,12 @@
   "Starting Price per 1,000 pages": "開始価格",
   "Status Codes": "ステータスコード",
   "Status Traffic": "ステータストラフィック",
+  "Step": "ステップ",
   "Subdirectories": "ディレクトリ",
   "Summarization License": "要約用ライセンス",
   "Summarization License Options": "要約ライセンスオプション",
   "Tag": "タグ",
+  "Technical Steps Required": "技術的な手順が必要です",
   "Test": "テスト",
   "Test Bot Requests": "ボットリクエストをテスト",
   "Test bot forwarding →": "ボットの転送を試してみる",
@@ -346,9 +390,15 @@
   "User Agent": "ユーザーエージェント",
   "Users in this organization": "この組織のユーザー",
   "Value": "Value（値）",
+  "Verification pending. Continue onto the next step while this occurs. It may take up to 24 hours.": "認証は保留中です。この間に次のステップに進んでください。最大で24時間かかる場合があります。",
+  "Verify": "確認する",
+  "Verify Property": "サイトを確認する",
+  "Verify Your Domain": "ドメインを認証する",
+  "Verify log streaming": "ログの送信を確認する",
   "View a sample of logs for the graph above.": "上記グラフのログサンプルを表示",
   "View the docs": "ドキュメントを確認し、",
   "Visit this URL below to see how other agents can discover your schema.": "他のエージェントがあなたのスキーマをどのように発見できるかを見るには、以下のURLを確認してください。",
+  "We provide a way for you to forward logs to our platform so that we can provide analytics on bot traffic and more.": "ボットトラフィックなどのアナリティクスを提供できるよう、ログを当社プラットフォームに転送する方法を提供します。",
   "We see firsthand the surge in AI-driven traffic. TollBit": "私たちは、AIによって急増するトラフィックを直接目の当たりにしています。TollBitは、",
   "Which bots are being forwarded or not.": "どのボットが転送されているか。ボットが転送されるかどうかを変更するには、",
   "You can use the a2a-inspector to validate and test your Agent2Agent implementation.": "a2a-inspectorを使用してあなたのAgent2Agent実装を検証およびテストできます。",
@@ -369,6 +419,7 @@
   "across USA TODAY and our 200+ local publications. We're encouraged by the work TollBit is doing to help defend our intellectual property and protect the value of original reporting.": "TollBitが知的財産を守り、独占的な報道の価値を保護するために取り組んでいる活動に、私たちは大いに助けられています。",
   "allowed": "許可されております。",
   "and made up": "本サイト内に占めるAIボットのうち",
+  "and pick the correct domain. Click \"Edit Configuration\", and clone your current configuration. This saves a new configuration version as a draft, and allows you to rollback if necessary. This should bring you to a new screen. On the sidebar, scroll down until you see Logging and click on that. Then, click \"Create Endpoint\"": "これにより新しい設定バージョンが下書きとして保存され、必要に応じてロールバックが可能になります。新しい画面が表示されます。サイドバーで「Logging」が見えるまでスクロールし、それをクリックします。次に「Create Endpoint」をクリックします。",
   "and your mcp endpoint will be hosted at": "そしてあなたのMCPエンドポイントは次の場所にホストされます。",
   "by presenting AI bots with a paywall where publishers can monetize the data that is being scraped.": "を実現しています。",
   "content licensing deals with AI companies": "AI企業とのコンテンツライセンス契約",
@@ -377,6 +428,7 @@
   "decreased to": "は減少傾向に向かっていて、その数、",
   "endpoint and an MCP compatible": "エンドポイントおよびMCP互換の",
   "endpoint. This allows developers and agents to seamlessly interact with your content via natural language.": "エンドポイント。これにより、開発者やエージェントが自然言語を通じてあなたのコンテンツとシームレスにやり取りできるようになります。",
+  "for your CDN provider .": "を参照し、設定ください。",
   "for your CDN provider to change if a bot is forwarded or not.": "適宜設定してください。",
   "for your CDN provider.": "を参照し、設定ください。",
   "from Anthropic and follow along with our demo": "ダウンロードし、デモに従ってください。",
@@ -416,6 +468,7 @@
   "six months": "過去6ヶ月で",
   "streaming ? boolean for if the query is a streaming query": "ストリーミングとは、クエリがストリーミングクエリかどうかを示すTRUE or NOTの値です。",
   "subdomain": "サブドメイン",
+  "subdomain and add these NS records to it.": "DNSプロバイダにアクセスし、サブドメイン用の新しいNSレコードを作成してください。",
   "takes bot blocking one step further": "パブリッシャーがスクレイピングされるデータを収益化できる仕組み",
   "that ensures our communities remain a trusted source of human expertise while positioning VerticalScope to unlock a new revenue stream.": "を構築できています。これにより、私たちのコミュニティが人間の専門知識に基づく信頼できる情報源であり続けると同時に、VerticalScopeが新たな収益源を開拓できるようになります。",
   "three months": "過去3ヶ月で",
@@ -433,11 +486,17 @@
 };
 
   // Placeholder翻訳（入力フィールド用）
+  
+
+  // パターンベース翻訳（正規表現）
+  // Placeholder翻訳（入力フィールド用）
   const PLACEHOLDER_TRANSLATIONS = {
   "Enter URL prefixes, starting with /. E.g. '/articles/hidden/": "URL のプレフィックスを「/」から始めて入力してください。例：/articles/hidden/",
   "Run a test to see data...": "データを見るためにはテストを実施してみましょう。",
   "Search for a page...": "ページを検索..."
 };
+
+  
 
   // パターンベース翻訳（正規表現）
   const PATTERN_TRANSLATIONS = [
@@ -450,8 +509,8 @@
     "replacement": "メンバー ($1)"
   },
   {
-    "pattern": "AI bots made ([\\d.]+[KMB]?) requests to your website, (down|up) ([\\d.]+)% from the previous (week|month|year)",
-    "replacement": "AIボットがあなたのウェブサイトに$1件のリクエストを行いました。前$4比で$3%$2しています。"
+    "pattern": "AI bots made ([\\d.]+[KMB]?) requests to your website, (?:down|up) ([\\d.]+)% from the previous week",
+    "replacement": "AIボットがあなたのウェブサイトに$1万件のリクエストを行いました。前週比で$1%減少しています。"
   },
   {
     "pattern": "You receive more traffic from AI bots than (\\d+)% of other publishers",
@@ -459,15 +518,15 @@
   },
   {
     "pattern": "Top (\\d+) Bots",
-    "replacement": "上位$1ボット"
+    "replacement": "上位5ボット"
   },
   {
     "pattern": "Breakdown the top (\\d+) most active bot agents accessing your content\\.",
-    "replacement": "あなたのコンテンツにアクセスしている最も活発なボットエージェント上位$1の内訳"
+    "replacement": "あなたのコンテンツにアクセスしている最も活発なボットエージェント上位5の内訳"
   },
   {
     "pattern": "\\$([\\d.]+)",
-    "replacement": "$$1"
+    "replacement": "$0.00"
   },
   {
     "pattern": "down ([\\d.]+)%",
@@ -482,11 +541,11 @@
     "replacement": "あなたはこのボットから他の$1%のサイトより多くのトラフィックを受け取っています。"
   },
   {
-    "pattern": "only (\\d+)% of websites were scraped more by ([\\w-]+)",
+    "pattern": "only (\\d+)% of websites were scraped more by",
     "replacement": "$1％に位置しています。"
   },
   {
-    "pattern": "no websites were scraped more by ([\\w-]+)",
+    "pattern": "no websites were scraped more by",
     "replacement": "どのサイトよりも多く、このAIボットにクロールされています。"
   },
   {
@@ -494,7 +553,7 @@
     "replacement": "あなたのサイトは、このボットから他のサイトの$1％よりも多くのボットトラフィックを受け取っています。"
   },
   {
-    "pattern": "(\\d+)(st|nd|rd|th)",
+    "pattern": "(\\d+)(?:st|nd|rd|th)",
     "replacement": "$1%"
   },
   {
