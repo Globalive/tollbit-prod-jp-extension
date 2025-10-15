@@ -5,7 +5,7 @@
  * 動的に生成されるiframeにも対応
  * topフレームから全てのiframeにアクセスして翻訳
  * 変数を含むテキスト（正規表現パターン）にも対応
- * 分割されたテキストにも対応（567エントリ: 通常549 + Placeholder3 + パターン15）
+ * 分割されたテキストにも対応（581エントリ: 通常563 + Placeholder3 + パターン15）
  * 末尾の句読点・スペースを除去して辞書検索
  * by以降削除対応
  * パターンマッチングロジック修正（trimmed使用）
@@ -18,7 +18,7 @@
 (function() {
   'use strict';
 
-  console.log('[TollBit日本語化] 本番環境版 v1.2.10 - 辞書更新完了（567エントリ: 通常549 + Placeholder3 + パターン15）');
+  console.log('[TollBit日本語化] 本番環境版 v1.2.10 - 辞書更新完了（581エントリ: 通常563 + Placeholder3 + パターン15）');
 
   // 通常の翻訳辞書（完全一致）
   const TRANSLATIONS = {
@@ -34,6 +34,8 @@
   ". Clicking": "。",
   ". Follow": "こちらの",
   ". Follow the instructions for starting the inspector, and for the Agent Card URL use": "インスペクターの起動手順に従い、Agent Card URLには次を使用してください：",
+  ". In your email, please include your bucket name, the AWS region it is in, and the path to your log files, for instance,": "メールには、バケット名、AWSリージョン、およびログファイルのパスを記載してください。例えば、",
+  ". Once we complete setup on our end, you will see logs flow in to your TollBit dashboard in 1-2 days.": "のような形式です。当社側でセットアップが完了すると、1~2日以内にTollBitダッシュボードにログが表示されます。",
   ". The endpoint url that you should be streaming to is": "ストリーミング先のエンドポイントURLは次の通りです。",
   ". These bots are not being forwarded to your Tollbit subdomain. To change a bots status": "これらのボットはTollbit サブドメインに転送されていません。設定を変更するには",
   ". To change a bots status": "。設定を変更するには、",
@@ -47,6 +49,7 @@
   "1. Create a Stream with DataStream 2": "1. DataStream 2 を使用してストリームを作成",
   "1. Create a new Logging Configuration": "1. 新しいログ設定を作成する",
   "1. Put this text string into a TXT DNS record for your top level domain.": "1. このテキスト文字列をトップレベルドメインのTXT DNSレコードに追加してください。",
+  "1. Setup ALB Access Logs": "1. ALBアクセスログを設定",
   "1. Verify Domain Ownership": "1. ドメイン所有権を確認する",
   "1000?per page": "1000件ごとの表示",
   "1M": "1ヶ月",
@@ -57,11 +60,13 @@
   "2. Configure your logs to be sent to our logging endpoint": "2. ログを当社のログエンドポイントに送信するよう設定します。",
   "2. Create new Worker": "2. 新しいワーカーを作成",
   "2. Create your": "2. 次のサブドメインを作成し、",
+  "2. Enable TollBit S3 Bucket Access": "2. TollBitのS3バケットへのアクセスを有効化",
   "2D": "2日",
   "3 Months": "3か月",
   "3. Authorize and Verify": "3. 認証と検証",
   "3. Edit worker code": "3. ワーカーコードを編集",
   "3. Ensure that your Requests are Authenticated": "3. リクエストが認証されていることを確認する",
+  "3. Finalize Setup": "3. セットアップの仕上げ",
   "3. Stream to Endpoint": "3. エンドポイントにストリームを送信",
   "3M": "3ヶ月",
   "4. Link worker to CloudFlare HTTP Logs": "4. CloudFlare HTTPログにワーカーをリンク",
@@ -163,6 +168,7 @@
   "Clickthrough Rates": "クリック率",
   "CloudFlare Enterprise": "CloudFlareエンタープライズ",
   "Configure Log Drain": "ログドレインを設定",
+  "Configure access logs for your ALB to be sent to an S3 bucket by following the": "ALBのアクセスログをS3バケットに送信するように設定します。",
   "Configure your log drain to point at": "ログドレインを次の宛先に設定します。",
   "Connect your CDN platform": "CDNプラットフォームを接続してください",
   "Connected accounts": "接続済みアカウント",
@@ -206,10 +212,12 @@
   "Enable": "有効にする",
   "Enable A2A": "A2Aを有効化",
   "Enable NLWeb": "NLWebを有効化",
+  "Enable TollBit S3 Access": "TollBitのS3へのアクセスを有効化",
   "Enter or paste one or more email addressess, separated by spaces or commas.": "メールアドレスを入力ください。コンマもしくはスペース区切りで複数の入力・登録も可能です。",
   "Exclude entire articles from AI access if the page contains matching HTML patterns": "ページに一致するHTMLパターンが含まれている場合、AIアクセスから記事全体を除外",
   "Exclude specific HTML elements from AI access": "特定のHTML要素へのAIアクセスを除外",
   "Fastly API Key": "Fastly APIキー",
+  "Finalize Setup": "セットアップの仕上げ",
   "Finally, set the URL to": "最後に、URLを次のように設定します。",
   "Finally, you can": "最後に、",
   "Find the HTTP logging endpoint and click \"Create endpoint\". You can set the name to anything descriptive (e.g. tollbit-prod). Keep the placement option as the default selection. Make sure your log placement option as the default selection. Make sure your log format is exactly as follows, without extra trailing spaces or newlines:": "HTTPロギングエンドポイントを見つけ、「Create endpoint」をクリックします。名前は任意のわかりやすいものに設定できます（例：tollbit-prod）。配置オプションはデフォルトのままにしてください。余分な空白や改行のない、以下のフォーマットに正確に合わせてください。",
@@ -218,6 +226,7 @@
   "Follow these steps to set up an integration into our platform if you use CloudFlare.": "CloudFlareを使用している場合、次の手順でプラットフォームインテグレーションを設定します。",
   "Follow these steps to set up an integration into our platform if you use Fastly.": "Fastlyを使用している場合、次の手順で当社プラットフォームへのインテグレーションを設定します。",
   "Follow these steps to set up an integration into our platform if you use Vercel.": "Vercelを使用している場合、次の手順で当社プラットフォームへのインテグレーションを設定します。",
+  "Follow these steps to set up an integration into our platform if you use an AWS ALB.": "AWS ALBを使用している場合、次の手順で当社プラットフォームとのインテグレーションを設定します。",
   "For every": "合計、",
   "For the": "次に、",
   "For the Log Drain you just created, specify the project that you will be sending logs from. The logs should be in": "作成したログドレインで、ログを送信するプロジェクトを指定します。ログ形式は",
@@ -300,6 +309,8 @@
   "Once you are ready to publish these changes, click the \"Activate\" button. Keep in mind that if you have other unpublished changes in Fastly, this may also publish those as well.": "これらの変更を公開する準備ができたら、「Activate（有効化）」ボタンをクリックしてください。なお、Fastlyで他に未公開の変更がある場合、それらも同時に公開される可能性があることに注意してください。",
   "Once you are ready, click \"Save\", and you are all set!": "準備ができたら「Save」をクリックします。これで完了です。",
   "Once you have added these headers, you can click the verify button to verify your custom log drain URL.": "これらのヘッダーを追加したら、「Verify」ボタンをクリックしてカスタムログドレインURLを検証できます。",
+  "Once you have configured your ALB to send access logs to an S3 bucket, you can enable TollBit to access bucket via an IAM policy. Our AWS account will need both": "ALBがS3バケットにアクセスログを送信するよう設定した後、IAMポリシーを通じてTollBitがバケットにアクセスできるようにします。当社のAWSアカウントには以下の両方の権限が必要です。",
+  "Once you have enabled TollBit to access your S3 bucket, you can finalize the setup by reaching out to our team directly via email at": "TollBitがS3バケットにアクセスできるようになったら、メールで当社チームに直接連絡してセットアップを完了してください。宛先：",
   "Once your worker has finished deploying, click \"Edit code\".": "ワーカーのデプロイが完了したら、「Edit code」をクリックします。",
   "One small update you may need to make is adding the": "小さな更新として追加する必要があるものは、",
   "One-Click Activation for A2A at your TollBit Subdomain": "TollBitサブドメインでA2Aをワンクリックで有効化",
@@ -386,6 +397,7 @@
   "Set up TollBit subdomain ? create NS records for content delivery": "TollBitサブドメインを設定し、コンテンツ配信用のNSレコードを作成してください",
   "Set up property to access analytics": "アナリティクスにアクセスするためのサイトの設定を行う",
   "Settings": "設定",
+  "Setup ALB Access Logs": "ALBアクセスログを設定",
   "Show Advanced Settings": "高度な設定を表示",
   "Show Custom License Rates": "カスタムライセンス価格を表示",
   "Shows how much of your AI traffic comes from this bot compared to other publishers.": "他のパブリッシャーと比較して、あなたのAIトラフィックのうちどれだけがこのボットから来ているかを示します。",
@@ -477,6 +489,7 @@
   "a2a-inspector": "a2aインスペクター",
   "across USA TODAY and our 200+ local publications. We're encouraged by the work TollBit is doing to help defend our intellectual property and protect the value of original reporting.": "TollBitが知的財産を守り、独占的な報道の価値を保護するために取り組んでいる活動に、私たちは大いに助けられています。",
   "allowed": "許可されております。",
+  "and": "および",
   "and click the": "に移動し、",
   "and go to the \"Workers & Pages\" section on the left bar.": "にログインし、左のバーの「Workers & Pages」セクションに進みます。",
   "and made up": "本サイト内に占めるAIボットのうち",
@@ -532,6 +545,7 @@
   "over the last": "をもたらし、",
   "per page": "ページごとの表示",
   "percentile": "パーセンタイル",
+  "permissions. For an example:": "の権限でし。例：",
   "query ? the question or query being asked to your site": "クエリとは、あなたのサイトに投げられる質問やクエリを指します。",
   "referrals": "リファラル",
   "requests": "回",
@@ -578,11 +592,14 @@
   // Placeholder翻訳（入力フィールド用）
   // Placeholder翻訳（入力フィールド用）
   // Placeholder翻訳（入力フィールド用）
+  // Placeholder翻訳（入力フィールド用）
   const PLACEHOLDER_TRANSLATIONS = {
   "Enter URL prefixes, starting with /. E.g. '/articles/hidden/": "URL のプレフィックスを「/」から始めて入力してください。例：/articles/hidden/",
   "Run a test to see data...": "データを見るためにはテストを実施してみましょう。",
   "Search for a page...": "ページを検索..."
 };
+
+  
 
   
 
