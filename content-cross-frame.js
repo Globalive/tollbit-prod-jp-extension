@@ -5,7 +5,7 @@
  * 動的に生成されるiframeにも対応
  * topフレームから全てのiframeにアクセスして翻訳
  * 変数を含むテキスト（正規表現パターン）にも対応
- * 分割されたテキストにも対応（604エントリ: 通常586 + Placeholder3 + パターン15）
+ * 分割されたテキストにも対応（611エントリ: 通常593 + Placeholder3 + パターン15）
  * 末尾の句読点・スペースを除去して辞書検索
  * by以降削除対応
  * パターンマッチングロジック修正（trimmed使用）
@@ -18,7 +18,7 @@
 (function() {
   'use strict';
 
-  console.log('[TollBit日本語化] 本番環境版 v1.2.10 - 辞書更新完了（604エントリ: 通常586 + Placeholder3 + パターン15）');
+  console.log('[TollBit日本語化] 本番環境版 v1.2.10 - 辞書更新完了（611エントリ: 通常593 + Placeholder3 + パターン15）');
 
   // 通常の翻訳辞書（完全一致）
   const TRANSLATIONS = {
@@ -119,6 +119,7 @@
   "Add rates to your content based on the website structure.": "サイトの構造に基づいて、コンテンツに価格を設定してください。",
   "Add user agents to block or allow.": "ブロックまたは許可するユーザーエージェントを追加します。",
   "Additionally, you will need to add your TollBit secret key as a custom header with the key": "さらに、あなたのTollBitの秘密鍵をカスタムヘッダーに追加する必要があります。",
+  "Admin": "管理者",
   "Agent2Agent (A2A) protocol": "Agent2Agent (A2A)プロトコル",
   "Agent2Agent is an open standard for AI agents to collaborate securely without sharing internal logic. It allows AI agents to discover capabilities, negotiate interactions, and work together seamlessly over HTTP.": "Agent2Agentは、AIエージェント同士が内部ロジックを共有せずに安全にコラボレーションするためのオープンスタンダードです。AIエージェントが機能を発見し、相互作用を交渉し、HTTP上でシームレスに動作することを可能にします。",
   "All": "全て",
@@ -194,6 +195,7 @@
   "Custom Rate": "カスタム価格",
   "Customize rates further for specific subdirectories, pages, or bots in the Advanced Settings. Global Rates are the default unless more customized rates are defined.": "「高度な設定」で、特定のサブディレクトリ、ページ、またはボットごとに価格をさらにカスタマイズできます。統一価格がデフォルト（初期設定）として適用されますが、より細かく設定された価格があればそちらが優先されます。",
   "DNS changes can take a little time to propagate = usually a few minutes, but it may take up to 24 hours. We'll update the status automatically once your domain is verified.": "DNSの変更が反映されるまで少し時間がかかる場合があります（通常は数分ですが、最大で24時間かかることもあります）。ドメインが認証され次第、ステータスは自動的に更新されます。",
+  "Dark": "ダーク",
   "Data includes only fully processed days. Recent days or days before your property joined may not appear.": "データには、処理が完了した日だけが含まれています。最近の日付や、あなたのサイトが追加される参加する前の期間は表示されない場合があります。",
   "Day": "日",
   "Deactivate": "無効化",
@@ -283,6 +285,7 @@
   "Last three months": "過去3ヶ月",
   "Last week": "先週",
   "Leave organization": "組織を離れる",
+  "Light": "ライト",
   "Link worker": "ワーカーをリンク",
   "Log forwarding": "ログ転送の設定",
   "Log into your": "まず、",
@@ -299,6 +302,7 @@
   "Manage your organization": "組織を管理",
   "Manage your profile": "プロフィールを管理",
   "Manage your secret keys.": "秘密鍵を管理します。",
+  "Member": "メンバー",
   "Members": "メンバー",
   "Monthly Spend": "月次の実績",
   "Most-scraped pages": "最もクローリングされているページ",
@@ -425,6 +429,7 @@
   "Subdirectories": "ディレクトリ",
   "Summarization License": "要約用ライセンス",
   "Summarization License Options": "要約ライセンスオプション",
+  "System": "システムの設定を利用",
   "Tag": "タグ",
   "Team Settings > Log Drains": "チーム設定 > ログドレイン",
   "Technical Steps Required": "技術的な手順が必要です",
@@ -473,6 +478,7 @@
   "Users in this organization": "この組織のユーザー",
   "Value": "Value（値）",
   "Verification pending. Continue onto the next step while this occurs. It may take up to 24 hours.": "認証は保留中です。この間に次のステップに進んでください。最大で24時間かかる場合があります。",
+  "Verification required": "認証が必要です",
   "Verify": "確認する",
   "Verify Property": "サイトを確認する",
   "Verify Your Domain": "ドメインを認証する",
@@ -487,6 +493,7 @@
   "When choosing data parameters, make sure to parameters that cover at least everything in following sample log JSON. Also, please ensure that your log format is JSON.": "データパラメータを選択する際は、次のサンプルログJSONに含まれるすべての項目をカバーするようにしてください。また、ログ形式はJSONであることを確認してください。",
   "When streaming the logs to the endpoint, please ensure that you are batching logs as much as possible. Each log be a single line, and should be newline separated from the other logs.": "エンドポイントにログをストリーミングする際は、できるだけログをバッチ処理してください。各ログは1行で、他のログとは改行で区切ってください。",
   "Which bots are being forwarded or not.": "どのボットが転送されているか。ボットが転送されるかどうかを変更するには、",
+  "You": "あなた",
   "You can forward your logs to our log sink endpoint at": "ログを当社のログシンクエンドポイントに転送できます。送信先：",
   "You can use the a2a-inspector to validate and test your Agent2Agent implementation.": "a2a-inspectorを使用してあなたのAgent2Agent実装を検証およびテストできます。",
   "You have more AI traffic from this bot than": "あなたのサイトは、このボットからのAIトラフィックが多く、他の",
@@ -619,11 +626,14 @@
   // Placeholder翻訳（入力フィールド用）
   // Placeholder翻訳（入力フィールド用）
   // Placeholder翻訳（入力フィールド用）
+  // Placeholder翻訳（入力フィールド用）
   const PLACEHOLDER_TRANSLATIONS = {
   "Enter URL prefixes, starting with /. E.g. '/articles/hidden/": "URL のプレフィックスを「/」から始めて入力してください。例：/articles/hidden/",
   "Run a test to see data...": "データを見るためにはテストを実施してみましょう。",
   "Search for a page...": "ページを検索..."
 };
+
+  
 
   
 
