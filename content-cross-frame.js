@@ -5,7 +5,7 @@
  * 動的に生成されるiframeにも対応
  * topフレームから全てのiframeにアクセスして翻訳
  * 変数を含むテキスト（正規表現パターン）にも対応
- * 分割されたテキストにも対応（482エントリ: 通常464 + Placeholder3 + パターン15）
+ * 分割されたテキストにも対応（520エントリ: 通常502 + Placeholder3 + パターン15）
  * 末尾の句読点・スペースを除去して辞書検索
  * by以降削除対応
  * パターンマッチングロジック修正（trimmed使用）
@@ -18,7 +18,7 @@
 (function() {
   'use strict';
 
-  console.log('[TollBit日本語化] 本番環境版 v1.2.10 - 辞書更新完了（482エントリ）');
+  console.log('[TollBit日本語化] 本番環境版 v1.2.10 - 辞書更新完了（520エントリ）');
 
   // 通常の翻訳辞書（完全一致）
   const TRANSLATIONS = {
@@ -26,7 +26,10 @@
   "\"list\" will simply return a list of documents that match the query.": "\"list\"：クエリに一致するドキュメントのリストのみを返します。",
   "\"summarize\" will return a list plus a summary of the contents of the docs.": "\"summarize\"：リストに加えて各ドキュメントの内容の要約を返します。",
   "#NAME?": "Attribute（属性）のペアを追加する",
+  "), you will need to set your worker route to just": "）、ワーカーのルートを次のように設定する必要があります。",
+  "*.<your_site.com>/*": "*. <your_site.com> /*",
   "+ Add Attribute Pair": "ペアを追加する",
+  ", or a custom path if you only want to forward logs for certain URL patterns. Under workers, choose the worker that you just created.": "特定URLのみ転送する場合はカスタムパスを指定します。作成したワーカーを選択する。",
   ". Clicking": "。",
   ". Follow the instructions for starting the inspector, and for the Agent Card URL use": "インスペクターの起動手順に従い、Agent Card URLには次を使用してください：",
   ". These bots are not being forwarded to your Tollbit subdomain. To change a bots status": "これらのボットはTollbit サブドメインに転送されていません。設定を変更するには",
@@ -35,6 +38,7 @@
   "1 Month": "1か月",
   "1 Week": "1週間",
   "1 Year": "1年",
+  "1. CloudFlare Enterprise": "1. CloudFlareエンタープライズ",
   "1. Create a new Logging Configuration": "1. 新しいログ設定を作成する",
   "1. Put this text string into a TXT DNS record for your top level domain.": "1. このテキスト文字列をトップレベルドメインのTXT DNSレコードに追加してください。",
   "1. Verify Domain Ownership": "1. ドメイン所有権を確認する",
@@ -43,11 +47,14 @@
   "1W": "1週間",
   "2. Configure Analytics Integration": "2. アナリティクス統合を設定する",
   "2. Configure your logs to be sent to our logging endpoint": "2. ログを当社のログエンドポイントに送信するよう設定します。",
+  "2. Create new Worker": "2. 新しいワーカーを作成",
   "2. Create your": "2. 次のサブドメインを作成し、",
   "2D": "2日",
   "3 Months": "3か月",
+  "3. Edit worker code": "3. ワーカーコードを編集",
   "3. Ensure that your Requests are Authenticated": "3. リクエストが認証されていることを確認する",
   "3M": "3ヶ月",
+  "4. Link worker to CloudFlare HTTP Logs": "4. CloudFlare HTTPログにワーカーをリンク",
   "6 Months": "6か月",
   "6M": "6ヶ月",
   ": The values here are \"list\", \"summarize\", and \"generate\".": "：ここで使用できる値は「list」「summarize」「generate」です。",
@@ -138,8 +145,10 @@
   "Choose a page and a bot user agent to simulate what a bot sees": "ページとボットのユーザーエージェントを選択して、ボットが実際に見る内容をシミュレーションする。",
   "Choose which bots are hitting your subdomain or have permission to crawl": "どのボットがあなたのサブドメインにアクセスしているか、またはクロール許可があるかを選択",
   "Choose your CDN Provider:": "CDNプロバイダーを選択してください：",
+  "Click \"Create application\", and then \"Create Worker\". This will take you to a screen where you can name your worker and see the initial code that it will be running. Set the name to something TollBit related, and click deploy. We will be modifying the worker code shortly.": "「Create application」をクリックし、その後「Create Worker」をクリックします。ワーカー名を設定してデプロイします。すぐにコードを編集します。",
   "Clickthrough Rate": "クリック率",
   "Clickthrough Rates": "クリック率",
+  "CloudFlare Enterprise": "CloudFlareエンタープライズ",
   "Connect your CDN platform": "CDNプラットフォームを接続してください",
   "Connected accounts": "接続済みアカウント",
   "Consider your current RPM as a benchmark when setting this rate": "この価格を設定する際は、現在のRPM（1000PVあたりの売上）をベンチマークとして検討してください。",
@@ -152,6 +161,7 @@
   "Create Property": "サイトを追加",
   "Create Time Pricing": "時間変動型の価格設定を作成",
   "Create an Article Filter": "記事フィルターを作成",
+  "Create new worker": "新しいワーカーを作成",
   "Cumulative Growth": "累積の実績",
   "Current Directory": "現在のディレクトリ",
   "Custom Rate": "カスタム価格",
@@ -173,6 +183,7 @@
   "Domain": "ドメイン",
   "Domain Verification": "ドメイン認証",
   "Download as CSV": "CSVとしてダウンロード",
+  "Edit worker code": "ワーカーコードを編集",
   "Element Filter": "要素フィルター",
   "Email addresses": "メールアドレス",
   "Enable": "有効にする",
@@ -185,7 +196,8 @@
   "Finally, set the URL to": "最後に、URLを次のように設定します。",
   "Find the HTTP logging endpoint and click \"Create endpoint\". You can set the name to anything descriptive (e.g. tollbit-prod). Keep the placement option as the default selection. Make sure your log placement option as the default selection. Make sure your log format is exactly as follows, without extra trailing spaces or newlines:": "HTTPロギングエンドポイントを見つけ、「Create endpoint」をクリックします。名前は任意のわかりやすいものに設定できます（例：tollbit-prod）。配置オプションはデフォルトのままにしてください。余分な空白や改行のない、以下のフォーマットに正確に合わせてください。",
   "Fine grain control over access rates for specific pages.": "特定のページに対する価格を細かく制御します。",
-  "Follow these steps to set up an integration into our platform if you use Fastly.": "Fastlyを使用している場合、次の手順で当社プラットフォームへの統合を設定します。",
+  "Follow these steps to set up an integration into our platform if you use CloudFlare.": "CloudFlareを使用している場合、次の手順でプラットフォームインテグレーションを設定します。",
+  "Follow these steps to set up an integration into our platform if you use Fastly.": "Fastlyを使用している場合、次の手順で当社プラットフォームへのインテグレーションを設定します。",
   "For every": "合計、",
   "Forwarded to TollBit": "TollBitへ転送されました",
   "Forwarded to TollBit - CDN services routed the request to TollBit.": "TollBitへ転送 - CDNがリクエストをTollBitに転送しました。",
@@ -195,6 +207,7 @@
   "Get Started with Fastly Integration": "Fastlyとのインテグレーションを始める",
   "Get Started with NLWeb": "NLWebを始める",
   "Go into Advanced Options and set the \"Custom header name\" field to \"TollbitKey\". You must set the customer header value to your secret key. Your secret key can be accessed below": "「Advanced Options」を開き、「Custom header name」を「TollbitKey」に設定します。カスタムヘッダーの値をあなたのシークレットキーに設定する必要があります。あなたの秘密鍵は以下で確認できます。",
+  "Go to \"Websites\" on the left pane and choose the website that you would like to forward logs for, and click into it. On the left panel, click into \"Worker Routes\", and then click \"Add route\". Set the route to": "左ペインの「Websites」で対象サイトを選び、「Worker Routes」で「Add route」をクリックし、ルートを設定します。",
   "Go to your": "正しいドメインを選択し、「Edit Configuration」をクリックして現在の設定をクローンしてください。",
   "Here's an example query for your HTTP ask endpoint:": "実際にエンドポイントに送信するクエリの例は以下のとおりです。",
   "Home": "ホーム",
@@ -207,8 +220,13 @@
   "How the traffic looks over time for all AI user agents.": "すべてのAIユーザーエージェントにおけるトラフィックの時系列推移",
   "How your AI traffic compares to others on TollBit": "TollBit内で、あなたのサイトのAIトラフィックが他と比較してどの位置にあるか",
   "Human": "人間",
+  "If you already have an existing worker that is intercepting requests for your site, or you already set up a worker in the": "すでに",
+  "If you are not on Enterprise, read on to set up a worker to forward logs.": "エンタープライズプランでない場合は、ログ転送用のワーカーを設定します。",
+  "If you are on the Enterprise plan, you should have access to CloudFlare's": "エンタープライズプランの場合、CloudFlareの機能にアクセスできます。",
+  "If your main site does not use the": "メインサイトが",
   "Important query parameters:": "重要なクエリパラメーター:",
   "In Progress": "進行中",
+  "In the": "次に、",
   "Independently manage the access rates for specific AI bots and User Agents.": "特定のAIボットやユーザーエージェントごとに価格を個別に管理します。",
   "Integrations": "インテグレーション",
   "Invite Team": "メンバーを招待する",
@@ -221,6 +239,8 @@
   "Last three months": "過去3ヶ月",
   "Last week": "先週",
   "Leave organization": "組織を離れる",
+  "Link worker": "ワーカーをリンク",
+  "Log into your": "まず、",
   "Logout": "ログアウト",
   "Logs": "ログ",
   "Main site": "メインサイト",
@@ -242,7 +262,7 @@
   "NLWeb is a protocol that aims to simplify the creation of natural language interfaces for websites. There are two main endpoints in the NLWeb protocol, an HTTP": "NLWebはウェブサイト向けの自然言語インターフェース構築を簡素化することを目的としたプロトコルです。NLWebプロトコルには2つの主要なエンドポイント（HTTPなど）があります。",
   "Name:": "名前：",
   "Navigate to your DNS provider and create a new NS record for the subdomain. If your main website were www.example.com or example.com, the subdomain must be tollbit.example.com. Point the NS records at the following domains:": "メインサイトが www.example.com または example.com の場合、サブドメインは tollbit.example.com である必要があります。NSレコードを以下のドメインに向けてください：",
-  "Need help?": "お困りの場合以下までご連絡ください。",
+  "Need help?": "お困りの場合は、以下までご連絡ください。",
   "New logging configuration": "新しいログ設定",
   "Next": "次へ",
   "No Page Rates": "ページ単位の価格設定はありません",
@@ -251,7 +271,12 @@
   "No data": "データなし",
   "No user agents selected": "ユーザーエージェントが選択されていません",
   "Not Activated": "無効",
+  "Note:": "注：",
   "Once this set up is complete, it may take 24-48 hours for your analytics to populate": "設定が完了すると、データの反映が開始されます。アナリティクスデータが反映されるまでに24?48時間かかる場合があります。",
+  "Once you are ready to publish these changes, click the \"Activate\" button. Keep in mind that if you have other unpublished changes in Fastly, this may also publish those as well.": "これらの変更を公開する準備ができたら、「Activate（有効化）」ボタンをクリックしてください。なお、Fastlyで他に未公開の変更がある場合、それらも同時に公開される可能性があることに注意してください。",
+  "Once you are ready, click \"Save\", and you are all set!": "準備ができたら「Save」をクリックします。これで完了です。",
+  "Once your worker has finished deploying, click \"Edit code\".": "ワーカーのデプロイが完了したら、「Edit code」をクリックします。",
+  "One small update you may need to make is adding the": "小さな更新として追加する必要があるものは、",
   "One-Click Activation for A2A at your TollBit Subdomain": "TollBitサブドメインでA2Aをワンクリックで有効化",
   "One-Click Activation for NLWeb at your TollBit Subdomain": "TollBitサブドメインでNLWebをワンクリックで有効化",
   "OpenAI (ChatGPT)": "OpenAI (ChatGPT)",
@@ -288,6 +313,7 @@
   "Property:": "サイト：",
   "Rate Limit": "レート制限",
   "Rates": "価格設定を追加",
+  "Reach out to": "この方法での取り込みを有効にする場合は",
   "Read the docs →": "ドキュメントを確認する",
   "Recent AI Bot Activity": "最近のAIボットアクティビティ",
   "Recent Transactions": "最近のトランザクション",
@@ -404,6 +430,7 @@
   "You can use the a2a-inspector to validate and test your Agent2Agent implementation.": "a2a-inspectorを使用してあなたのAgent2Agent実装を検証およびテストできます。",
   "You have more AI traffic from this bot than": "あなたのサイトは、このボットからのAIトラフィックが多く、他の",
   "You have more AI traffic than": "あなたのサイトはTollBit内の全サイトを100としたうち、上位",
+  "You must be proxying traffic through CloudFlare in order have the worker seconds your logs over to us. Most websites are already doing this, but if you are not certain, you can check by going into your site's DNS page and ensuring that your main site's DNS settings have proxy status as `Proxied`.": "CloudFlare経由でトラフィックをプロキシする必要があります。ほとんどのサイトはすでにそうしていますが、DNSページで「Proxied」か確認できます。",
   "You receive more traffic from AI bots than": "あなたのサイトはTollBit内の全サイトを100としたうち、上位",
   "You receive more traffic from this bot than 100% of other publishers.": "TollBit内の全サイトの中で、このボットに最もアクセス（クロール）されていることを意味します。",
   "Your A2A server will be hosted at": "あなたのA2Aサーバーは次の場所にホストされます",
@@ -418,6 +445,7 @@
   "a2a-inspector": "a2aインスペクター",
   "across USA TODAY and our 200+ local publications. We're encouraged by the work TollBit is doing to help defend our intellectual property and protect the value of original reporting.": "TollBitが知的財産を守り、独占的な報道の価値を保護するために取り組んでいる活動に、私たちは大いに助けられています。",
   "allowed": "許可されております。",
+  "and go to the \"Workers & Pages\" section on the left bar.": "にログインし、左のバーの「Workers & Pages」セクションに進みます。",
   "and made up": "本サイト内に占めるAIボットのうち",
   "and pick the correct domain. Click \"Edit Configuration\", and clone your current configuration. This saves a new configuration version as a draft, and allows you to rollback if necessary. This should bring you to a new screen. On the sidebar, scroll down until you see Logging and click on that. Then, click \"Create Endpoint\"": "これにより新しい設定バージョンが下書きとして保存され、必要に応じてロールバックが可能になります。新しい画面が表示されます。サイドバーで「Logging」が見えるまでスクロールし、それをクリックします。次に「Create Endpoint」をクリックします。",
   "and your mcp endpoint will be hosted at": "そしてあなたのMCPエンドポイントは次の場所にホストされます。",
@@ -428,6 +456,8 @@
   "decreased to": "は減少傾向に向かっていて、その数、",
   "endpoint and an MCP compatible": "エンドポイントおよびMCP互換の",
   "endpoint. This allows developers and agents to seamlessly interact with your content via natural language.": "エンドポイント。これにより、開発者やエージェントが自然言語を通じてあなたのコンテンツとシームレスにやり取りできるようになります。",
+  "feature. You may already be pushing logs to an S3, R2 or GCP bucket. If this is the case, we are able to ingest your logs from where they are already being stored.": "すでにログをS3、R2、またはGCPバケットに送信しているかもしれません。その場合、そこからログを取り込むことができます。",
+  "file, delete everything and copy the following code over exactly, making sure to replace": "において、すべてを削除し、次のコードを正確にコピーして置き換えます。",
   "for your CDN provider .": "を参照し、設定ください。",
   "for your CDN provider to change if a bot is forwarded or not.": "適宜設定してください。",
   "for your CDN provider.": "を参照し、設定ください。",
@@ -438,8 +468,10 @@
   "from the last three months.": "しています。",
   "from the previous period": "（前期間比）",
   "from the previous week.": "しています。",
+  "gets redirected to your main site (": "メインサイトにリダイレクトされる場合（",
   "gives us the capabilities to protect our content,": "私たちがコンテンツを保護することを可能にしてくれ、",
   "here": "デモはこちら",
+  "in Cloudflare's documentation to add this header. You will want to select \"Response Header\" as the field type and type in": "（CloudFlareのドキュメント）に従い、このヘッダーを追加します。「Response Header」をフィールドタイプとして選択し入力します。",
   "including OpenAI and the search engine Perplexity.": "を交渉する際に有用でした。",
   "increased to": "は増加傾向に向かっていて、その数、",
   "initiated": "は",
@@ -460,20 +492,25 @@
   "query ? the question or query being asked to your site": "クエリとは、あなたのサイトに投げられる質問やクエリを指します。",
   "referrals": "リファラル",
   "requests": "回",
+  "response header to the logs. Follow": "のレスポンスヘッダーをログに追加することです。",
   "scrapes": "クロール",
   "scrapes you get 1 AI referral": "回のクローリングにつき、1回のリファラルを獲得",
+  "section, you will need to integrate this logging code with that worker. If you just have a bot deterrence worker set up, see that section to get a code snippet that also pushes logs.": "そのセクションのいて、もしあなたのサイトでリクエストを受け取る既存のワーカーがすでにある場合、または以前にワーカーを設定している場合には、そのワーカーを利用します。このロギングコードをそのワーカーに統合する必要があります。Bot抑止ワーカーがある場合は、ログも送信するコードスニペットを参照します。",
   "see the docs": "こちらのドキュメント",
   "should produce an": "をクリックすると、次のメッセージが表示されます：",
   "shown above.": "に同意したものとみなされます。",
   "six months": "過去6ヶ月で",
   "streaming ? boolean for if the query is a streaming query": "ストリーミングとは、クエリがストリーミングクエリかどうかを示すTRUE or NOTの値です。",
   "subdomain": "サブドメイン",
-  "subdomain and add these NS records to it.": "DNSプロバイダにアクセスし、サブドメイン用の新しいNSレコードを作成してください。",
+  "subdomain and add these NS records to it.": "さらに、DNSプロバイダにアクセスし、サブドメイン用の新しいNSレコードを作成してください。",
+  "subdomain and all traffic to": "を利用していない場合、サブドメインおよびすべてのトラフィックが",
   "takes bot blocking one step further": "パブリッシャーがスクレイピングされるデータを収益化できる仕組み",
   "that ensures our communities remain a trusted source of human expertise while positioning VerticalScope to unlock a new revenue stream.": "を構築できています。これにより、私たちのコミュニティが人間の専門知識に基づく信頼できる情報源であり続けると同時に、VerticalScopeが新たな収益源を開拓できるようになります。",
+  "these steps": "これらの手順",
   "three months": "過去3ヶ月で",
   "times": "回",
   "to access": "対象ドメイン：",
+  "to enable ingestion this way.": "までご連絡ください。",
   "to mirror your traffic to the TollBit subdomain.": "トラフィックをTollBitサブドメインにミラーリングしましょう。",
   "to our leading online business publications, we turned to TollBit.": "主要なオンラインビジネスのコンテンツにおいてTollBitを導入しました。",
   "to your website,": "あなたのサイトに訪問してきており、前期間と比較して、",
@@ -482,7 +519,8 @@
   "vital to preserve the integrity of our journalism": "私たちのジャーナリズムの健全性を守ることは極めて重要です。",
   "was scraped the most.": "最もクローリングしているAIボット",
   "was the top referrer with": "が最も多くのリファラル数をもたらし、その回数は",
-  "week": "過去1週で"
+  "week": "過去1週で",
+  "with your secret key. Your secret key can be accessed below": "には以下の秘密鍵を入力ください。"
 };
 
   // Placeholder翻訳（入力フィールド用）
@@ -490,11 +528,14 @@
 
   // パターンベース翻訳（正規表現）
   // Placeholder翻訳（入力フィールド用）
+  // Placeholder翻訳（入力フィールド用）
   const PLACEHOLDER_TRANSLATIONS = {
   "Enter URL prefixes, starting with /. E.g. '/articles/hidden/": "URL のプレフィックスを「/」から始めて入力してください。例：/articles/hidden/",
   "Run a test to see data...": "データを見るためにはテストを実施してみましょう。",
   "Search for a page...": "ページを検索..."
 };
+
+  
 
   
 
