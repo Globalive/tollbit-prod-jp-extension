@@ -1,20 +1,22 @@
 /**
  * TollBit 本番環境 日本語化拡張機能
- * バージョン: 1.2.0
+ * バージョン: 1.2.7
  *
  * 動的に生成されるiframeにも対応
  * topフレームから全てのiframeにアクセスして翻訳
  * 変数を含むテキスト（正規表現パターン）にも対応
- * 分割されたテキストにも対応（388エントリ）
+ * 分割されたテキストにも対応（429エントリ: 通常411 + Placeholder3 + パターン15）
  * 末尾の句読点・スペースを除去して辞書検索
  * by以降削除対応
  * パターンマッチングロジック修正（trimmed使用）
+ * 改行エスケープエラー修正完了
+ * Placeholder文字コード修正完了（ellipsis → three dots）
  */
 
 (function() {
   'use strict';
 
-  console.log('[TollBit日本語化] 本番環境版 v1.2.0 - パターンマッチング修正（388エントリ）');
+  console.log('[TollBit日本語化] 本番環境版 v1.2.7 - 改行エスケープ＆文字コード修正済（429エントリ）');
 
   // 通常の翻訳辞書（完全一致）
   const TRANSLATIONS = {
@@ -22,7 +24,11 @@
   "\"list\" will simply return a list of documents that match the query.": "\"list\"：クエリに一致するドキュメントのリストのみを返します。",
   "\"summarize\" will return a list plus a summary of the contents of the docs.": "\"summarize\"：リストに加えて各ドキュメントの内容の要約を返します。",
   "#NAME?": "Attribute（属性）のペアを追加する",
+  "+ Add Attribute Pair": "ペアを追加する",
+  ". Clicking": "。",
   ". Follow the instructions for starting the inspector, and for the Agent Card URL use": "インスペクターの起動手順に従い、Agent Card URLには次を使用してください：",
+  ". These bots are not being forwarded to your Tollbit subdomain. To change a bots status": "これらのボットはTollbit サブドメインに転送されていません。設定を変更するには",
+  ". To change a bots status": "設定を変更するには、",
   "1 Day": "1日",
   "1 Month": "1か月",
   "1 Week": "1週間",
@@ -69,6 +75,7 @@
   "Add Property": "サイトを追加",
   "Add Rate": "価格を追加",
   "Add Time Rate": "時間ごとの価格を追加",
+  "Add URL Paths and Prefixes as individual lines. Any URL requested that contains these lines as prefixes will be blocked.": "URLパスやプレフィックスを 1 行ずつ追加してください。これらの行をプレフィックスとして含む URLへのリクエストはすべてブロックされます。",
   "Add a Bot Rate": "ボットごとの価格を追加",
   "Add and select a property to get started monetizing your content.": "コンテンツの収益化を始めるには、サイトを追加して選択してください。",
   "Add email address": "メールアドレスを追加",
@@ -84,6 +91,8 @@
   "Allow for your logs to be streamed.": "ログのストリーミングを許可します。",
   "Allowed": "許可済み",
   "Analytics": "アナリティクス",
+  "Analytics for bots that are": "あなたのサイトに来ているボットの分析情報です。これらのボットは次の対象ドメインに対してアクセスが",
+  "Analytics for bots that are being forwarded to your Tollbit subdomain. These bots are": "あなたのTollbit サブドメインに転送されているボットの分析情報です。これらのボットは次の対象ドメインに対してアクセスが",
   "Analyze the response of your content sites from the perspective of a bot": "ボットの視点からあなたのコンテンツサイトのレスポンスを分析",
   "Article Filters": "記事フィルター",
   "Attribute": "Attribute（属性）",
@@ -105,6 +114,7 @@
   "Breakdown by AI platform:": "AIプラットフォーム別の内訳",
   "Breakdown by bot": "ボット別内訳",
   "By clicking Activate, you agree to the": "「有効化」をクリックすることで、",
+  "By working with TollBit, we're creating": "TollBitと協力することで、我々は",
   "CDN services routed the request to TollBit.": "CDNがその受信したリクエストをTollBitに転送しました。",
   "Calculation: (This bot's hits ÷ Your total AI traffic) x 100 = Bot traffic %": "計算式：（このボットのトラフィック数 ÷ あなたのサイトでのAIトラフィックの総数） × 100 ＝ ボットトラフィックの割合（％）",
   "Choose a page and a bot user agent to simulate what a bot sees": "ページとボットのユーザーエージェントを選択して、ボットが実際に見る内容をシミュレーションする。",
@@ -128,7 +138,7 @@
   "Day": "日",
   "Deactivate": "無効化",
   "Define Global Rates across your subdirectories and pages at the property level. If a custom rate conflicts with a global rate, the custom rate will be used.": "サブディレクトリやページ全体に統一価格を設定します。カスタム価格が統一価格と矛盾する場合はカスタム価格が使用されます。",
-  "Define Global Rates for your content across all subdirectories and pages. These rates apply for each use and do not allow your content to be used for training or creating generative AI models.": "すべてのサブディレクトリやページに対して適用される「統一価格」を定義してください。 この価格はクローリングごとに適用され、あなたのコンテンツが生成AIモデルの学習や生成目的に使用されることは許可されません。",
+  "Define Global Rates for your content across all subdirectories and pages. These rates apply for each use and do not allow your content to be used for training or creating generative AI models.": "すべてのサブディレクトリやページに対して適用される「統一価格」を定義してください。\nこの価格はクローリングごとに適用され、あなたのコンテンツが生成AIモデルの学習や生成目的に使用されることは許可されません。",
   "Define how the rate of a page should change over time.": "最終更新から特定の時間が経過した場合の、特別な価格設定を行う",
   "Define how the rate should change over time": "時間とともに価格がどのように変化するかを定義",
   "Delete": "削除",
@@ -174,6 +184,7 @@
   "Invite Team": "メンバーを招待する",
   "Invite Users": "ユーザーを招待",
   "Invite your team to join your organization": "チーム（メンバー）をあなたの組織に追加しましょう。",
+  "It's": "USA TODAYおよび200以上の地域メディアにおいて、",
   "Joined": "参加日",
   "Last month": "先月",
   "Last six months": "過去6ヶ月",
@@ -221,12 +232,14 @@
   "Partially Forwarded": "一部転送済み",
   "Password": "パスワード",
   "Path Prefix": "パスのプレフィックス（接頭語）",
+  "Percentile": "パーセンタイル",
   "Percentile Metrics": "パーセンタイル指標",
   "Percentile Metrics: How your AI traffic compares to others on TollBit": "パーセンタイル指標: TollBit内で、あなたのサイトのAIトラフィックが他と比較してどの位置にあるか",
   "Perplexity": "Perplexity",
   "Prevent all access to URLs begining with a custom Prefix.": "特定のプレフィックス（接頭辞）で始まるURLへのすべてのアクセスを禁止します。",
   "Prevent all access to URLs beginning with a custom Prefix": "指定したプレフィックスで始まるURLへのすべてのアクセスを禁止する",
   "Previous": "前へ",
+  "Price after content upload": "時間経過による価格設定",
   "Price per 1,000 pages": "1,000ページあたりの価格",
   "Price per User Agent": "ユーザーエージェントごとの価格",
   "Profile": "プロフィール",
@@ -248,7 +261,7 @@
   "Request Received - Base URL received the request.": "リクエスト受信 - ベースURLがリクエストを受信しました。",
   "Robots.txt violations": "robots.txtの違反",
   "Role": "役割",
-  "Run a test to see data…": "データを確認するためにテストを実行…",
+  "Run a test to see data...": "データを確認するためにテストを実行...",
   "SEO Agents": "SEOエージェント",
   "Sample Agent Card": "サンプルエージェントカード",
   "Save": "保存",
@@ -282,7 +295,7 @@
   "Shows how much of your AI traffic comes from this bot compared to other publishers.": "他のパブリッシャーと比較して、あなたのAIトラフィックのうちどれだけがこのボットから来ているかを示します。",
   "Shows what percentage of your AI traffic comes from this specific bot compared to other publishers.": "他のサイトと比較して、あなたのサイトでは、AIトラフィックのうちどのくらいの割合がこの特定のボットから来ているかを示しています。",
   "Simulate a Bot Request": "ボットリクエストをシミュレーション",
-  "Specific Page Access": "特定ページへのアクセス設定",
+  "Specific Page Access": "ページ単位の価格設定",
   "Starting Price per 1,000 pages": "開始価格",
   "Status Codes": "ステータスコード",
   "Status Traffic": "ステータストラフィック",
@@ -292,22 +305,26 @@
   "Tag": "タグ",
   "Test": "テスト",
   "Test Bot Requests": "ボットリクエストをテスト",
+  "Test bot forwarding →": "ボットの転送を試してみる",
   "Test how content controls affect what bots see when they scrape.": "コンテンツ制御がボットのクローリング結果にどのように影響するかをテストします。",
   "Test your property against sample requests to check forwarding and content filters.": "サンプルリクエストに対してサイトをテストし、転送とコンテンツフィルターを確認します。",
   "Test your property's bot forwarding functionality based on popular bot user agents.": "一般的なボットユーザーエージェントに基づいて、あなたのサイトのボット転送機能をテストします。",
   "The Agent2Agent (A2A) protocol is an open standard designed to let AI agents collaborate securely without sharing their internal logic or data. It enables agents to discover each other's capabilities, negotiate how to interact, and work together on tasks over http(s). For more A2A details, please review the": "Agent2Agent（A2A）プロトコルは、AIエージェント同士が内部ロジックやデータを共有せずに安全に協調できるよう設計されたオープンスタンダードです。エージェントは互いの機能を発見し、通信方法を交渉し、HTTP(S)上でタスクを協力して実行できます。詳細は以下をご覧ください。",
-  "The Full Display Content License means that purchasing Developers will be granted a non-exclusive, non-transferable, non-assignable, non-sublicensable, and revocable (pursuant to the Content Access Terms linked below) right and license for the Term to access, index, and process the Publisher Data to summarize, cite, and display ground inferences based upon Provider Data to end users, including displaying the full text of Provider Data to end users.": "全文表示コンテンツライセンスとは、購入したAI事業社に対し、非独占的・譲渡不可・再許諾不可・取消可能（下記リンク先の「コンテンツアクセス規約」に従う）な権利およびライセンスを、契約期間中に付与するものです。 これにより、AI事業社はサイトのコンテンツデータを要約・引用・処理し、提供データの全文をエンドユーザーに表示することも可能です。",
-  "The Summarization Content License means that purchasing Developers will be granted a non-exclusive, non-transferable, non-assignable, non-sublicensable, and revocable (pursuant to the Content Access Terms linked below) right and license for the Term to access, index, and process the Publisher Data solely to summarize, cite, and display ground inferences based upon Provider Data to end users, provided Developer is prohibited from displaying the full text of the Provider Data to end users.": "要約用ライセンスとは、購入したAI事業社に対し、非独占的・譲渡不可・再許諾不可・取消可能（下記リンク先の「コンテンツアクセス規約」に従う）な権利およびライセンスを、契約期間中に付与するものです。 AI事業社はこれにより、サイトのコンテンツにアクセス・インデックス化・処理して、要約・引用・根拠に基づく推論結果をエンドユーザーに表示することができます。 ただし、提供データの全文をエンドユーザーに表示することは禁止されています。",
+  "The Full Display Content License means that purchasing Developers will be granted a non-exclusive, non-transferable, non-assignable, non-sublicensable, and revocable (pursuant to the Content Access Terms linked below) right and license for the Term to access, index, and process the Publisher Data to summarize, cite, and display ground inferences based upon Provider Data to end users, including displaying the full text of Provider Data to end users.": "全文表示コンテンツライセンスとは、購入したAI事業社に対し、非独占的・譲渡不可・再許諾不可・取消可能（下記リンク先の「コンテンツアクセス規約」に従う）な権利およびライセンスを、契約期間中に付与するものです。\nこれにより、AI事業社はサイトのコンテンツデータを要約・引用・処理し、提供データの全文をエンドユーザーに表示することも可能です。",
+  "The Summarization Content License means that purchasing Developers will be granted a non-exclusive, non-transferable, non-assignable, non-sublicensable, and revocable (pursuant to the Content Access Terms linked below) right and license for the Term to access, index, and process the Publisher Data solely to summarize, cite, and display ground inferences based upon Provider Data to end users, provided Developer is prohibited from displaying the full text of the Provider Data to end users.": "要約用ライセンスとは、購入したAI事業社に対し、非独占的・譲渡不可・再許諾不可・取消可能（下記リンク先の「コンテンツアクセス規約」に従う）な権利およびライセンスを、契約期間中に付与するものです。\nAI事業社はこれにより、サイトのコンテンツにアクセス・インデックス化・処理して、要約・引用・根拠に基づく推論結果をエンドユーザーに表示することができます。\nただし、提供データの全文をエンドユーザーに表示することは禁止されています。",
   "The requests is recieved at TollBit.": "転送されたリクエストはTollBitで正しく受信されました。",
   "There may be an issue with your bot paywall setup. Some bots are making it through to your main site.": "ボットのペイウォール設定に問題がある可能性があります。いくつかのボットがメインサイトに到達してしまっています。",
   "These are the secret keys to be used from your backend code. They are sensitive and should be deleted if leaked.": "これはAPIを利用する際に使用する秘密鍵です。機密情報のため、流出した場合は削除してください。",
   "This device": "このデバイス",
   "This rate will be used for all sub directories and pages.": "この価格は、すべてのサブディレクトリおよびページに適用されます。",
   "Time": "時間",
+  "To ensure we are in control of who accesses our content, and to": "私たちは、自社コンテンツへのアクセスをどのAIボットが行っているのかを管理できるようにするため、さらに",
   "To test your MCP endpoint, download the": "MCPエンドポイントをテストするには、次の",
   "To validate and test your A2A server, you can use the": "A2Aサーバーの検証とテストには次のリンクからインスペクターをダウンロードし、ご利用ください。",
+  "TollBit": "TollBitは、AIボットに対して ペイウォールを提示 することで、",
   "TollBit subdomain": "TollBit サブドメイン",
   "TollBit's bot blocking is easily compatible with Fastly customers. By adding your API key and Service ID, the Bot Blocking controls are a simple toggle function.": "TollBitのボットブロックはFastlyのお客様と簡単に互換性があります。APIキーとサービスIDを追加することで、ボットブロックコントロールを簡単に切り替えられます。",
+  "TollBit's traffic data has helped TIME negotiate": "TollBitのトラフィックデータは、TIMEがOpenAIやPerplexityなどの",
   "Top 5 Pages": "上位5ページ",
   "Top AI bots scraping your website": "あなたのウェブサイトをクロールしているAIボットの上位",
   "Top Pages": "人気ページ",
@@ -330,6 +347,7 @@
   "View a sample of logs for the graph above.": "上記グラフのログサンプルを表示",
   "View the docs": "ドキュメントを確認し、",
   "Visit this URL below to see how other agents can discover your schema.": "他のエージェントがあなたのスキーマをどのように発見できるかを見るには、以下のURLを確認してください。",
+  "We see firsthand the surge in AI-driven traffic. TollBit": "私たちは、AIによって急増するトラフィックを直接目の当たりにしています。TollBitは、",
   "Which bots are being forwarded or not.": "どのボットが転送されているか。ボットが転送されるかどうかを変更するには、",
   "You can use the a2a-inspector to validate and test your Agent2Agent implementation.": "a2a-inspectorを使用してあなたのAgent2Agent実装を検証およびテストできます。",
   "You have more AI traffic from this bot than": "あなたのサイトは、このボットからのAIトラフィックが多く、他の",
@@ -344,15 +362,21 @@
   "Your site ranks in the": "あなたのサイトはTollBit内の全サイトを100としたうち、上位",
   "Your subdomain is not active.": "あなたのサブドメインは有効化されていません。",
   "Your website's pages AI bots visited the most.": "あなたのサイトで、AIボットが最も多く訪れたページ",
+  "a fair and transparent licensing model": "公正で透明性のあるライセンスモデル",
   "a2a-inspector": "a2aインスペクター",
+  "across USA TODAY and our 200+ local publications. We're encouraged by the work TollBit is doing to help defend our intellectual property and protect the value of original reporting.": "TollBitが知的財産を守り、独占的な報道の価値を保護するために取り組んでいる活動に、私たちは大いに助けられています。",
+  "allowed": "許可されております。",
   "and made up": "本サイト内に占めるAIボットのうち",
   "and your mcp endpoint will be hosted at": "そしてあなたのMCPエンドポイントは次の場所にホストされます。",
+  "by presenting AI bots with a paywall where publishers can monetize the data that is being scraped.": "を実現しています。",
+  "content licensing deals with AI companies": "AI企業とのコンテンツライセンス契約",
   "create an article filter": "記事フィルターを作成",
   "create an element filter": "要素フィルターを作成",
   "decreased to": "は減少傾向に向かっていて、その数、",
   "endpoint and an MCP compatible": "エンドポイントおよびMCP互換の",
   "endpoint. This allows developers and agents to seamlessly interact with your content via natural language.": "エンドポイント。これにより、開発者やエージェントが自然言語を通じてあなたのコンテンツとシームレスにやり取りできるようになります。",
   "for your CDN provider to change if a bot is forwarded or not.": "適宜設定してください。",
+  "for your CDN provider.": "を参照し、設定ください。",
   "from Anthropic and follow along with our demo": "ダウンロードし、デモに従ってください。",
   "from previous": "前期間との比較",
   "from the last month.": "しています。",
@@ -360,12 +384,16 @@
   "from the last three months.": "しています。",
   "from the previous period": "（前期間比）",
   "from the previous week.": "しています。",
+  "gives us the capabilities to protect our content,": "私たちがコンテンツを保護することを可能にしてくれ、",
   "here": "デモはこちら",
+  "including OpenAI and the search engine Perplexity.": "を交渉する際に有用でした。",
   "increased to": "は増加傾向に向かっていて、その数、",
   "initiated": "は",
   "license terms": "コンテンツアクセス規約",
   "message and allow you to communicate with the server using the A2A protocol using the chat feature of the inspector.": "このメッセージが表示されると、インスペクターのチャット機能を使ってA2Aプロトコルでサーバーと通信できます。",
   "mode ? one of the supported modes. Use mode \"list\" for classification or to retrieve a list of objects, mode \"summarize\" to condense or compress content, or mode \"generate\" to generate new content": "モードとは、 サポートされているモードの1つ。分類またはオブジェクトのリストを取得するには「リスト」モード、コンテンツを要約または圧縮するには「要約」モード、新しいコンテンツを生成するには「生成」モードを使用します。",
+  "monitor AI bot traffic, manage it on our terms, and monetize AI access.": "さらに、AIによるアクセスを収益化することを可能にしてくれます。",
+  "not allowed": "許可されておりません。",
   "of AI traffic": "を占める",
   "of other publishers": "サイトよりも多いです。",
   "of other publishers on TollBit": "に位置しています。例えばこの数値が95%だった場合、あなたのサイトのAIボットのトラフィック量はTollBitで観測しているサイトの中の上位5位には入っている、という意味になります。",
@@ -377,82 +405,98 @@
   "percentile": "パーセンタイル",
   "query ? the question or query being asked to your site": "クエリとは、あなたのサイトに投げられる質問やクエリを指します。",
   "referrals": "リファラル",
+  "requests": "回",
   "scrapes": "クロール",
   "scrapes you get 1 AI referral": "回のクローリングにつき、1回のリファラルを獲得",
+  "see the docs": "こちらのドキュメント",
   "should produce an": "をクリックすると、次のメッセージが表示されます：",
   "shown above.": "に同意したものとみなされます。",
   "six months": "過去6ヶ月で",
   "streaming ? boolean for if the query is a streaming query": "ストリーミングとは、クエリがストリーミングクエリかどうかを示すTRUE or NOTの値です。",
   "subdomain": "サブドメイン",
+  "takes bot blocking one step further": "パブリッシャーがスクレイピングされるデータを収益化できる仕組み",
+  "that ensures our communities remain a trusted source of human expertise while positioning VerticalScope to unlock a new revenue stream.": "を構築できています。これにより、私たちのコミュニティが人間の専門知識に基づく信頼できる情報源であり続けると同時に、VerticalScopeが新たな収益源を開拓できるようになります。",
   "three months": "過去3ヶ月で",
   "times": "回",
+  "to access": "対象ドメイン：",
   "to mirror your traffic to the TollBit subdomain.": "トラフィックをTollBitサブドメインにミラーリングしましょう。",
+  "to our leading online business publications, we turned to TollBit.": "主要なオンラインビジネスのコンテンツにおいてTollBitを導入しました。",
   "to your website,": "あなたのサイトに訪問してきており、前期間と比較して、",
+  "to your website.": "あなたのサイトに訪れてきています。",
+  "unlock new revenue from AI traffic": "AIトラフィックから新たな収益を生み出すために、",
+  "vital to preserve the integrity of our journalism": "私たちのジャーナリズムの健全性を守ることは極めて重要です。",
   "was scraped the most.": "最もクローリングしているAIボット",
   "was the top referrer with": "が最も多くのリファラル数をもたらし、その回数は",
   "week": "過去1週で"
 };
 
   // パターンベース翻訳（正規表現）
+  const PLACEHOLDER_TRANSLATIONS = {
+  "Enter URL prefixes, starting with /. E.g. '/articles/hidden/": "URL のプレフィックスを「/」から始めて入力してください。例：/articles/hidden/",
+  "Run a test to see data...": "データを見るためにはテストを実施してみましょう。",
+  "Search for a page...": "ページを検索..."
+};
+
+  // パターンベース翻訳（正規表現）
   const PATTERN_TRANSLATIONS = [
   {
-    "pattern": "Updated (\d+) days? ago",
+    "pattern": "Updated 55 days ago",
     "replacement": "$1日前に更新"
   },
   {
-    "pattern": "Members \((\d+)\)",
+    "pattern": "Members (12)",
     "replacement": "メンバー ($1)"
   },
   {
-    "pattern": "AI bots made ([\d.]+[KMB]) requests to your website, down ([\d.]+)% from the previous week",
-    "replacement": "AIボットがあなたのウェブサイトに$1万件のリクエストを行いました。前週比で$2%減少しています。"
+    "pattern": "AI bots made 1.1M requests to your website, down 27.8% from the previous week",
+    "replacement": "AIボットがあなたのウェブサイトに$1万件のリクエストを行いました。前週比で$1%減少しています。"
   },
   {
-    "pattern": "You receive more traffic from AI bots than ([\d.]+)% of other publishers",
+    "pattern": "You receive more traffic from AI bots than 92% of other publishers",
     "replacement": "あなたは他のサイトの$1%より多く、AIボットからのトラフィックがあります。"
   },
   {
-    "pattern": "Top (\d+) Bots?",
-    "replacement": "上位$1ボット"
+    "pattern": "Top 5 Bots",
+    "replacement": "上位5ボット"
   },
   {
-    "pattern": "Breakdown the top (\d+) most active bot agents accessing your content.",
-    "replacement": "あなたのコンテンツにアクセスしている最も活発なボットエージェント上位$1の内訳"
+    "pattern": "Breakdown the top 5 most active bot agents accessing your content.",
+    "replacement": "あなたのコンテンツにアクセスしている最も活発なボットエージェント上位5の内訳"
   },
   {
-    "pattern": "\$([\d.]+)",
-    "replacement": "$$$1"
+    "pattern": "$0.00",
+    "replacement": "$0.00"
   },
   {
-    "pattern": "down ([\d.]+)%",
+    "pattern": "down 27.8%",
     "replacement": "$1％減少"
   },
   {
-    "pattern": "up ([\d.]+)%",
+    "pattern": "up 27.8%",
     "replacement": "$1％増加"
   },
   {
-    "pattern": "You receive more traffic from this bot than ([\d.]+)% of other publishers.",
+    "pattern": "You receive more traffic from this bot than 98% of other publishers.",
     "replacement": "あなたはこのボットから他の$1%のサイトより多くのトラフィックを受け取っています。"
   },
   {
-    "pattern": "only (\d+)% of websites were scraped more",
+    "pattern": "only 2% of websites were scraped more by meta-externalagent",
     "replacement": "$1％に位置しています。"
   },
   {
-    "pattern": "no websites were scraped more",
+    "pattern": "no websites were scraped more by Bytespider",
     "replacement": "どのサイトよりも多く、このAIボットにクロールされています。"
   },
   {
-    "pattern": "You receive more traffic from this bot than ([\d.]+)% of other publishers.",
+    "pattern": "You receive more traffic from this bot than 97% of other publishers.",
     "replacement": "あなたのサイトは、このボットから他のサイトの$1％よりも多くのボットトラフィックを受け取っています。"
   },
   {
-    "pattern": "(\d+)(st|nd|rd|th)",
-    "replacement": "$1%の"
+    "pattern": "99th",
+    "replacement": "$1%"
   },
   {
-    "pattern": "(\d+) days? ago",
+    "pattern": "55 days ago",
     "replacement": "$1 日前"
   }
 ];
@@ -535,6 +579,30 @@
     return false;
   }
 
+
+  /**
+   * Placeholder属性を翻訳
+   */
+  function translatePlaceholders(doc) {
+    if (!doc) return 0;
+
+    let count = 0;
+    try {
+      const elementsWithPlaceholder = doc.querySelectorAll('[placeholder]');
+      elementsWithPlaceholder.forEach(element => {
+        const placeholder = element.getAttribute('placeholder');
+        if (placeholder && PLACEHOLDER_TRANSLATIONS[placeholder]) {
+          element.setAttribute('placeholder', PLACEHOLDER_TRANSLATIONS[placeholder]);
+          count++;
+          console.log(`[Placeholder翻訳] "${placeholder}" → "${PLACEHOLDER_TRANSLATIONS[placeholder]}"`);
+        }
+      });
+    } catch (e) {
+      console.error('[Placeholder翻訳エラー]:', e);
+    }
+
+    return count;
+  }
   /**
    * ドキュメントを翻訳（再帰的）
    */
@@ -544,6 +612,9 @@
     let count = 0;
 
     try {
+      // Placeholder属性を翻訳
+      count += translatePlaceholders(doc);
+
       // TreeWalkerで全テキストノードを処理
       const walker = doc.createTreeWalker(
         doc.body,
