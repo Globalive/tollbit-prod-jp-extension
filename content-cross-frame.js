@@ -5,7 +5,7 @@
  * 動的に生成されるiframeにも対応
  * topフレームから全てのiframeにアクセスして翻訳
  * 変数を含むテキスト（正規表現パターン）にも対応
- * 分割されたテキストにも対応（581エントリ: 通常563 + Placeholder3 + パターン15）
+ * 分割されたテキストにも対応（588エントリ: 通常570 + Placeholder3 + パターン15）
  * 末尾の句読点・スペースを除去して辞書検索
  * by以降削除対応
  * パターンマッチングロジック修正（trimmed使用）
@@ -18,7 +18,7 @@
 (function() {
   'use strict';
 
-  console.log('[TollBit日本語化] 本番環境版 v1.2.10 - 辞書更新完了（581エントリ: 通常563 + Placeholder3 + パターン15）');
+  console.log('[TollBit日本語化] 本番環境版 v1.2.10 - 辞書更新完了（588エントリ: 通常570 + Placeholder3 + パターン15）');
 
   // 通常の翻訳辞書（完全一致）
   const TRANSLATIONS = {
@@ -48,6 +48,7 @@
   "1. Create a Log Drain": "1. ログドレインを作成",
   "1. Create a Stream with DataStream 2": "1. DataStream 2 を使用してストリームを作成",
   "1. Create a new Logging Configuration": "1. 新しいログ設定を作成する",
+  "1. Enable standard logging": "1. 標準ロギングを有効化",
   "1. Put this text string into a TXT DNS record for your top level domain.": "1. このテキスト文字列をトップレベルドメインのTXT DNSレコードに追加してください。",
   "1. Setup ALB Access Logs": "1. ALBアクセスログを設定",
   "1. Verify Domain Ownership": "1. ドメイン所有権を確認する",
@@ -169,6 +170,7 @@
   "CloudFlare Enterprise": "CloudFlareエンタープライズ",
   "Configure Log Drain": "ログドレインを設定",
   "Configure access logs for your ALB to be sent to an S3 bucket by following the": "ALBのアクセスログをS3バケットに送信するように設定します。",
+  "Configure logging for your Cloudfront distribution to be sent to an S3 bucket by following the": "CloudFrontディストリビューションのログをS3バケットに送信するよう次のドキュメントに沿って設定ください：",
   "Configure your log drain to point at": "ログドレインを次の宛先に設定します。",
   "Connect your CDN platform": "CDNプラットフォームを接続してください",
   "Connected accounts": "接続済みアカウント",
@@ -213,6 +215,8 @@
   "Enable A2A": "A2Aを有効化",
   "Enable NLWeb": "NLWebを有効化",
   "Enable TollBit S3 Access": "TollBitのS3へのアクセスを有効化",
+  "Enable standard logging": "標準ロギングを有効化",
+  "Ensure you have your logs in the default w3c, tab delimited format with the default 33 fields that are included in the logs. If you wish to use JSON and/or modify the fields that Cloudfront logs, please reach out to": "ログがデフォルトのw3c形式（タブ区切り、33項目を含む）であることを確認してください。JSON形式の使用やCloudFrontログの項目を変更したい場合は、次の宛先までご連絡ください。",
   "Enter or paste one or more email addressess, separated by spaces or commas.": "メールアドレスを入力ください。コンマもしくはスペース区切りで複数の入力・登録も可能です。",
   "Exclude entire articles from AI access if the page contains matching HTML patterns": "ページに一致するHTMLパターンが含まれている場合、AIアクセスから記事全体を除外",
   "Exclude specific HTML elements from AI access": "特定のHTML要素へのAIアクセスを除外",
@@ -227,6 +231,7 @@
   "Follow these steps to set up an integration into our platform if you use Fastly.": "Fastlyを使用している場合、次の手順で当社プラットフォームへのインテグレーションを設定します。",
   "Follow these steps to set up an integration into our platform if you use Vercel.": "Vercelを使用している場合、次の手順で当社プラットフォームへのインテグレーションを設定します。",
   "Follow these steps to set up an integration into our platform if you use an AWS ALB.": "AWS ALBを使用している場合、次の手順で当社プラットフォームとのインテグレーションを設定します。",
+  "Follow these steps to set up an integration into our platform if you use an AWS Cloudfront distribution.": "AWS CloudFrontディストリビューションを使用している場合、次の手順で当社プラットフォームとのインテグレーションを設定します。",
   "For every": "合計、",
   "For the": "次に、",
   "For the Log Drain you just created, specify the project that you will be sending logs from. The logs should be in": "作成したログドレインで、ログを送信するプロジェクトを指定します。ログ形式は",
@@ -495,6 +500,7 @@
   "and made up": "本サイト内に占めるAIボットのうち",
   "and pick the correct domain. Click \"Edit Configuration\", and clone your current configuration. This saves a new configuration version as a draft, and allows you to rollback if necessary. This should bring you to a new screen. On the sidebar, scroll down until you see Logging and click on that. Then, click \"Create Endpoint\"": "これにより新しい設定バージョンが下書きとして保存され、必要に応じてロールバックが可能になります。新しい画面が表示されます。サイドバーで「Logging」が見えるまでスクロールし、それをクリックします。次に「Create Endpoint」をクリックします。",
   "and the value as your secret key. Your secret key can be accessed below": "を設定します。値にはあなたの秘密鍵を設定します。秘密鍵は以下で確認できます。",
+  "and we can get that set up for you.": "その後に、当社側でその設定を行います。",
   "and your mcp endpoint will be hosted at": "そしてあなたのMCPエンドポイントは次の場所にホストされます。",
   "button. Select the": "ボタンをクリックします。次に、",
   "by presenting AI bots with a paywall where publishers can monetize the data that is being scraped.": "を実現しています。",
@@ -539,6 +545,7 @@
   "of other publishers.": "に位置しています。例えばこの数値が95%だった場合、あなたのサイトのAIボットのトラフィック量はTollBitで観測しているサイトの中の上位5位には入っている、という意味になります。",
   "of your AI bot scrapes.": "を占めています。",
   "official MCP inspector": "Anthropicの公式MCPインスペクターを",
+  "on enabling standard logging.": "です。",
   "on how to create your stream.": "ストリームの作成を行ってください。",
   "option and click": "を選択し、",
   "option.": "オプションを選択します。",
@@ -593,11 +600,14 @@
   // Placeholder翻訳（入力フィールド用）
   // Placeholder翻訳（入力フィールド用）
   // Placeholder翻訳（入力フィールド用）
+  // Placeholder翻訳（入力フィールド用）
   const PLACEHOLDER_TRANSLATIONS = {
   "Enter URL prefixes, starting with /. E.g. '/articles/hidden/": "URL のプレフィックスを「/」から始めて入力してください。例：/articles/hidden/",
   "Run a test to see data...": "データを見るためにはテストを実施してみましょう。",
   "Search for a page...": "ページを検索..."
 };
+
+  
 
   
 
