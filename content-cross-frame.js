@@ -1,6 +1,6 @@
 /**
  * TollBit 本番環境 日本語化拡張機能
- * バージョン: 1.2.7
+ * バージョン: 1.2.8
  *
  * 動的に生成されるiframeにも対応
  * topフレームから全てのiframeにアクセスして翻訳
@@ -11,12 +11,13 @@
  * パターンマッチングロジック修正（trimmed使用）
  * 改行エスケープエラー修正完了
  * Placeholder文字コード修正完了（ellipsis → three dots）
+ * 正規表現パターン修正完了（ダブルエスケープ適用）
  */
 
 (function() {
   'use strict';
 
-  console.log('[TollBit日本語化] 本番環境版 v1.2.7 - 改行エスケープ＆文字コード修正済（429エントリ）');
+  console.log('[TollBit日本語化] 本番環境版 v1.2.8 - 正規表現パターン修正済（429エントリ）');
 
   // 通常の翻訳辞書（完全一致）
   const TRANSLATIONS = {
@@ -440,63 +441,63 @@
   // パターンベース翻訳（正規表現）
   const PATTERN_TRANSLATIONS = [
   {
-    "pattern": "Updated 55 days ago",
+    "pattern": "Updated (\\d+) days? ago",
     "replacement": "$1日前に更新"
   },
   {
-    "pattern": "Members (12)",
+    "pattern": "Members \\((\\d+)\\)",
     "replacement": "メンバー ($1)"
   },
   {
-    "pattern": "AI bots made 1.1M requests to your website, down 27.8% from the previous week",
-    "replacement": "AIボットがあなたのウェブサイトに$1万件のリクエストを行いました。前週比で$1%減少しています。"
+    "pattern": "AI bots made ([\\d.]+[KMB]?) requests to your website, (down|up) ([\\d.]+)% from the previous (week|month|year)",
+    "replacement": "AIボットがあなたのウェブサイトに$1件のリクエストを行いました。前$4比で$3%$2しています。"
   },
   {
-    "pattern": "You receive more traffic from AI bots than 92% of other publishers",
+    "pattern": "You receive more traffic from AI bots than (\\d+)% of other publishers",
     "replacement": "あなたは他のサイトの$1%より多く、AIボットからのトラフィックがあります。"
   },
   {
-    "pattern": "Top 5 Bots",
-    "replacement": "上位5ボット"
+    "pattern": "Top (\\d+) Bots",
+    "replacement": "上位$1ボット"
   },
   {
-    "pattern": "Breakdown the top 5 most active bot agents accessing your content.",
-    "replacement": "あなたのコンテンツにアクセスしている最も活発なボットエージェント上位5の内訳"
+    "pattern": "Breakdown the top (\\d+) most active bot agents accessing your content\\.",
+    "replacement": "あなたのコンテンツにアクセスしている最も活発なボットエージェント上位$1の内訳"
   },
   {
-    "pattern": "$0.00",
-    "replacement": "$0.00"
+    "pattern": "\\$([\\d.]+)",
+    "replacement": "$$1"
   },
   {
-    "pattern": "down 27.8%",
+    "pattern": "down ([\\d.]+)%",
     "replacement": "$1％減少"
   },
   {
-    "pattern": "up 27.8%",
+    "pattern": "up ([\\d.]+)%",
     "replacement": "$1％増加"
   },
   {
-    "pattern": "You receive more traffic from this bot than 98% of other publishers.",
+    "pattern": "You receive more traffic from this bot than (\\d+)% of other publishers\\.",
     "replacement": "あなたはこのボットから他の$1%のサイトより多くのトラフィックを受け取っています。"
   },
   {
-    "pattern": "only 2% of websites were scraped more by meta-externalagent",
+    "pattern": "only (\\d+)% of websites were scraped more by ([\\w-]+)",
     "replacement": "$1％に位置しています。"
   },
   {
-    "pattern": "no websites were scraped more by Bytespider",
+    "pattern": "no websites were scraped more by ([\\w-]+)",
     "replacement": "どのサイトよりも多く、このAIボットにクロールされています。"
   },
   {
-    "pattern": "You receive more traffic from this bot than 97% of other publishers.",
+    "pattern": "You receive more traffic from this bot than (\\d+)% of other publishers\\.",
     "replacement": "あなたのサイトは、このボットから他のサイトの$1％よりも多くのボットトラフィックを受け取っています。"
   },
   {
-    "pattern": "99th",
+    "pattern": "(\\d+)(st|nd|rd|th)",
     "replacement": "$1%"
   },
   {
-    "pattern": "55 days ago",
+    "pattern": "(\\d+) days? ago",
     "replacement": "$1 日前"
   }
 ];
