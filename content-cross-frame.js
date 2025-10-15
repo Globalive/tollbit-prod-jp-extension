@@ -1,6 +1,6 @@
 /**
  * TollBit 本番環境 日本語化拡張機能
- * バージョン: 1.2.8
+ * バージョン: 1.2.9
  *
  * 動的に生成されるiframeにも対応
  * topフレームから全てのiframeにアクセスして翻訳
@@ -12,12 +12,13 @@
  * 改行エスケープエラー修正完了
  * Placeholder文字コード修正完了（ellipsis → three dots）
  * 正規表現パターン修正完了（ダブルエスケープ適用）
+ * コンソールログ削減完了（定期監視15秒間隔）
  */
 
 (function() {
   'use strict';
 
-  console.log('[TollBit日本語化] 本番環境版 v1.2.8 - 正規表現パターン修正済（429エントリ）');
+  console.log('[TollBit日本語化] 本番環境版 v1.2.9 - 辞書更新完了（429エントリ）');
 
   // 通常の翻訳辞書（完全一致）
   const TRANSLATIONS = {
@@ -431,7 +432,7 @@
   "week": "過去1週で"
 };
 
-  // パターンベース翻訳（正規表現）
+  // Placeholder翻訳（入力フィールド用）
   const PLACEHOLDER_TRANSLATIONS = {
   "Enter URL prefixes, starting with /. E.g. '/articles/hidden/": "URL のプレフィックスを「/」から始めて入力してください。例：/articles/hidden/",
   "Run a test to see data...": "データを見るためにはテストを実施してみましょう。",
