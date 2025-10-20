@@ -1,11 +1,11 @@
 /**
  * TollBit 本番環境 日本語化拡張機能
- * バージョン: 1.3.8
+ * バージョン: 1.3.9
  *
  * 動的に生成されるiframeにも対応
  * topフレームから全てのiframeにアクセスして翻訳
  * 変数を含むテキスト（正規表現パターン）にも対応
- * 分割されたテキストにも対応（618エントリ: 通常599 + Placeholder4 + パターン15）
+ * 分割されたテキストにも対応（627エントリ: 通常607 + Placeholder5 + パターン15）
  * 末尾の句読点・スペースを除去して辞書検索
  * by以降削除対応
  * パターンマッチングロジック修正（trimmed使用）
@@ -137,6 +137,7 @@
   "Analytics for bots that are being forwarded to your Tollbit subdomain. These bots are": "あなたのTollbit サブドメインに転送されているボットの分析情報です。これらのボットは次の対象ドメインに対してアクセスが",
   "Analytics setup verification pending": "アナリティクス設定の確認を保留中",
   "Analyze the response of your content sites from the perspective of a bot": "ボットの視点からあなたのコンテンツサイトのレスポンスを分析",
+  "Already have an account?": "すでにアカウントをお持ちの場合は",
   "Article Filters": "記事フィルター",
   "Attribute": "Attribute（属性）",
   "Authentication your requests": "リクエストの認証設定",
@@ -186,6 +187,7 @@
   "Content Retrieval": "コンテンツの取得",
   "Content to request": "要求するコンテンツ",
   "Continue": "続行",
+  "Continue with Google": "Googleアカウントで続行",
   "Crawler": "クローラー",
   "Create Property": "サイトを追加",
   "Create Time Pricing": "時間変動型の価格設定を作成",
@@ -193,6 +195,7 @@
   "Create an Article Filter": "記事フィルターを作成",
   "Create new worker": "新しいワーカーを作成",
   "Create stream": "ストリームを作成",
+  "Create your account": "アカウントの作成",
   "Cumulative Growth": "累積の実績",
   "Current Directory": "現在のディレクトリ",
   "Custom Rate": "カスタム価格",
@@ -221,6 +224,7 @@
   "Download as CSV": "CSVとしてダウンロード",
   "Edit worker code": "ワーカーコードを編集",
   "Element Filter": "要素フィルター",
+  "Email address": "メールアドレス",
   "Email addresses": "メールアドレス",
   "Enable": "有効にする",
   "Enable A2A": "A2Aを有効化",
@@ -234,6 +238,7 @@
   "Fastly API Key": "Fastly APIキー",
   "File storage": "ファイルストレージの設定",
   "Finalize Setup": "セットアップの仕上げ",
+  "First name": "お名前",
   "Finally, set the URL to": "最後に、URLを次のように設定します。",
   "Finally, you can": "最後に、",
   "Find the HTTP logging endpoint and click \"Create endpoint\". You can set the name to anything descriptive (e.g. tollbit-prod). Keep the placement option as the default selection. Make sure your log placement option as the default selection. Make sure your log format is exactly as follows, without extra trailing spaces or newlines:": "HTTPロギングエンドポイントを見つけ、「Create endpoint」をクリックします。名前は任意のわかりやすいものに設定できます（例：tollbit-prod）。配置オプションはデフォルトのままにしてください。余分な空白や改行のない、以下のフォーマットに正確に合わせてください。",
@@ -289,6 +294,7 @@
   "Last six months": "過去6ヶ月",
   "Last three months": "過去3ヶ月",
   "Last week": "先週",
+  "Last name": "苗字",
   "Leave organization": "組織を離れる",
   "Light": "ライト",
   "Link worker": "ワーカーをリンク",
@@ -406,6 +412,7 @@
   "Send invitations": "招待を送信",
   "Service ID": "サービスID",
   "Sign in to Tollbit Content Dashboard": "TollBitのダッシュボードにサインインしましょう。",
+  "Sign in": "こちらからサインインしてください",
   "Sign up": "こちらからサインアップしてください。",
   "Set Global Rates For Your Content": "コンテンツの統一価格を設定",
   "Set Up Analytics": "アナリティクスをセットアップする",
@@ -498,6 +505,7 @@
   "We see firsthand the surge in AI-driven traffic. TollBit": "私たちは、AIによって急増するトラフィックを直接目の当たりにしています。TollBitは、",
   "We're ingesting your logs and configuring your dashboard - this can take up to 24-48 hours. We'll email you as soon as everything's ready. Have questions? Just let us know and we'll be happy to help.": "ログを取り込み、ダッシュボードを構成しています。この処理には最大で24~48時間かかる場合があります。準備が整い次第、メールでお知らせします。ご不明点がありましたら、お気軽にお問い合わせください。",
   "Welcome back! Please sign in to continue": "メールアドレス、もしくはGoogleアカウントで続行してください。",
+  "Welcome! Please fill in the details to get started.": "以下の項目を入力もしくはGoogleアカウントで続行を選択ください。",
   "When choosing data parameters, make sure to parameters that cover at least everything in following sample log JSON. Also, please ensure that your log format is JSON.": "データパラメータを選択する際は、次のサンプルログJSONに含まれるすべての項目をカバーするようにしてください。また、ログ形式はJSONであることを確認してください。",
   "When streaming the logs to the endpoint, please ensure that you are batching logs as much as possible. Each log be a single line, and should be newline separated from the other logs.": "エンドポイントにログをストリーミングする際は、できるだけログをバッチ処理してください。各ログは1行で、他のログとは改行で区切ってください。",
   "Which bots are being forwarded or not.": "どのボットが転送されているか。ボットが転送されるかどうかを変更するには、",
@@ -639,6 +647,7 @@
   const PLACEHOLDER_TRANSLATIONS = {
   "Enter URL prefixes, starting with /. E.g. '/articles/hidden/": "URL のプレフィックスを「/」から始めて入力してください。例：/articles/hidden/",
   "Enter your email address": "メールアドレスを入力してください。",
+  "Enter your password": "パスワードを入力してください。",
   "Run a test to see data...": "データを見るためにはテストを実施してみましょう。",
   "Search for a page...": "ページを検索..."
 };
