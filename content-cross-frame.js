@@ -1,6 +1,6 @@
 /**
  * TollBit 本番環境 日本語化拡張機能
- * バージョン: 1.3.2
+ * バージョン: 1.3.3
  *
  * 動的に生成されるiframeにも対応
  * topフレームから全てのiframeにアクセスして翻訳
@@ -14,13 +14,13 @@
  * 正規表現パターン修正完了（ダブルエスケープ適用）
  * コンソールログ削減完了（定期監視15秒間隔）
  * sign-inページ専用の動的翻訳機能追加（p[class*="line-clamp"]要素監視+初回翻訳実行）
- * デバッグログ大幅強化（テキストノード処理詳細を出力）
+ * デバッグログ大幅強化（完全なテキストを出力）
  */
 
 (function() {
   'use strict';
 
-  console.log('[TollBit日本語化] 本番環境版 v1.3.2 - デバッグログ強化版（612エントリ: 通常594 + Placeholder3 + パターン15）');
+  console.log('[TollBit日本語化] 本番環境版 v1.3.3 - 完全テキスト表示版（612エントリ: 通常594 + Placeholder3 + パターン15）');
 
   // 通常の翻訳辞書（完全一致）
   const TRANSLATIONS = {
@@ -980,7 +980,7 @@
 
         // デバッグ: 各テキストノードの処理結果を記録
         results.push({
-          text: text?.substring(0, 30) + '...',
+          text: text,  // 完全なテキストを記録
           success: success,
           hasJapanese: /[\u3040-\u309F\u30A0-\u30FF\u4E00-\u9FAF]/.test(text || '')
         });
@@ -993,7 +993,9 @@
       // デバッグ: 処理結果を出力
       console.log(`[translateElement] 処理結果: ${count}/${totalNodes}個翻訳成功`);
       results.forEach((r, i) => {
-        console.log(`  [${i}] "${r.text}" | 成功:${r.success} | 日本語:${r.hasJapanese}`);
+        // 完全なテキストを表示（長い場合は複数行になる）
+        console.log(`  [${i}] 成功:${r.success} | 日本語:${r.hasJapanese}`);
+        console.log(`      テキスト: "${r.text}"`);
       });
 
       // Placeholder属性も翻訳（input要素などがある場合）
