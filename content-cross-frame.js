@@ -1,11 +1,11 @@
 /**
  * TollBit 本番環境 日本語化拡張機能
- * バージョン: 1.3.0
+ * バージョン: 1.3.1
  *
  * 動的に生成されるiframeにも対応
  * topフレームから全てのiframeにアクセスして翻訳
  * 変数を含むテキスト（正規表現パターン）にも対応
- * 分割されたテキストにも対応（611エントリ: 通常593 + Placeholder3 + パターン15）
+ * 分割されたテキストにも対応（612エントリ: 通常594 + Placeholder3 + パターン15）
  * 末尾の句読点・スペースを除去して辞書検索
  * by以降削除対応
  * パターンマッチングロジック修正（trimmed使用）
@@ -13,13 +13,13 @@
  * Placeholder文字コード修正完了（ellipsis → three dots）
  * 正規表現パターン修正完了（ダブルエスケープ適用）
  * コンソールログ削減完了（定期監視15秒間隔）
- * sign-inページ専用の動的翻訳機能追加（p[class*="line-clamp"]要素監視）
+ * sign-inページ専用の動的翻訳機能追加（p[class*="line-clamp"]要素監視+初回翻訳実行）
  */
 
 (function() {
   'use strict';
 
-  console.log('[TollBit日本語化] 本番環境版 v1.3.0 - sign-inページ専用監視機能追加（611エントリ: 通常593 + Placeholder3 + パターン15）');
+  console.log('[TollBit日本語化] 本番環境版 v1.3.1 - sign-in初回翻訳修正+辞書追加（612エントリ: 通常594 + Placeholder3 + パターン15）');
 
   // 通常の翻訳辞書（完全一致）
   const TRANSLATIONS = {
@@ -514,6 +514,7 @@
   "a fair and transparent licensing model": "公正で透明性のあるライセンスモデル",
   "a2a-inspector": "a2aインスペクター",
   "across USA TODAY and our 200+ local publications. We're encouraged by the work TollBit is doing to help defend our intellectual property and protect the value of original reporting.": "TollBitが知的財産を守り、独占的な報道の価値を保護するために取り組んでいる活動に、私たちは大いに助けられています。",
+  "It's vital to preserve the integrity of our journalism across USA TODAY and our 200+ local publications. We're encouraged by the work TollBit is doing to help defend our intellectual property and protect the value of original reporting.": "私たちのジャーナリズムの健全性を守ることは、USA TODAYと200以上の地域出版物全体にわたって極めて重要です。TollBitが私たちの知的財産を守り、オリジナル報道の価値を保護するために取り組んでいる活動に、私たちは大いに励まされています。",
   "allowed": "許可されております。",
   "and": "および",
   "and click the": "に移動し、",
@@ -1006,11 +1007,20 @@
 
     // 各要素に対してObserverを設定
     targetElements.forEach((element, index) => {
+      // デバッグ: 要素のテキスト内容を確認
+      const textContent = element.textContent?.trim().substring(0, 50);
+      console.log(`[sign-in] 要素${index}: "${textContent}..."`);
+
+      // 🔥 重要: 初回翻訳を実行（既存コンテンツを翻訳）
+      console.log(`[sign-in] 要素${index}の初回翻訳を実行`);
+      translateElement(element);
+
+      // Observerを設定（以降の変更を監視）
       const observer = new MutationObserver((mutations) => {
         // 変更検知時に即座に翻訳
         mutations.forEach(mutation => {
           if (mutation.type === 'characterData' || mutation.type === 'childList') {
-            // console.log(`[sign-in監視] 要素${index}の変更を検知`);
+            console.log(`[sign-in監視] 要素${index}の変更を検知`);
             // この要素配下のテキストノードを再翻訳
             translateElement(mutation.target);
           }
