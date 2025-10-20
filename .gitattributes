@@ -1,0 +1,11 @@
+# GitHubのzipダウンロード（archive）から除外するファイル
+# Gitリポジトリには残すが、配布用zipには含めない
+
+# Claude Code用の開発ドキュメント（エンドユーザーには不要）
+CLAUDE.md export-ignore
+
+# インストールガイド.txtと重複するため除外
+TollBit本番環境_日本語化拡張機能_インストール＆利用ガイド.md export-ignore
+
+# .gitattributes自体も配布用zipには不要
+.gitattributes export-ignore
