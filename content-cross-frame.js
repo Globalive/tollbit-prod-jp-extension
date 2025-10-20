@@ -1,6 +1,6 @@
 /**
  * TollBit 本番環境 日本語化拡張機能
- * バージョン: 1.3.6
+ * バージョン: 1.3.7
  *
  * 動的に生成されるiframeにも対応
  * topフレームから全てのiframeにアクセスして翻訳
@@ -202,7 +202,7 @@
   "Data includes only fully processed days. Recent days or days before your property joined may not appear.": "データには、処理が完了した日だけが含まれています。最近の日付や、あなたのサイトが追加される参加する前の期間は表示されない場合があります。",
   "Day": "日",
   "Deactivate": "無効化",
-  "Don't have an account?": "アカウントをお持ちでない場合は",
+  "Don\u2019t\u00A0have\u00A0an\u00A0account?": "アカウントをお持ちでない場合は",
   "Define Global Rates across your subdirectories and pages at the property level. If a custom rate conflicts with a global rate, the custom rate will be used.": "サブディレクトリやページ全体に統一価格を設定します。カスタム価格が統一価格と矛盾する場合はカスタム価格が使用されます。",
   "Define Global Rates for your content across all subdirectories and pages. These rates apply for each use and do not allow your content to be used for training or creating generative AI models.": "すべてのサブディレクトリやページに対して適用される「統一価格」を定義してください。\nこの価格はクローリングごとに適用され、あなたのコンテンツが生成AIモデルの学習や生成目的に使用されることは許可されません。",
   "Define how the rate of a page should change over time.": "最終更新から特定の時間が経過した場合の、特別な価格設定を行う",
