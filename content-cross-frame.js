@@ -1,11 +1,11 @@
 /**
  * TollBit 本番環境 日本語化拡張機能
- * バージョン: 1.3.5
+ * バージョン: 1.3.6
  *
  * 動的に生成されるiframeにも対応
  * topフレームから全てのiframeにアクセスして翻訳
  * 変数を含むテキスト（正規表現パターン）にも対応
- * 分割されたテキストにも対応（612エントリ: 通常594 + Placeholder3 + パターン15）
+ * 分割されたテキストにも対応（617エントリ: 通常598 + Placeholder4 + パターン15）
  * 末尾の句読点・スペースを除去して辞書検索
  * by以降削除対応
  * パターンマッチングロジック修正（trimmed使用）
@@ -21,7 +21,7 @@
 (function() {
   'use strict';
 
-  console.log('[TollBit日本語化] 本番環境版 v1.3.5 - 本番リリース版（612エントリ: 通常594 + Placeholder3 + パターン15）');
+  console.log('[TollBit日本語化] 本番環境版 v1.3.6 - sign-in辞書拡充版（617エントリ: 通常598 + Placeholder4 + パターン15）');
 
   // 通常の翻訳辞書（完全一致）
   const TRANSLATIONS = {
@@ -202,6 +202,7 @@
   "Data includes only fully processed days. Recent days or days before your property joined may not appear.": "データには、処理が完了した日だけが含まれています。最近の日付や、あなたのサイトが追加される参加する前の期間は表示されない場合があります。",
   "Day": "日",
   "Deactivate": "無効化",
+  "Don't have an account?": "アカウントをお持ちでない場合は",
   "Define Global Rates across your subdirectories and pages at the property level. If a custom rate conflicts with a global rate, the custom rate will be used.": "サブディレクトリやページ全体に統一価格を設定します。カスタム価格が統一価格と矛盾する場合はカスタム価格が使用されます。",
   "Define Global Rates for your content across all subdirectories and pages. These rates apply for each use and do not allow your content to be used for training or creating generative AI models.": "すべてのサブディレクトリやページに対して適用される「統一価格」を定義してください。\nこの価格はクローリングごとに適用され、あなたのコンテンツが生成AIモデルの学習や生成目的に使用されることは許可されません。",
   "Define how the rate of a page should change over time.": "最終更新から特定の時間が経過した場合の、特別な価格設定を行う",
@@ -403,6 +404,8 @@
   "Select none for authentication for now, as we will be setting up custom authentication. To do so, go to \"Custom header\". For the content type, you can select": "認証は一旦「なし」を選択します。後でカスタム認証を設定します。「Custom header」に進んでください。Content-Typeには次のものを選択ください。",
   "Send invitations": "招待を送信",
   "Service ID": "サービスID",
+  "Sign in to Tollbit Content Dashboard": "TollBitのダッシュボードにサインインしましょう。",
+  "Sign up": "こちらからサインアップしてください。",
   "Set Global Rates For Your Content": "コンテンツの統一価格を設定",
   "Set Up Analytics": "アナリティクスをセットアップする",
   "Set Up Each Type Below": "以下の4タイプの設定が可能",
@@ -493,6 +496,7 @@
   "We provide a way for you to forward logs to our platform so that we can provide analytics on bot traffic and more.": "ボットトラフィックなどのアナリティクスを提供できるよう、ログを当社プラットフォームに転送する方法を提供します。",
   "We see firsthand the surge in AI-driven traffic. TollBit": "私たちは、AIによって急増するトラフィックを直接目の当たりにしています。TollBitは、",
   "We're ingesting your logs and configuring your dashboard - this can take up to 24-48 hours. We'll email you as soon as everything's ready. Have questions? Just let us know and we'll be happy to help.": "ログを取り込み、ダッシュボードを構成しています。この処理には最大で24~48時間かかる場合があります。準備が整い次第、メールでお知らせします。ご不明点がありましたら、お気軽にお問い合わせください。",
+  "Welcome back! Please sign in to continue": "メールアドレス、もしくはGoogleアカウントで続行してください。",
   "When choosing data parameters, make sure to parameters that cover at least everything in following sample log JSON. Also, please ensure that your log format is JSON.": "データパラメータを選択する際は、次のサンプルログJSONに含まれるすべての項目をカバーするようにしてください。また、ログ形式はJSONであることを確認してください。",
   "When streaming the logs to the endpoint, please ensure that you are batching logs as much as possible. Each log be a single line, and should be newline separated from the other logs.": "エンドポイントにログをストリーミングする際は、できるだけログをバッチ処理してください。各ログは1行で、他のログとは改行で区切ってください。",
   "Which bots are being forwarded or not.": "どのボットが転送されているか。ボットが転送されるかどうかを変更するには、",
@@ -633,6 +637,7 @@
   // Placeholder翻訳（入力フィールド用）
   const PLACEHOLDER_TRANSLATIONS = {
   "Enter URL prefixes, starting with /. E.g. '/articles/hidden/": "URL のプレフィックスを「/」から始めて入力してください。例：/articles/hidden/",
+  "Enter your email address": "メールアドレスを入力してください。",
   "Run a test to see data...": "データを見るためにはテストを実施してみましょう。",
   "Search for a page...": "ページを検索..."
 };
