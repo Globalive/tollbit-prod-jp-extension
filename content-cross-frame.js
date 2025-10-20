@@ -1,11 +1,11 @@
 /**
  * TollBit 本番環境 日本語化拡張機能
- * バージョン: 1.3.10
+ * バージョン: 1.3.11
  *
  * 動的に生成されるiframeにも対応
  * topフレームから全てのiframeにアクセスして翻訳
  * 変数を含むテキスト（正規表現パターン）にも対応
- * 分割されたテキストにも対応（627エントリ: 通常605 + Placeholder7 + パターン15）
+ * 分割されたテキストにも対応（629エントリ: 通常607 + Placeholder7 + パターン15）
  * 末尾の句読点・スペースを除去して辞書検索
  * by以降削除対応
  * パターンマッチングロジック修正（trimmed使用）
@@ -238,6 +238,7 @@
   "Fastly API Key": "Fastly APIキー",
   "File storage": "ファイルストレージの設定",
   "Finalize Setup": "セットアップの仕上げ",
+  "First name": "名前",
   "Finally, set the URL to": "最後に、URLを次のように設定します。",
   "Finally, you can": "最後に、",
   "Find the HTTP logging endpoint and click \"Create endpoint\". You can set the name to anything descriptive (e.g. tollbit-prod). Keep the placement option as the default selection. Make sure your log placement option as the default selection. Make sure your log format is exactly as follows, without extra trailing spaces or newlines:": "HTTPロギングエンドポイントを見つけ、「Create endpoint」をクリックします。名前は任意のわかりやすいものに設定できます（例：tollbit-prod）。配置オプションはデフォルトのままにしてください。余分な空白や改行のない、以下のフォーマットに正確に合わせてください。",
@@ -293,6 +294,7 @@
   "Last six months": "過去6ヶ月",
   "Last three months": "過去3ヶ月",
   "Last week": "先週",
+  "Last name": "苗字",
   "Leave organization": "組織を離れる",
   "Light": "ライト",
   "Link worker": "ワーカーをリンク",
