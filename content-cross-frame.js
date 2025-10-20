@@ -1,6 +1,6 @@
 /**
  * TollBit 本番環境 日本語化拡張機能
- * バージョン: 1.3.4
+ * バージョン: 1.3.5
  *
  * 動的に生成されるiframeにも対応
  * topフレームから全てのiframeにアクセスして翻訳
@@ -14,14 +14,14 @@
  * 正規表現パターン修正完了（ダブルエスケープ適用）
  * コンソールログ削減完了（定期監視15秒間隔）
  * sign-inページ専用の動的翻訳機能追加（p[class*="line-clamp"]要素監視+初回翻訳実行）
- * デバッグログ大幅強化（完全なテキストを出力）
  * 動的テキスト変更対応（WeakMapでテキスト内容を記録）
+ * 本番リリース版（デバッグログ削除）
  */
 
 (function() {
   'use strict';
 
-  console.log('[TollBit日本語化] 本番環境版 v1.3.4 - 動的テキスト変更対応版（612エントリ: 通常594 + Placeholder3 + パターン15）');
+  console.log('[TollBit日本語化] 本番環境版 v1.3.5 - 本番リリース版（612エントリ: 通常594 + Placeholder3 + パターン15）');
 
   // 通常の翻訳辞書（完全一致）
   const TRANSLATIONS = {
@@ -758,7 +758,6 @@
         return false;
       }
       // テキストが変わっている場合は再翻訳を続行
-      console.log(`  🔄 テキスト変更検知: "${lastText?.substring(0, 20)}..." → "${trimmed.substring(0, 20)}..."`);
     }
 
     // テキストを正規化（末尾の句読点・スペース除去）
@@ -983,33 +982,11 @@
 
       let node;
       let count = 0;
-      let totalNodes = 0;
-      const results = [];
-
       while (node = walker.nextNode()) {
-        totalNodes++;
-        const text = node.nodeValue?.trim();
-        const success = translateTextNode(node);
-
-        // デバッグ: 各テキストノードの処理結果を記録
-        results.push({
-          text: text,  // 完全なテキストを記録
-          success: success,
-          hasJapanese: /[\u3040-\u309F\u30A0-\u30FF\u4E00-\u9FAF]/.test(text || '')
-        });
-
-        if (success) {
+        if (translateTextNode(node)) {
           count++;
         }
       }
-
-      // デバッグ: 処理結果を出力
-      console.log(`[translateElement] 処理結果: ${count}/${totalNodes}個翻訳成功`);
-      results.forEach((r, i) => {
-        // 完全なテキストを表示（長い場合は複数行になる）
-        console.log(`  [${i}] 成功:${r.success} | 日本語:${r.hasJapanese}`);
-        console.log(`      テキスト: "${r.text}"`);
-      });
 
       // Placeholder属性も翻訳（input要素などがある場合）
       if (count > 0) {
@@ -1039,16 +1016,9 @@
       return;
     }
 
-    console.log(`[TollBit日本語化] sign-in専用監視開始: ${targetElements.length}個の要素を監視`);
-
     // 各要素に対してObserverを設定
     targetElements.forEach((element, index) => {
-      // デバッグ: 要素のテキスト内容を確認
-      const textContent = element.textContent?.trim().substring(0, 50);
-      console.log(`[sign-in] 要素${index}: "${textContent}..."`);
-
-      // 🔥 重要: 初回翻訳を実行（既存コンテンツを翻訳）
-      console.log(`[sign-in] 要素${index}の初回翻訳を実行`);
+      // 初回翻訳を実行（既存コンテンツを翻訳）
       translateElement(element);
 
       // Observerを設定（以降の変更を監視）
@@ -1056,7 +1026,6 @@
         // 変更検知時に即座に翻訳
         mutations.forEach(mutation => {
           if (mutation.type === 'characterData' || mutation.type === 'childList') {
-            console.log(`[sign-in監視] 要素${index}の変更を検知`);
             // この要素配下のテキストノードを再翻訳
             translateElement(mutation.target);
           }
@@ -1078,8 +1047,6 @@
    */
   function initializeSignInPage() {
     if (!isSignInPage()) return;
-
-    console.log('[TollBit日本語化] sign-inページを検出 - 専用監視を起動します');
 
     // 専用Observer起動
     // DOM読み込み完了後に起動
