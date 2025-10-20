@@ -1,6 +1,6 @@
 /**
  * TollBit 本番環境 日本語化拡張機能
- * バージョン: 1.2.10
+ * バージョン: 1.3.0
  *
  * 動的に生成されるiframeにも対応
  * topフレームから全てのiframeにアクセスして翻訳
@@ -13,12 +13,13 @@
  * Placeholder文字コード修正完了（ellipsis → three dots）
  * 正規表現パターン修正完了（ダブルエスケープ適用）
  * コンソールログ削減完了（定期監視15秒間隔）
+ * sign-inページ専用の動的翻訳機能追加（p[class*="line-clamp"]要素監視）
  */
 
 (function() {
   'use strict';
 
-  console.log('[TollBit日本語化] 本番環境版 v1.2.10 - 辞書更新完了（611エントリ: 通常593 + Placeholder3 + パターン15）');
+  console.log('[TollBit日本語化] 本番環境版 v1.3.0 - sign-inページ専用監視機能追加（611エントリ: 通常593 + Placeholder3 + パターン15）');
 
   // 通常の翻訳辞書（完全一致）
   const TRANSLATIONS = {
@@ -939,6 +940,120 @@
   }
 
   /**
+   * 現在のURLがsign-inページか判定
+   */
+  function isSignInPage() {
+    return window.location.href === 'https://app.tollbit.com/sign-in';
+  }
+
+  /**
+   * 特定要素配下のテキストノードのみを翻訳
+   * @param {Element|Node} element - 翻訳対象の要素
+   */
+  function translateElement(element) {
+    if (!element) return;
+
+    // elementがテキストノードの場合はその親要素を対象にする
+    const targetElement = element.nodeType === 3 ? element.parentElement : element;
+    if (!targetElement) return;
+
+    // この要素配下のテキストノードを翻訳
+    try {
+      const walker = targetElement.ownerDocument.createTreeWalker(
+        targetElement,
+        NodeFilter.SHOW_TEXT,
+        null,
+        false
+      );
+
+      let node;
+      let count = 0;
+      while (node = walker.nextNode()) {
+        if (translateTextNode(node)) {
+          count++;
+        }
+      }
+
+      // Placeholder属性も翻訳（input要素などがある場合）
+      if (count > 0) {
+        translatePlaceholders(targetElement.ownerDocument);
+      }
+    } catch (e) {
+      console.error('[sign-in専用翻訳エラー]:', e);
+    }
+  }
+
+  /**
+   * sign-inページ専用のObserver
+   * p[class*="line-clamp"]要素の変更を監視
+   */
+  let signInPageObserver = null;
+
+  function setupSignInPageObserver() {
+    // 既に動作中なら何もしない
+    if (signInPageObserver) return;
+
+    // 対象要素の検出
+    const targetElements = document.querySelectorAll('p[class*="line-clamp"]');
+
+    if (targetElements.length === 0) {
+      // 要素がまだ存在しない場合は遅延再試行
+      setTimeout(setupSignInPageObserver, 500);
+      return;
+    }
+
+    console.log(`[TollBit日本語化] sign-in専用監視開始: ${targetElements.length}個の要素を監視`);
+
+    // 各要素に対してObserverを設定
+    targetElements.forEach((element, index) => {
+      const observer = new MutationObserver((mutations) => {
+        // 変更検知時に即座に翻訳
+        mutations.forEach(mutation => {
+          if (mutation.type === 'characterData' || mutation.type === 'childList') {
+            // console.log(`[sign-in監視] 要素${index}の変更を検知`);
+            // この要素配下のテキストノードを再翻訳
+            translateElement(mutation.target);
+          }
+        });
+      });
+
+      observer.observe(element, {
+        childList: true,
+        subtree: true,
+        characterData: true
+      });
+    });
+
+    signInPageObserver = true;
+  }
+
+  /**
+   * sign-inページ専用の初期化
+   */
+  function initializeSignInPage() {
+    if (!isSignInPage()) return;
+
+    console.log('[TollBit日本語化] sign-inページを検出 - 専用監視を起動します');
+
+    // 専用Observer起動
+    // DOM読み込み完了後に起動
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => {
+        setTimeout(setupSignInPageObserver, 1000);
+      });
+    } else {
+      setTimeout(setupSignInPageObserver, 1000);
+    }
+
+    // 要素が動的に追加される可能性に備えて定期チェック
+    setInterval(() => {
+      if (!signInPageObserver) {
+        setupSignInPageObserver();
+      }
+    }, 3000);
+  }
+
+  /**
    * 段階的翻訳実行
    */
   function setupTranslation() {
@@ -966,6 +1081,9 @@
     setInterval(() => {
       translateAllFrames(document, 0, 'top-periodic');
     }, 15000);
+
+    // sign-inページ専用の初期化（既存ロジックに影響なし）
+    initializeSignInPage();
   }
 
   /**
