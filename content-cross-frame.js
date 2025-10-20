@@ -1,6 +1,6 @@
 /**
  * TollBit 本番環境 日本語化拡張機能
- * バージョン: 1.3.3
+ * バージョン: 1.3.4
  *
  * 動的に生成されるiframeにも対応
  * topフレームから全てのiframeにアクセスして翻訳
@@ -15,12 +15,13 @@
  * コンソールログ削減完了（定期監視15秒間隔）
  * sign-inページ専用の動的翻訳機能追加（p[class*="line-clamp"]要素監視+初回翻訳実行）
  * デバッグログ大幅強化（完全なテキストを出力）
+ * 動的テキスト変更対応（WeakMapでテキスト内容を記録）
  */
 
 (function() {
   'use strict';
 
-  console.log('[TollBit日本語化] 本番環境版 v1.3.3 - 完全テキスト表示版（612エントリ: 通常594 + Placeholder3 + パターン15）');
+  console.log('[TollBit日本語化] 本番環境版 v1.3.4 - 動的テキスト変更対応版（612エントリ: 通常594 + Placeholder3 + パターン15）');
 
   // 通常の翻訳辞書（完全一致）
   const TRANSLATIONS = {
@@ -719,6 +720,8 @@
 ];
   // 翻訳済みノードを追跡（全フレーム共通）
   const translatedNodes = new WeakSet();
+  // ノードごとの最後に処理したテキスト内容を記録（動的変更対応）
+  const lastProcessedText = new WeakMap();
   let totalTranslations = 0;
 
   /**
@@ -746,9 +749,16 @@
       return false; // 日本語が含まれていれば翻訳済みとみなす
     }
 
-    // 既翻訳ノードチェック
+    // 既翻訳ノードチェック（テキスト内容ベース）
     if (translatedNodes.has(node)) {
-      return false;
+      // 最後に処理したテキストと比較
+      const lastText = lastProcessedText.get(node);
+      if (lastText === trimmed) {
+        // 同じテキストなので翻訳済み
+        return false;
+      }
+      // テキストが変わっている場合は再翻訳を続行
+      console.log(`  🔄 テキスト変更検知: "${lastText?.substring(0, 20)}..." → "${trimmed.substring(0, 20)}..."`);
     }
 
     // テキストを正規化（末尾の句読点・スペース除去）
@@ -760,6 +770,7 @@
       const japanese = TRANSLATIONS[trimmed];
       node.nodeValue = node.nodeValue.replace(trimmed, japanese);
       translatedNodes.add(node);
+      lastProcessedText.set(node, trimmed);  // テキスト内容を記録
       totalTranslations++;
       // console.log(`[翻訳] "${trimmed.substring(0, 30)}..." → "${japanese.substring(0, 30)}..."`);
       return true;
@@ -770,6 +781,7 @@
       const japanese = TRANSLATIONS[normalized];
       node.nodeValue = node.nodeValue.replace(trimmed, japanese);
       translatedNodes.add(node);
+      lastProcessedText.set(node, trimmed);  // テキスト内容を記録
       totalTranslations++;
       // console.log(`[翻訳(正規化)] "${trimmed}" → "${japanese}"`);
       return true;
@@ -784,6 +796,7 @@
           const japanese = trimmed.replace(regex, patternObj.replacement);
           node.nodeValue = node.nodeValue.replace(trimmed, japanese);
           translatedNodes.add(node);
+          lastProcessedText.set(node, trimmed);  // テキスト内容を記録
           totalTranslations++;
           // console.log(`[パターン翻訳] "${trimmed}" → "${japanese}"`);
           return true;
